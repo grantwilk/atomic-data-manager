@@ -17,8 +17,7 @@ You should have received a copy of the GNU General Public License along
 with Data MGR.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import bpy
-from atomic_data_manager.ui import main_panel_ui, stats_panel_ui
+from atomic_data_manager.ui import main_panel_ui, stats_panel_ui, inspect_ui
 
 
 def register():

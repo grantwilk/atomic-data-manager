@@ -20,8 +20,7 @@ with Data MGR.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from . import ui
-from atomic_data_manager import ops
+from atomic_data_manager import ui, ops
 
 bl_info = {
     "name": "Data Manager",
