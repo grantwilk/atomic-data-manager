@@ -35,7 +35,7 @@ bl_info = {
 }
 
 
-# Data MGR Properties
+# Atomic Data Manager Properties
 class DATAMGR_PG_main(bpy.types.PropertyGroup):
     # Main Panel Toggle Buttons
     collections: bpy.props.BoolProperty(default=False)
