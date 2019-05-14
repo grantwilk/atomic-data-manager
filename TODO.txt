@@ -12,6 +12,7 @@ High Priority:
 Low Priority:
 + Add search bar support to quickly Nuke or Clean datablocks
 + Add a pie menu to quickly Nuke or Clean datablocks
++ Add detection and a warning for missing files
 * Find a better location for deleting individual objects
 * Find a more obvious way to implement inspection buttons (magnifying glass button following icon-ed toggle button?)
 * Make less useful features (e.g. pin, duplicate, rename) less prominent
