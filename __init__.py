@@ -1,20 +1,20 @@
 """
 Copyright (C) 2019 Grant Wilk
 
-This file is part of Data MGR.
+This file is part of Atomic Data Manager.
 
-Data MGR is free software: you can redistribute
+Atomic Data Manager is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
 
-Data MGR is distributed in the hope that it will
+Atomic Data Manager is distributed in the hope that it will
 be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
-with Data MGR.  If not, see <https://www.gnu.org/licenses/>.
+with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 
@@ -23,7 +23,7 @@ from bpy.utils import register_class, unregister_class
 from atomic_data_manager import ui, ops
 
 bl_info = {
-    "name": "Data Manager",
+    "name": "Atomic Data Manager",
     "author": "Grant Wilk",
     "blender": (2, 80, 0),
     "version": (1, 0, 0),

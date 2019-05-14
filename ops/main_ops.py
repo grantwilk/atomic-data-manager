@@ -1,20 +1,20 @@
 """
 Copyright (C) 2019 Grant Wilk
 
-This file is part of Data MGR.
+This file is part of Atomic Data Manager.
 
-Data MGR is free software: you can redistribute
+Atomic Data Manager is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
 
-Data MGR is distributed in the hope that it will
+Atomic Data Manager is distributed in the hope that it will
 be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
-with Data MGR.  If not, see <https://www.gnu.org/licenses/>.
+with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import bpy
@@ -23,7 +23,7 @@ from atomic_data_manager.ui import inspect_ui
 from atomic_data_manager.ops.utils import delete, clean, nuke
 
 
-# Data Manager Nuke Operator
+# Atomic Data Manager Nuke Operator
 class DATAMGR_OT_nuke(bpy.types.Operator):
     """Automatically removes all data from the selected categories"""
     bl_idname = "datamgr.nuke"
@@ -63,7 +63,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# Data Manager Clean Operator
+# Atomic Data Manager Clean Operator
 class DATAMGR_OT_clean(bpy.types.Operator):
     """Automatically removes all user-less data from the selected categories"""
     bl_idname = "datamgr.clean"
@@ -94,7 +94,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
         return {'FINISHED'}
 
 
-# Data Manager Undo Operator
+# Atomic Data Manager Undo Operator
 class DATAMGR_OT_undo(bpy.types.Operator):
     """Undoes the previous action"""
     bl_idname = "datamgr.undo"
@@ -105,7 +105,7 @@ class DATAMGR_OT_undo(bpy.types.Operator):
         return {'FINISHED'}
 
 
-# Data Manager Smart Select Operator
+# Atomic Data Manager Smart Select Operator
 class DATAMGR_OT_smart_select(bpy.types.Operator):
     """Auto-select categories with user-less data"""
     bl_idname = "datamgr.smart_select"
@@ -126,7 +126,7 @@ class DATAMGR_OT_smart_select(bpy.types.Operator):
         return {'FINISHED'}
 
 
-# Data Manager Select All Operator
+# Atomic Data Manager Select All Operator
 class DATAMGR_OT_select_all(bpy.types.Operator):
     """Selects all categories"""
     bl_idname = "datamgr.select_all"
@@ -144,7 +144,7 @@ class DATAMGR_OT_select_all(bpy.types.Operator):
         return {'FINISHED'}
 
 
-# Data Manager Deselect All Operator
+# Atomic Data Manager Deselect All Operator
 class DATAMGR_OT_deselect_all(bpy.types.Operator):
     """Deselects all categories"""
     bl_idname = "datamgr.deselect_all"

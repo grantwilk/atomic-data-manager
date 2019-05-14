@@ -1,20 +1,20 @@
 """
 Copyright (C) 2019 Grant Wilk
 
-This file is part of Data MGR.
+This file is part of Atomic Data Manager.
 
-Data MGR is free software: you can redistribute
+Atomic Data Manager is free software: you can redistribute
 it and/or modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3 of the
 License, or (at your option) any later version.
 
-Data MGR is distributed in the hope that it will
+Atomic Data Manager is distributed in the hope that it will
 be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
 of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
-with Data MGR.  If not, see <https://www.gnu.org/licenses/>.
+with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import bpy
@@ -23,13 +23,13 @@ from atomic_data_manager.ui.utils import blendstats
 from atomic_data_manager.ui.utils import ui_layouts
 
 
-# Data Manager Main Panel
+# Atomic Data Manager Main Panel
 class DATAMGR_PT_main_panel(bpy.types.Panel):
     """
-    The primary Data Manager panel that will appear in the Scene tab of the Properties panel.
+    The primary Atomic Data Manager panel that will appear in the Scene tab of the Properties panel.
     This panel contains the Nuke/Clean/Undo buttons as well as the data set toggles and selection tools.
     """
-    bl_label = "Data Manager"
+    bl_label = "Atomic Data Manager"
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
     bl_context = "scene"
