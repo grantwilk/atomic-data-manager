@@ -10,8 +10,8 @@ High Priority:
 - Fix bug where deleting particle systems on an object deletes the object as well
 
 Low Priority:
-+ Add search bar support to quickly Nuke or Clean datablocks
-+ Add a pie menu to quickly Nuke or Clean datablocks
++ Add search bar support to quickly Nuke or Clean specific datablocks
++ Add a pie menu to quickly Nuke or Clean specific datablocks
 + Add detection and a warning for missing files
 * Find a better location for deleting individual objects
 * Find a more obvious way to implement inspection buttons (magnifying glass button following icon-ed toggle button?)
