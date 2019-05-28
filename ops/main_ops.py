@@ -19,20 +19,112 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ui import inspect_ui
-from atomic_data_manager.ops.utils import delete, clean, nuke
+from atomic_data_manager.ops.utils import clean, nuke
+from atomic_data_manager.ui.utils import ui_layouts
 
 
 # Atomic Data Manager Nuke Operator
 class DATAMGR_OT_nuke(bpy.types.Operator):
-    """Automatically removes all data from the selected categories"""
+    """Removes all data from the selected categories"""
     bl_idname = "datamgr.nuke"
-    bl_label = "Nuke"
+    bl_label = "CAUTION!"
 
     def draw(self, context):
+        dmgr = bpy.context.scene.datamgr
         layout = self.layout
+
         col = layout.column()
-        col.label(text="WARNING: This operation will remove ALL selected data!")
+        col.label(text="Remove the following data-blocks?")
+
+        # No Data Section
+        if not (dmgr.collections or dmgr.images or dmgr.lights or dmgr.materials
+                or dmgr.node_groups or dmgr.particles or dmgr.textures or dmgr.worlds):
+
+            ui_layouts.box_list(
+                layout=layout,
+            )
+
+        # Collections Section
+        if dmgr.collections and len(bpy.data.collections) != 0:
+            collections = sorted(bpy.data.collections.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Collections",
+                items=collections,
+                icon="OUTLINER_OB_GROUP_INSTANCE"
+            )
+
+        # Images Section
+        if dmgr.images and len(bpy.data.images) != 0:
+            images = sorted(bpy.data.images.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Images",
+                items=images,
+                icon="IMAGE_DATA"
+            )
+
+        # Lights Section
+        if dmgr.lights and len(bpy.data.lights) != 0:
+            lights = sorted(bpy.data.lights.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Lights",
+                items=lights,
+                icon="OUTLINER_OB_LIGHT"
+            )
+
+        # Materials Section
+        if dmgr.materials and len(bpy.data.materials) != 0:
+            materials = sorted(bpy.data.materials.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Materials",
+                items=materials,
+                icon="MATERIAL"
+            )
+
+        # Node Group Section
+        if dmgr.node_groups and len(bpy.data.node_groups) != 0:
+            node_groups = sorted(bpy.data.node_groups.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Node Groups",
+                items=node_groups,
+                icon="NODETREE"
+            )
+
+        # Particles Section
+        if dmgr.particles and len(bpy.data.particles) != 0:
+            particles = sorted(bpy.data.particles.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Particle Systems",
+                items=particles,
+                icon="PARTICLES"
+            )
+
+        # Textures Section
+        if dmgr.textures and len(bpy.data.textures) != 0:
+            textures = sorted(bpy.data.textures.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Textures",
+                items=textures,
+                icon="TEXTURE"
+            )
+
+        # Worlds Section
+        if dmgr.worlds and len(bpy.data.worlds) != 0:
+            worlds = sorted(bpy.data.worlds.keys())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Worlds",
+                items=worlds,
+                icon="WORLD"
+            )
+
+        row = layout.row()  # extra spacing
 
     def execute(self, context):
         dmgr = bpy.context.scene.datamgr
