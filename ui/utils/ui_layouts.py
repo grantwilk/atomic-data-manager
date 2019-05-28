@@ -20,21 +20,27 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 
 
-def box_list(layout, title, items, icon):
+def box_list(layout, title=None, items=None, icon=None):
     # a title label followed by a box that contains a two column list of items, each of which is preceded by a
     # uniform icon that does not change depending on the objects type
 
     # Section Title
     row = layout.row()  # extra row for additional spacing
-    row = layout.row()
-    row.label(text=title)
+
+    if title is not None:
+        row = layout.row()
+        row.label(text=title)
+
     box = layout.box()
 
-    if len(items) != 0:
+    if items is not None and len(items) != 0:
         # Section List
         flow = box.column_flow(columns=2)
         for item in items:
-            flow.label(text=item, icon=icon)
+            if icon is not None:
+                flow.label(text=item, icon=icon)
+            else:
+                flow.label(text=item)
     else:
         # No Data in Section Notification
         row = box.row()
