@@ -45,7 +45,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Collections Section
-        if dmgr.collections and len(bpy.data.collections) != 0:
+        if dmgr.collections:
             collections = sorted(bpy.data.collections.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -55,7 +55,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Images Section
-        if dmgr.images and len(bpy.data.images) != 0:
+        if dmgr.images:
             images = sorted(bpy.data.images.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -65,7 +65,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Lights Section
-        if dmgr.lights and len(bpy.data.lights) != 0:
+        if dmgr.lights:
             lights = sorted(bpy.data.lights.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -75,7 +75,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Materials Section
-        if dmgr.materials and len(bpy.data.materials) != 0:
+        if dmgr.materials:
             materials = sorted(bpy.data.materials.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -85,7 +85,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Node Group Section
-        if dmgr.node_groups and len(bpy.data.node_groups) != 0:
+        if dmgr.node_groups:
             node_groups = sorted(bpy.data.node_groups.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -95,7 +95,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Particles Section
-        if dmgr.particles and len(bpy.data.particles) != 0:
+        if dmgr.particles:
             particles = sorted(bpy.data.particles.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -105,7 +105,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Textures Section
-        if dmgr.textures and len(bpy.data.textures) != 0:
+        if dmgr.textures:
             textures = sorted(bpy.data.textures.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -115,7 +115,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Worlds Section
-        if dmgr.worlds and len(bpy.data.worlds) != 0:
+        if dmgr.worlds:
             worlds = sorted(bpy.data.worlds.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -177,7 +177,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Collections Section
-        if dmgr.collections and len(blendstats.get_unused_collections()) != 0:
+        if dmgr.collections:
             collections = sorted(blendstats.get_unused_collections())
             ui_layouts.box_list(
                 layout=layout,
@@ -187,7 +187,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Images Section
-        if dmgr.images and len(blendstats.get_unused_images()) != 0:
+        if dmgr.images:
             images = sorted(blendstats.get_unused_images())
             ui_layouts.box_list(
                 layout=layout,
@@ -197,7 +197,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Lights Section
-        if dmgr.lights and len(blendstats.get_unused_lights()) != 0:
+        if dmgr.lights:
             lights = sorted(blendstats.get_unused_lights())
             ui_layouts.box_list(
                 layout=layout,
@@ -207,7 +207,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Materials Section
-        if dmgr.materials and len(blendstats.get_unused_materials()) != 0:
+        if dmgr.materials:
             materials = sorted(blendstats.get_unused_materials())
             ui_layouts.box_list(
                 layout=layout,
@@ -217,7 +217,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Node Group Section
-        if dmgr.node_groups and len(blendstats.get_unused_node_groups()) != 0:
+        if dmgr.node_groups:
             node_groups = sorted(blendstats.get_unused_node_groups())
             ui_layouts.box_list(
                 layout=layout,
@@ -227,7 +227,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Particles Section
-        if dmgr.particles and len(blendstats.get_unused_particles()) != 0:
+        if dmgr.particles:
             particles = sorted(blendstats.get_unused_particles())
             ui_layouts.box_list(
                 layout=layout,
@@ -237,7 +237,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Textures Section
-        if dmgr.textures and len(blendstats.get_unused_textures()) != 0:
+        if dmgr.textures:
             textures = sorted(blendstats.get_unused_textures())
             ui_layouts.box_list(
                 layout=layout,
@@ -247,7 +247,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Worlds Section
-        if dmgr.worlds and len(blendstats.get_unused_worlds()) != 0:
+        if dmgr.worlds:
             worlds = sorted(blendstats.get_unused_worlds())
             ui_layouts.box_list(
                 layout=layout,
