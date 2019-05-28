@@ -20,7 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 from bpy.utils import register_class, unregister_class
 from atomic_data_manager.ops.utils import clean, nuke
-from atomic_data_manager.ui.utils import ui_layouts
+from atomic_data_manager.ui.utils import ui_layouts, blendstats
 
 
 # Atomic Data Manager Nuke Operator
@@ -161,6 +161,103 @@ class DATAMGR_OT_clean(bpy.types.Operator):
     bl_idname = "datamgr.clean"
     bl_label = "Clean"
 
+    def draw(self, context):
+        dmgr = bpy.context.scene.datamgr
+        layout = self.layout
+
+        col = layout.column()
+        col.label(text="Remove the following data-blocks?")
+
+        # No Data Section
+        if not (dmgr.collections or dmgr.images or dmgr.lights or dmgr.materials
+                or dmgr.node_groups or dmgr.particles or dmgr.textures or dmgr.worlds):
+
+            ui_layouts.box_list(
+                layout=layout,
+            )
+
+        # Collections Section
+        if dmgr.collections and len(blendstats.get_unused_collections()) != 0:
+            collections = sorted(blendstats.get_unused_collections())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Collections",
+                items=collections,
+                icon="OUTLINER_OB_GROUP_INSTANCE"
+            )
+
+        # Images Section
+        if dmgr.images and len(blendstats.get_unused_images()) != 0:
+            images = sorted(blendstats.get_unused_images())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Images",
+                items=images,
+                icon="IMAGE_DATA"
+            )
+
+        # Lights Section
+        if dmgr.lights and len(blendstats.get_unused_lights()) != 0:
+            lights = sorted(blendstats.get_unused_lights())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Lights",
+                items=lights,
+                icon="OUTLINER_OB_LIGHT"
+            )
+
+        # Materials Section
+        if dmgr.materials and len(blendstats.get_unused_materials()) != 0:
+            materials = sorted(blendstats.get_unused_materials())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Materials",
+                items=materials,
+                icon="MATERIAL"
+            )
+
+        # Node Group Section
+        if dmgr.node_groups and len(blendstats.get_unused_node_groups()) != 0:
+            node_groups = sorted(blendstats.get_unused_node_groups())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Node Groups",
+                items=node_groups,
+                icon="NODETREE"
+            )
+
+        # Particles Section
+        if dmgr.particles and len(blendstats.get_unused_particles()) != 0:
+            particles = sorted(blendstats.get_unused_particles())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Particle Systems",
+                items=particles,
+                icon="PARTICLES"
+            )
+
+        # Textures Section
+        if dmgr.textures and len(blendstats.get_unused_textures()) != 0:
+            textures = sorted(blendstats.get_unused_textures())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Textures",
+                items=textures,
+                icon="TEXTURE"
+            )
+
+        # Worlds Section
+        if dmgr.worlds and len(blendstats.get_unused_worlds()) != 0:
+            worlds = sorted(blendstats.get_unused_worlds())
+            ui_layouts.box_list(
+                layout=layout,
+                title="Worlds",
+                items=worlds,
+                icon="WORLD"
+            )
+
+        row = layout.row()  # extra spacing
+
     def execute(self, context):
         dmgr = bpy.context.scene.datamgr
 
@@ -184,6 +281,10 @@ class DATAMGR_OT_clean(bpy.types.Operator):
         bpy.ops.datamgr.deselect_all()
 
         return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
 
 
 # Atomic Data Manager Undo Operator
