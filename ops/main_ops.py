@@ -24,28 +24,28 @@ from atomic_data_manager.ui.utils import ui_layouts, blendstats
 
 
 # Atomic Data Manager Nuke Operator
-class DATAMGR_OT_nuke(bpy.types.Operator):
+class ATOMIC_OT_nuke(bpy.types.Operator):
     """Removes all data from the selected categories"""
-    bl_idname = "datamgr.nuke"
+    bl_idname = "atomic.nuke"
     bl_label = "CAUTION!"
 
     def draw(self, context):
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         layout = self.layout
 
         col = layout.column()
         col.label(text="Remove the following data-blocks?")
 
         # No Data Section
-        if not (dmgr.collections or dmgr.images or dmgr.lights or dmgr.materials
-                or dmgr.node_groups or dmgr.particles or dmgr.textures or dmgr.worlds):
+        if not (atom.collections or atom.images or atom.lights or atom.materials
+                or atom.node_groups or atom.particles or atom.textures or atom.worlds):
 
             ui_layouts.box_list(
                 layout=layout,
             )
 
         # Collections Section
-        if dmgr.collections:
+        if atom.collections:
             collections = sorted(bpy.data.collections.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -55,7 +55,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Images Section
-        if dmgr.images:
+        if atom.images:
             images = sorted(bpy.data.images.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -65,7 +65,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Lights Section
-        if dmgr.lights:
+        if atom.lights:
             lights = sorted(bpy.data.lights.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -75,7 +75,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Materials Section
-        if dmgr.materials:
+        if atom.materials:
             materials = sorted(bpy.data.materials.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -85,7 +85,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Node Group Section
-        if dmgr.node_groups:
+        if atom.node_groups:
             node_groups = sorted(bpy.data.node_groups.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -95,7 +95,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Particles Section
-        if dmgr.particles:
+        if atom.particles:
             particles = sorted(bpy.data.particles.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -105,7 +105,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Textures Section
-        if dmgr.textures:
+        if atom.textures:
             textures = sorted(bpy.data.textures.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -115,7 +115,7 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
             )
 
         # Worlds Section
-        if dmgr.worlds:
+        if atom.worlds:
             worlds = sorted(bpy.data.worlds.keys())
             ui_layouts.box_list(
                 layout=layout,
@@ -127,26 +127,26 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
         row = layout.row()  # extra spacing
 
     def execute(self, context):
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
 
-        if dmgr.collections:
+        if atom.collections:
             nuke.collections()
-        if dmgr.images:
+        if atom.images:
             nuke.images()
-        if dmgr.lights:
+        if atom.lights:
             nuke.lights()
-        if dmgr.materials:
+        if atom.materials:
             nuke.materials()
-        if dmgr.node_groups:
+        if atom.node_groups:
             nuke.node_groups()
-        if dmgr.particles:
+        if atom.particles:
             nuke.particles()
-        if dmgr.textures:
+        if atom.textures:
             nuke.textures()
-        if dmgr.worlds:
+        if atom.worlds:
             nuke.worlds()
 
-        bpy.ops.datamgr.deselect_all()
+        bpy.ops.atomic.deselect_all()
 
         return {'FINISHED'}
 
@@ -156,28 +156,28 @@ class DATAMGR_OT_nuke(bpy.types.Operator):
 
 
 # Atomic Data Manager Clean Operator
-class DATAMGR_OT_clean(bpy.types.Operator):
+class ATOMIC_OT_clean(bpy.types.Operator):
     """Automatically removes all user-less data from the selected categories"""
-    bl_idname = "datamgr.clean"
+    bl_idname = "atomic.clean"
     bl_label = "Clean"
 
     def draw(self, context):
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         layout = self.layout
 
         col = layout.column()
         col.label(text="Remove the following data-blocks?")
 
         # No Data Section
-        if not (dmgr.collections or dmgr.images or dmgr.lights or dmgr.materials
-                or dmgr.node_groups or dmgr.particles or dmgr.textures or dmgr.worlds):
+        if not (atom.collections or atom.images or atom.lights or atom.materials
+                or atom.node_groups or atom.particles or atom.textures or atom.worlds):
 
             ui_layouts.box_list(
                 layout=layout,
             )
 
         # Collections Section
-        if dmgr.collections:
+        if atom.collections:
             collections = sorted(blendstats.get_unused_collections())
             ui_layouts.box_list(
                 layout=layout,
@@ -187,7 +187,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Images Section
-        if dmgr.images:
+        if atom.images:
             images = sorted(blendstats.get_unused_images())
             ui_layouts.box_list(
                 layout=layout,
@@ -197,7 +197,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Lights Section
-        if dmgr.lights:
+        if atom.lights:
             lights = sorted(blendstats.get_unused_lights())
             ui_layouts.box_list(
                 layout=layout,
@@ -207,7 +207,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Materials Section
-        if dmgr.materials:
+        if atom.materials:
             materials = sorted(blendstats.get_unused_materials())
             ui_layouts.box_list(
                 layout=layout,
@@ -217,7 +217,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Node Group Section
-        if dmgr.node_groups:
+        if atom.node_groups:
             node_groups = sorted(blendstats.get_unused_node_groups())
             ui_layouts.box_list(
                 layout=layout,
@@ -227,7 +227,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Particles Section
-        if dmgr.particles:
+        if atom.particles:
             particles = sorted(blendstats.get_unused_particles())
             ui_layouts.box_list(
                 layout=layout,
@@ -237,7 +237,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Textures Section
-        if dmgr.textures:
+        if atom.textures:
             textures = sorted(blendstats.get_unused_textures())
             ui_layouts.box_list(
                 layout=layout,
@@ -247,7 +247,7 @@ class DATAMGR_OT_clean(bpy.types.Operator):
             )
 
         # Worlds Section
-        if dmgr.worlds:
+        if atom.worlds:
             worlds = sorted(blendstats.get_unused_worlds())
             ui_layouts.box_list(
                 layout=layout,
@@ -259,26 +259,26 @@ class DATAMGR_OT_clean(bpy.types.Operator):
         row = layout.row()  # extra spacing
 
     def execute(self, context):
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
 
-        if dmgr.collections:
+        if atom.collections:
             clean.collections()
-        if dmgr.images:
+        if atom.images:
             clean.images()
-        if dmgr.lights:
+        if atom.lights:
             clean.lights()
-        if dmgr.materials:
+        if atom.materials:
             clean.materials()
-        if dmgr.node_groups:
+        if atom.node_groups:
             clean.node_groups()
-        if dmgr.particles:
+        if atom.particles:
             clean.particles()
-        if dmgr.textures:
+        if atom.textures:
             clean.textures()
-        if dmgr.worlds:
+        if atom.worlds:
             clean.worlds()
 
-        bpy.ops.datamgr.deselect_all()
+        bpy.ops.atomic.deselect_all()
 
         return {'FINISHED'}
 
@@ -288,9 +288,9 @@ class DATAMGR_OT_clean(bpy.types.Operator):
 
 
 # Atomic Data Manager Undo Operator
-class DATAMGR_OT_undo(bpy.types.Operator):
+class ATOMIC_OT_undo(bpy.types.Operator):
     """Undoes the previous action"""
-    bl_idname = "datamgr.undo"
+    bl_idname = "atomic.undo"
     bl_label = "Undo"
 
     def execute(self, context):
@@ -299,69 +299,69 @@ class DATAMGR_OT_undo(bpy.types.Operator):
 
 
 # Atomic Data Manager Smart Select Operator
-class DATAMGR_OT_smart_select(bpy.types.Operator):
+class ATOMIC_OT_smart_select(bpy.types.Operator):
     """Auto-select categories with user-less data"""
-    bl_idname = "datamgr.smart_select"
+    bl_idname = "atomic.smart_select"
     bl_label = "Smart Select"
 
     def execute(self, context):
         data = bpy.data
 
-        bpy.context.scene.datamgr.collections = any(len(collection.all_objects.values()) == 0 for collection in data.collections)
-        bpy.context.scene.datamgr.images = any(image.users == 0 for image in data.images)
-        bpy.context.scene.datamgr.lights = any(lights.users == 0 for lights in data.lights)
-        bpy.context.scene.datamgr.materials = any(material.users == 0 for material in data.materials)
-        bpy.context.scene.datamgr.node_groups = any(node_group.users == 0 for node_group in data.node_groups)
-        bpy.context.scene.datamgr.particles = any(particle.users == 0 for particle in data.particles)
-        bpy.context.scene.datamgr.textures = any(texture.users == 0 for texture in data.textures)
-        bpy.context.scene.datamgr.worlds = any(world.users == 0 for world in data.worlds)
+        bpy.context.scene.atomic.collections = any(len(collection.all_objects.values()) == 0 for collection in data.collections)
+        bpy.context.scene.atomic.images = any(image.users == 0 for image in data.images)
+        bpy.context.scene.atomic.lights = any(lights.users == 0 for lights in data.lights)
+        bpy.context.scene.atomic.materials = any(material.users == 0 for material in data.materials)
+        bpy.context.scene.atomic.node_groups = any(node_group.users == 0 for node_group in data.node_groups)
+        bpy.context.scene.atomic.particles = any(particle.users == 0 for particle in data.particles)
+        bpy.context.scene.atomic.textures = any(texture.users == 0 for texture in data.textures)
+        bpy.context.scene.atomic.worlds = any(world.users == 0 for world in data.worlds)
 
         return {'FINISHED'}
 
 
 # Atomic Data Manager Select All Operator
-class DATAMGR_OT_select_all(bpy.types.Operator):
+class ATOMIC_OT_select_all(bpy.types.Operator):
     """Selects all categories"""
-    bl_idname = "datamgr.select_all"
+    bl_idname = "atomic.select_all"
     bl_label = "Select All"
 
     def execute(self, context):
-        bpy.context.scene.datamgr.collections = True
-        bpy.context.scene.datamgr.images = True
-        bpy.context.scene.datamgr.lights = True
-        bpy.context.scene.datamgr.materials = True
-        bpy.context.scene.datamgr.node_groups = True
-        bpy.context.scene.datamgr.particles = True
-        bpy.context.scene.datamgr.textures = True
-        bpy.context.scene.datamgr.worlds = True
+        bpy.context.scene.atomic.collections = True
+        bpy.context.scene.atomic.images = True
+        bpy.context.scene.atomic.lights = True
+        bpy.context.scene.atomic.materials = True
+        bpy.context.scene.atomic.node_groups = True
+        bpy.context.scene.atomic.particles = True
+        bpy.context.scene.atomic.textures = True
+        bpy.context.scene.atomic.worlds = True
         return {'FINISHED'}
 
 
 # Atomic Data Manager Deselect All Operator
-class DATAMGR_OT_deselect_all(bpy.types.Operator):
+class ATOMIC_OT_deselect_all(bpy.types.Operator):
     """Deselects all categories"""
-    bl_idname = "datamgr.deselect_all"
+    bl_idname = "atomic.deselect_all"
     bl_label = "Deselect All"
 
     def execute(self, context):
-        bpy.context.scene.datamgr.collections = False
-        bpy.context.scene.datamgr.images = False
-        bpy.context.scene.datamgr.lights = False
-        bpy.context.scene.datamgr.materials = False
-        bpy.context.scene.datamgr.node_groups = False
-        bpy.context.scene.datamgr.particles = False
-        bpy.context.scene.datamgr.textures = False
-        bpy.context.scene.datamgr.worlds = False
+        bpy.context.scene.atomic.collections = False
+        bpy.context.scene.atomic.images = False
+        bpy.context.scene.atomic.lights = False
+        bpy.context.scene.atomic.materials = False
+        bpy.context.scene.atomic.node_groups = False
+        bpy.context.scene.atomic.particles = False
+        bpy.context.scene.atomic.textures = False
+        bpy.context.scene.atomic.worlds = False
 
         return {'FINISHED'}
 
 
-reg_list = [DATAMGR_OT_nuke,
-            DATAMGR_OT_clean,
-            DATAMGR_OT_undo,
-            DATAMGR_OT_smart_select,
-            DATAMGR_OT_select_all,
-            DATAMGR_OT_deselect_all]
+reg_list = [ATOMIC_OT_nuke,
+            ATOMIC_OT_clean,
+            ATOMIC_OT_undo,
+            ATOMIC_OT_smart_select,
+            ATOMIC_OT_select_all,
+            ATOMIC_OT_deselect_all]
 
 
 def register():

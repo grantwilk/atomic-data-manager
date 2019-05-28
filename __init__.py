@@ -36,7 +36,7 @@ bl_info = {
 
 
 # Atomic Data Manager Properties
-class DATAMGR_PG_main(bpy.types.PropertyGroup):
+class ATOMIC_PG_main(bpy.types.PropertyGroup):
     # Main Panel Toggle Buttons
     collections: bpy.props.BoolProperty(default=False)
     images: bpy.props.BoolProperty(default=False)
@@ -89,16 +89,16 @@ class DATAMGR_PG_main(bpy.types.PropertyGroup):
 
 
 def register():
-    register_class(DATAMGR_PG_main)
-    bpy.types.Scene.datamgr = bpy.props.PointerProperty(type=DATAMGR_PG_main)
+    register_class(ATOMIC_PG_main)
+    bpy.types.Scene.atomic = bpy.props.PointerProperty(type=ATOMIC_PG_main)
 
     ui.register()
     ops.register()
 
 
 def unregister():
-    unregister_class(DATAMGR_PG_main)
-    del bpy.types.Scene.datamgr
+    unregister_class(ATOMIC_PG_main)
+    del bpy.types.Scene.atomic
 
     ui.unregister()
     ops.unregister()

@@ -24,21 +24,21 @@ from atomic_data_manager.ui.utils import ui_layouts
 
 
 # COLLECTIONS
-class DATAMGR_OT_inspect_collections(bpy.types.Operator):
+class ATOMIC_OT_inspect_collections(bpy.types.Operator):
     """Inspect Collections"""
-    bl_idname = "datamgr.inspect_collections"
+    bl_idname = "atomic.inspect_collections"
     bl_label = "Inspect Collections"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         collections = bpy.data.collections
-        collections_field = dmgr.collections_field if dmgr.collections_field in collections.keys() else ""
+        collections_field = atom.collections_field if atom.collections_field in collections.keys() else ""
 
         # Inspect Collections Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="collections_field",
+            atom_prop="collections_field",
             data="collections"
         )
 
@@ -92,28 +92,28 @@ class DATAMGR_OT_inspect_collections(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "COLLECTIONS"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "COLLECTIONS"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # IMAGES
-class DATAMGR_OT_inspect_images(bpy.types.Operator):
+class ATOMIC_OT_inspect_images(bpy.types.Operator):
     """Inspect Images"""
-    bl_idname = "datamgr.inspect_images"
+    bl_idname = "atomic.inspect_images"
     bl_label = "Inspect Images"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         images = bpy.data.images
-        images_field = dmgr.images_field if dmgr.images_field in images.keys() else ""
+        images_field = atom.images_field if atom.images_field in images.keys() else ""
 
         # Inspect Images Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="images_field",
+            atom_prop="images_field",
             data="images"
         )
 
@@ -158,28 +158,28 @@ class DATAMGR_OT_inspect_images(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "IMAGES"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "IMAGES"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # LIGHTS
-class DATAMGR_OT_inspect_lights(bpy.types.Operator):
+class ATOMIC_OT_inspect_lights(bpy.types.Operator):
     """Inspect Lights"""
-    bl_idname = "datamgr.inspect_lights"
+    bl_idname = "atomic.inspect_lights"
     bl_label = "Inspect Lights"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         lights = bpy.data.lights
-        lights_field = dmgr.lights_field if dmgr.lights_field in lights.keys() else ""
+        lights_field = atom.lights_field if atom.lights_field in lights.keys() else ""
 
         # Inspect Lights Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="lights_field",
+            atom_prop="lights_field",
             data="lights"
         )
 
@@ -198,28 +198,28 @@ class DATAMGR_OT_inspect_lights(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "LIGHTS"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "LIGHTS"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # MATERIALS
-class DATAMGR_OT_inspect_materials(bpy.types.Operator):
+class ATOMIC_OT_inspect_materials(bpy.types.Operator):
     """Inspect Materials"""
-    bl_idname = "datamgr.inspect_materials"
+    bl_idname = "atomic.inspect_materials"
     bl_label = "Inspect Materials"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         materials = bpy.data.materials
-        materials_field = dmgr.materials_field if dmgr.materials_field in materials.keys() else ""
+        materials_field = atom.materials_field if atom.materials_field in materials.keys() else ""
 
         # Inspect Materials Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="materials_field",
+            atom_prop="materials_field",
             data="materials"
         )
 
@@ -237,28 +237,28 @@ class DATAMGR_OT_inspect_materials(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "MATERIALS"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "MATERIALS"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # NODE GROUPS
-class DATAMGR_OT_inspect_node_groups(bpy.types.Operator):
+class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
     """Inspect Node Groups"""
-    bl_idname = "datamgr.inspect_node_groups"
+    bl_idname = "atomic.inspect_node_groups"
     bl_label = "Inspect Node Groups"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         node_groups = bpy.data.node_groups
-        node_groups_field = dmgr.node_groups_field if dmgr.node_groups_field in node_groups.keys() else ""
+        node_groups_field = atom.node_groups_field if atom.node_groups_field in node_groups.keys() else ""
 
         # Inspect Node Groups Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="node_groups_field",
+            atom_prop="node_groups_field",
             data="node_groups"
         )
 
@@ -298,28 +298,28 @@ class DATAMGR_OT_inspect_node_groups(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "NODE_GROUPS"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "NODE_GROUPS"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # PARTICLES
-class DATAMGR_OT_inspect_particles(bpy.types.Operator):
+class ATOMIC_OT_inspect_particles(bpy.types.Operator):
     """Inspect Particle Systems"""
-    bl_idname = "datamgr.inspect_particles"
+    bl_idname = "atomic.inspect_particles"
     bl_label = "Inspect Particles"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         particles = bpy.data.particles
-        particles_field = dmgr.particles_field if dmgr.particles_field in particles.keys() else ""
+        particles_field = atom.particles_field if atom.particles_field in particles.keys() else ""
 
         # Inspect Particles Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="particles_field",
+            atom_prop="particles_field",
             data="particles"
         )
 
@@ -338,28 +338,28 @@ class DATAMGR_OT_inspect_particles(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "PARTICLES"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "PARTICLES"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # TEXTURES
-class DATAMGR_OT_inspect_textures(bpy.types.Operator):
+class ATOMIC_OT_inspect_textures(bpy.types.Operator):
     """Inspect Textures"""
-    bl_idname = "datamgr.inspect_textures"
+    bl_idname = "atomic.inspect_textures"
     bl_label = "Inspect Textures"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
         textures = bpy.data.textures
-        textures_field = dmgr.textures_field if dmgr.textures_field in textures.keys() else ""
+        textures_field = atom.textures_field if atom.textures_field in textures.keys() else ""
 
         # Inspect Textures Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="textures_field",
+            atom_prop="textures_field",
             data="textures"
         )
 
@@ -395,16 +395,16 @@ class DATAMGR_OT_inspect_textures(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "TEXTURES"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "TEXTURES"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
 # WORLDS
-class DATAMGR_OT_inspect_worlds(bpy.types.Operator):
+class ATOMIC_OT_inspect_worlds(bpy.types.Operator):
     """Inspect Worlds"""
-    bl_idname = "datamgr.inspect_worlds"
+    bl_idname = "atomic.inspect_worlds"
     bl_label = "Inspect Worlds"
 
     def draw(self, context):
@@ -413,7 +413,7 @@ class DATAMGR_OT_inspect_worlds(bpy.types.Operator):
         # Inspect Worlds Header
         ui_layouts.inspect_header(
             layout=layout,
-            dmgr_prop="worlds_field",
+            atom_prop="worlds_field",
             data="worlds"
         )
 
@@ -431,20 +431,20 @@ class DATAMGR_OT_inspect_worlds(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        dmgr = bpy.context.scene.datamgr
-        dmgr.active_inspection = "WORLDS"
+        atom = bpy.context.scene.atomic
+        atom.active_inspection = "WORLDS"
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
-reg_list = [DATAMGR_OT_inspect_collections,
-            DATAMGR_OT_inspect_images,
-            DATAMGR_OT_inspect_lights,
-            DATAMGR_OT_inspect_materials,
-            DATAMGR_OT_inspect_node_groups,
-            DATAMGR_OT_inspect_particles,
-            DATAMGR_OT_inspect_textures,
-            DATAMGR_OT_inspect_worlds,]
+reg_list = [ATOMIC_OT_inspect_collections,
+            ATOMIC_OT_inspect_images,
+            ATOMIC_OT_inspect_lights,
+            ATOMIC_OT_inspect_materials,
+            ATOMIC_OT_inspect_node_groups,
+            ATOMIC_OT_inspect_particles,
+            ATOMIC_OT_inspect_textures,
+            ATOMIC_OT_inspect_worlds,]
 
 
 def register():

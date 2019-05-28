@@ -98,23 +98,23 @@ def box_list_diverse(layout, title, items):
         row.label(text="none")
 
 
-def inspect_header(layout, dmgr_prop, data):
+def inspect_header(layout, atom_prop, data):
     # a single column containing a search property and basic data manipulation functions that appears at the top of all
     # inspect data set dialogs
 
-    dmgr = bpy.context.scene.datamgr
+    atom = bpy.context.scene.atomic
 
     # exterior box and prop search
     col = layout.column(align=True)
     box = col.box()
     row = box.row()
     split = row.split()
-    split.prop_search(dmgr, dmgr_prop, bpy.data, data, text="")
+    split.prop_search(atom, atom_prop, bpy.data, data, text="")
 
     # convert the data set string into an actual data set reference
     data = getattr(bpy.data, data)
-    # convert the dmgr_prop input into the value of its respective string property
-    text_field = getattr(dmgr, dmgr_prop)
+    # convert the atom_prop input into the value of its respective string property
+    text_field = getattr(atom, atom_prop)
 
     # determine whether or not the text entered in the string property is a valid key
     is_valid_key = text_field in data.keys()
@@ -132,17 +132,17 @@ def inspect_header(layout, dmgr_prop, data):
     # icon and depression changes depending on whether or not the object is using a fake user
     if not data == bpy.data.collections:
         if has_fake_user:
-            row.operator("datamgr.toggle_fake_user", text="", icon="FAKE_USER_ON", depress=True)
+            row.operator("atomic.toggle_fake_user", text="", icon="FAKE_USER_ON", depress=True)
         else:
-            row.operator("datamgr.toggle_fake_user", text="", icon="FAKE_USER_OFF", depress=False)
+            row.operator("atomic.toggle_fake_user", text="", icon="FAKE_USER_OFF", depress=False)
 
-    row.operator("datamgr.inspection_duplicate", text="", icon="DUPLICATE")
+    row.operator("atomic.inspection_duplicate", text="", icon="DUPLICATE")
 
     if not data == bpy.data.collections:
-        row.operator("datamgr.replace", text="", icon="UV_SYNC_SELECT")
+        row.operator("atomic.replace", text="", icon="UV_SYNC_SELECT")
 
-    row.operator("datamgr.rename", text="", icon="GREASEPENCIL")  # Alternate Icon: OUTLINER_DATA_FONT
-    row.operator("datamgr.inspection_delete", text="", icon="TRASH")
+    row.operator("atomic.rename", text="", icon="GREASEPENCIL")  # Alternate Icon: OUTLINER_DATA_FONT
+    row.operator("atomic.inspection_delete", text="", icon="TRASH")
 
 
 def number_suffix(text, number):

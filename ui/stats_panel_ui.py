@@ -24,7 +24,7 @@ from atomic_data_manager.ui.utils import ui_layouts
 
 
 # Atomic Data Manager Statistics SubPanel
-class DATAMGR_PT_stats_panel(bpy.types.Panel):
+class ATOMIC_PT_stats_panel(bpy.types.Panel):
     """
     The statistics panel is nested in the main Atomic Data Manager panel.
     This panel contains statistics about the file and each data set in the Blender file.
@@ -32,21 +32,21 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
     bl_label = "Stats for Nerds"
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
-    bl_parent_id = "DATAMGR_PT_main_panel"
+    bl_parent_id = "ATOMIC_PT_main_panel"
 
     def draw(self, context):
         layout = self.layout
-        dmgr = bpy.context.scene.datamgr
+        atom = bpy.context.scene.atomic
 
         row = layout.row()
         row.label(text="Data Sets:")
-        row.prop(dmgr, "stats_mode", expand=True, icon_only=True)
+        row.prop(atom, "stats_mode", expand=True, icon_only=True)
 
         box = layout.box()
 
         # UI Implementation
         # OVERVIEW
-        if dmgr.stats_mode == 'OVERVIEW':
+        if atom.stats_mode == 'OVERVIEW':
             row = box.row()
             row.label(text="Overview", icon='FILE')
 
@@ -92,7 +92,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
                 text=ui_layouts.number_suffix(str(blendstats.count_worlds()), blendstats.count_unused_worlds()))
 
         # COLLECTIONS
-        elif dmgr.stats_mode == 'COLLECTIONS':
+        elif atom.stats_mode == 'COLLECTIONS':
             row = box.row()
             row.label(text="Collections", icon='GROUP')
 
@@ -107,7 +107,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_collections()))
 
         # IMAGES
-        elif dmgr.stats_mode == 'IMAGES':
+        elif atom.stats_mode == 'IMAGES':
             row = box.row()
             row.label(text="Images", icon='IMAGE_DATA')
 
@@ -126,7 +126,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unused Size: {0}".format(blendstats.images_unused_size()))
 
         # LIGHTS
-        elif dmgr.stats_mode == 'LIGHTS':
+        elif atom.stats_mode == 'LIGHTS':
             row = box.row()
             row.label(text="Lights", icon='LIGHT')
 
@@ -141,7 +141,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_lights()))
 
         # MATERIALS
-        elif dmgr.stats_mode == 'MATERIALS':
+        elif atom.stats_mode == 'MATERIALS':
             row = box.row()
             row.label(text="Materials", icon='MATERIAL')
 
@@ -156,7 +156,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_materials()))
 
         # OBJECTS
-        elif dmgr.stats_mode == 'OBJECTS':
+        elif atom.stats_mode == 'OBJECTS':
             row = box.row()
             row.label(text="Objects", icon='OBJECT_DATA')
 
@@ -168,7 +168,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_objects()))
 
         # NODE GROUPS
-        elif dmgr.stats_mode == 'NODE_GROUPS':
+        elif atom.stats_mode == 'NODE_GROUPS':
             row = box.row()
             row.label(text="Node Groups", icon='NODETREE')
 
@@ -183,7 +183,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_node_groups()))
 
         # PARTICLES
-        elif dmgr.stats_mode == 'PARTICLES':
+        elif atom.stats_mode == 'PARTICLES':
             row = box.row()
             row.label(text="Particle Systems", icon='PARTICLES')
 
@@ -202,7 +202,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Visible: {0}".format(blendstats.count_emitted_particles_visible()))
 
         # TEXTURES
-        elif dmgr.stats_mode == 'TEXTURES':
+        elif atom.stats_mode == 'TEXTURES':
             row = box.row()
             row.label(text="Textures", icon='TEXTURE')
 
@@ -217,7 +217,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_textures()))
 
         # WORLDS
-        elif dmgr.stats_mode == 'WORLDS':
+        elif atom.stats_mode == 'WORLDS':
             row = box.row()
             row.label(text="Worlds", icon='WORLD')
 
@@ -232,7 +232,7 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_worlds()))
 
 
-reg_list = [DATAMGR_PT_stats_panel]
+reg_list = [ATOMIC_PT_stats_panel]
 
 
 def register():
