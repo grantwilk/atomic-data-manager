@@ -85,17 +85,17 @@ def is_unnamed(data, key):
 
 
 # <editor-fold desc="Generic Count Functions">
-def total_count(data):
+def count_total(data):
     # returns the amount of keys in a set of data
     return len(data.keys())
 
 
-def unused_count(data):
+def count_unused(data):
     # returns the amount of unused data-blocks in a set of data
     return sum(1 if datablock.users == 0 else 0 for datablock in data)
 
 
-def unnamed_count(data):
+def count_unnamed(data):
     # returns the amount of unnamed data-blocks in a set of data
     unnamed_datablocks = []
 
@@ -108,49 +108,49 @@ def unnamed_count(data):
 
 
 # <editor-fold desc="Data Set Specific Functions">
-def collections_count():
+def count_collections():
     # returns the amount of collections in the current Blender file
-    return total_count(bpy.data.collections)
+    return count_total(bpy.data.collections)
 
 
-def collections_unused():
+def count_unused_collections():
     # returns the amount of empty collections in the current Blender file
     return str(sum(1 if len(collection.all_objects.values()) == 0 else 0 for collection in bpy.data.collections))
 
 
-def collections_unnamed():
+def count_unnamed_collections():
     # returns the amount of unnamed collections in the current Blender file
-    return unnamed_count(bpy.data.collections)
+    return count_unnamed(bpy.data.collections)
 
 
-def images_count():
+def count_images():
     # returns the amount of images in the current Blender file
-    return total_count(bpy.data.images)
+    return count_total(bpy.data.images)
 
 
-def images_unused():
+def count_unused_images():
     # returns the amount of unused images in the current Blender file
-    return unused_count(bpy.data.images)
+    return count_unused(bpy.data.images)
 
 
-def images_unnamed():
+def count_unnamed_images():
     # returns the amount of unnamed images in the current Blender file
-    return unnamed_count(bpy.data.images)
+    return count_unnamed(bpy.data.images)
 
 
-def lights_count():
+def count_lights():
     # returns the amount of lights in the current Blender file
-    return total_count(bpy.data.lights)
+    return count_total(bpy.data.lights)
 
 
-def lights_unused():
+def count_unused_lights():
     # returns the amount of unused lights in the current Blender file
-    return unused_count(bpy.data.lights)
+    return count_unused(bpy.data.lights)
 
 
-def lights_unnamed():
+def count_unnamed_lights():
     # returns the amount of unnamed lights in the current Blender file
-    return unnamed_count(bpy.data.lights)
+    return count_unnamed(bpy.data.lights)
 
 
 def images_size():
@@ -171,97 +171,97 @@ def images_unused_size():
     return images_unused_filesize
 
 
-def materials_count():
+def count_materials():
     # returns the amount of materials in the current Blender file
-    return total_count(bpy.data.materials)
+    return count_total(bpy.data.materials)
 
 
-def materials_unused():
+def count_unused_materials():
     # returns the amount of unused materials in the current Blender file
-    return unused_count(bpy.data.materials)
+    return count_unused(bpy.data.materials)
 
 
-def materials_unnamed():
+def count_unnamed_materials():
     # returns the amount of unnamed materials in the current Blender file
-    return unnamed_count(bpy.data.materials)
+    return count_unnamed(bpy.data.materials)
 
 
-def objects_count():
+def count_objects():
     # returns the amount of objects in the current Blender file
-    return total_count(bpy.data.objects)
+    return count_total(bpy.data.objects)
 
 
-def objects_unnamed():
+def count_unnamed_objects():
     # returns the amount of unnamed objects in the current Blender file
-    return unnamed_count(bpy.data.objects)
+    return count_unnamed(bpy.data.objects)
 
 
-def particles_count():
+def count_particles():
     # returns the amount of particle systems in the current Blender file
-    return total_count(bpy.data.particles)
+    return count_total(bpy.data.particles)
 
 
-def particles_unused():
+def count_unused_particles():
     # returns the amount of unused particle systems in the current Blender file
-    return unused_count(bpy.data.particles)
+    return count_unused(bpy.data.particles)
 
 
-def particles_unnamed():
+def count_unnamed_particles():
     # returns the amount of unnamed particle systems in the current Blender file
-    return unnamed_count(bpy.data.particles)
+    return count_unnamed(bpy.data.particles)
 
 
-def particles_sum_particles():
-    # returns the sum of the number of particles in all particle systems in the current Blender file
+def count_emitted_particles():
+    # returns the  number of particles emitted in all particle systems in the current Blender file
     return sum(particle.count for particle in bpy.data.particles)
 
 
-def particles_sum_visible():
-    # returns the sum of the number of particles in all particle systems in the current Blender file
+def count_emitted_particles_visible():
+    # returns the the number of visible particles emitted in all particle systems in the current Blender file
     return sum(int(particle.count * (particle.display_percentage / 100)) for particle in bpy.data.particles)
 
 
-def node_groups_count():
+def count_node_groups():
     # returns the amount of node groups in the current Blender file
-    return total_count(bpy.data.node_groups)
+    return count_total(bpy.data.node_groups)
 
 
-def node_groups_unused():
+def count_unused_node_groups():
     # returns the amount of unused node groups in the current Blender file
-    return unused_count(bpy.data.node_groups)
+    return count_unused(bpy.data.node_groups)
 
 
-def node_groups_unnamed():
+def count_unnamed_node_groups():
     # returns the amount of unnamed node_groups in the current Blender file
-    return unnamed_count(bpy.data.node_groups)
+    return count_unnamed(bpy.data.node_groups)
 
 
-def textures_count():
+def count_textures():
     # returns the amount of textures in the current Blender file
-    return total_count(bpy.data.textures)
+    return count_total(bpy.data.textures)
 
 
-def textures_unused():
+def count_unused_textures():
     # returns the amount of unused textures in the current Blender file
-    return unused_count(bpy.data.textures)
+    return count_unused(bpy.data.textures)
 
 
-def textures_unnamed():
+def count_unnamed_textures():
     # returns the amount of unnamed textures in the current Blender file
-    return unnamed_count(bpy.data.textures)
+    return count_unnamed(bpy.data.textures)
 
 
-def worlds_count():
+def count_worlds():
     # returns the amount of worlds in the current Blender file
-    return total_count(bpy.data.worlds)
+    return count_total(bpy.data.worlds)
 
 
-def worlds_unused():
+def count_unused_worlds():
     # returns the amount of unused worlds in the current Blender file
-    return unused_count(bpy.data.worlds)
+    return count_unused(bpy.data.worlds)
 
 
-def worlds_unnamed():
+def count_unnamed_worlds():
     # returns the amount of unnamed worlds in the current Blender file
-    return unnamed_count(bpy.data.worlds)
+    return count_unnamed(bpy.data.worlds)
 # </editor-fold>
