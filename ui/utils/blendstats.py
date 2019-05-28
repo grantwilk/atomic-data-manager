@@ -84,7 +84,7 @@ def is_unnamed(data, key):
 # </editor-fold>
 
 
-# <editor-fold desc="Generic Count Functions">
+# <editor-fold desc="Count Functions">
 def count_total(data):
     # returns the amount of keys in a set of data
     return len(data.keys())
@@ -104,10 +104,8 @@ def count_unnamed(data):
             unnamed_datablocks.append(key)
 
     return len(unnamed_datablocks)
-# </editor-fold>
 
 
-# <editor-fold desc="Data Set Specific Functions">
 def count_collections():
     # returns the amount of collections in the current Blender file
     return count_total(bpy.data.collections)
@@ -264,4 +262,59 @@ def count_unused_worlds():
 def count_unnamed_worlds():
     # returns the amount of unnamed worlds in the current Blender file
     return count_unnamed(bpy.data.worlds)
+# </editor-fold>
+
+
+# <editor-fold desc="Get Functions">
+def get_unused(data):
+    # returns a list of keys of data with no users in the specified set of data
+    unused_data = []
+    for datablock in data:
+        if data.users == 0:
+            unused_data.append(datablock.name)
+    return unused_data
+
+
+def get_unused_collections():
+    # returns a list of keys of collections with no objects
+    unused_collections = []
+    for collection in bpy.data.collections:
+        if len(collection.all_objects.values()) == 0:
+            unused_collections.append(collection.name)
+    return unused_collections
+
+
+def get_unused_images():
+    # returns a list of keys of images with no users
+    return get_unused(bpy.data.images)
+
+
+def get_unused_lights():
+    # returns a list of keys of lights with no users
+    return get_unused(bpy.data.lights)
+
+
+def get_unused_materials():
+    # returns a list of keys of materials with no users
+    return get_unused(bpy.data.materials)
+
+
+def get_unused_node_groups():
+    # returns a list of keys of node groups with no users
+    return get_unused(bpy.data.node_groups)
+
+
+def get_unused_particles():
+    # returns a list of keys of particles with no users
+    return get_unused(bpy.data.particles)
+
+
+def get_unused_textures():
+    # returns a list of keys of textures with no users
+    return get_unused(bpy.data.textures)
+
+
+def get_unused_worlds():
+    # returns a list of keys of worlds with no users
+    return get_unused(bpy.data.worlds)
 # </editor-fold>
