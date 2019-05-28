@@ -270,7 +270,7 @@ def get_unused(data):
     # returns a list of keys of data with no users in the specified set of data
     unused_data = []
     for datablock in data:
-        if data.users == 0:
+        if datablock.users == 0:
             unused_data.append(datablock.name)
     return unused_data
 
