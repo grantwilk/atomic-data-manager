@@ -57,22 +57,22 @@ class DATAMGR_PT_main_panel(bpy.types.Panel):
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_collections", icon='GROUP', text="")
         splitcol.prop(dmgr, "collections",
-                      text=ui_layouts.number_suffix("Collections", blendstats.collections_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Collections", blendstats.count_unused_collections()), toggle=True)
 
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_lights", icon='LIGHT', text="")
         splitcol.prop(dmgr, "lights",
-                      text=ui_layouts.number_suffix("Lights", blendstats.lights_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Lights", blendstats.count_unused_lights()), toggle=True)
 
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_node_groups", icon='NODETREE', text="")
         splitcol.prop(dmgr, "node_groups",
-                      text=ui_layouts.number_suffix("Node Groups", blendstats.node_groups_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Node Groups", blendstats.count_unused_node_groups()), toggle=True)
 
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_textures", icon='TEXTURE', text="")
         splitcol.prop(dmgr, "textures",
-                      text=ui_layouts.number_suffix("Textures", blendstats.textures_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Textures", blendstats.count_unused_textures()), toggle=True)
 
         # RIGHT COLUMN
         col = split.column(align=True)
@@ -80,22 +80,22 @@ class DATAMGR_PT_main_panel(bpy.types.Panel):
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_images", icon='IMAGE_DATA', text="")
         splitcol.prop(dmgr, "images",
-                      text=ui_layouts.number_suffix("Images", blendstats.images_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Images", blendstats.count_unused_images()), toggle=True)
 
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_materials", icon='MATERIAL', text="")
         splitcol.prop(dmgr, "materials",
-                      text=ui_layouts.number_suffix("Materials", blendstats.materials_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Materials", blendstats.count_unused_materials()), toggle=True)
 
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_particles", icon='PARTICLES', text="")
         splitcol.prop(dmgr, "particles",
-                      text=ui_layouts.number_suffix("Particles", blendstats.particles_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Particles", blendstats.count_unused_particles()), toggle=True)
 
         splitcol = col.split(factor=0.2, align=True)
         splitcol.operator("datamgr.inspect_worlds", icon='WORLD', text="")
         splitcol.prop(dmgr, "worlds",
-                      text=ui_layouts.number_suffix("Worlds", blendstats.worlds_unused()), toggle=True)
+                      text=ui_layouts.number_suffix("Worlds", blendstats.count_unused_worlds()), toggle=True)
 
         # SELECTION OPERATORS
         row = layout.row(align=True)

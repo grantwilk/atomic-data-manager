@@ -66,13 +66,13 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
 
             col = split.column()
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.collections_count()), blendstats.collections_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_collections()), blendstats.count_unused_collections()))
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.lights_count()), blendstats.lights_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_lights()), blendstats.count_unused_lights()))
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.node_groups_count()), blendstats.node_groups_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_node_groups()), blendstats.count_unused_node_groups()))
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.textures_count()), blendstats.textures_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_textures()), blendstats.count_unused_textures()))
 
             # RIGHT COLUMN
             col = split.column()
@@ -83,13 +83,13 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
 
             col = split.column()
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.images_count()), blendstats.images_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_images()), blendstats.count_unused_images()))
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.materials_count()), blendstats.materials_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_materials()), blendstats.count_unused_materials()))
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.particles_count()), blendstats.particles_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_particles()), blendstats.count_unused_particles()))
             col.label(
-                text=ui_layouts.number_suffix(str(blendstats.worlds_count()), blendstats.worlds_unused()))
+                text=ui_layouts.number_suffix(str(blendstats.count_worlds()), blendstats.count_unused_worlds()))
 
         # COLLECTIONS
         elif dmgr.stats_mode == 'COLLECTIONS':
@@ -99,12 +99,12 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.collections_count()))
+            col.label(text="Total: {0}".format(blendstats.count_collections()))
             col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.collections_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.collections_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_collections()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_collections()))
 
         # IMAGES
         elif dmgr.stats_mode == 'IMAGES':
@@ -114,14 +114,14 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.images_count()))
+            col.label(text="Total: {0}".format(blendstats.count_images()))
             col.label(text="Placeholder")  # todo
             col.separator()
             col.label(text="Total Size: {0}".format(blendstats.images_size()))
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.images_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.images_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_images()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_images()))
             col.separator()
             col.label(text="Unused Size: {0}".format(blendstats.images_unused_size()))
 
@@ -133,12 +133,12 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.lights_count()))
+            col.label(text="Total: {0}".format(blendstats.count_lights()))
             col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.lights_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.lights_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_lights()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_lights()))
 
         # MATERIALS
         elif dmgr.stats_mode == 'MATERIALS':
@@ -148,12 +148,12 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.materials_count()))
+            col.label(text="Total: {0}".format(blendstats.count_materials()))
             col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.materials_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.materials_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_materials()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_materials()))
 
         # OBJECTS
         elif dmgr.stats_mode == 'OBJECTS':
@@ -162,10 +162,10 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
 
             split = box.split()
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.objects_count()))
+            col.label(text="Total: {0}".format(blendstats.count_objects()))
 
             col = split.column()
-            col.label(text="Unnamed: {0}".format(blendstats.objects_unnamed()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_objects()))
 
         # NODE GROUPS
         elif dmgr.stats_mode == 'NODE_GROUPS':
@@ -175,12 +175,12 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.node_groups_count()))
+            col.label(text="Total: {0}".format(blendstats.count_node_groups()))
             col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.node_groups_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.node_groups_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_node_groups()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_node_groups()))
 
         # PARTICLES
         elif dmgr.stats_mode == 'PARTICLES':
@@ -190,16 +190,16 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.particles_count()))
+            col.label(text="Total: {0}".format(blendstats.count_particles()))
             col.label(text="Placeholder")  # todo
             col.separator()
-            col.label(text="Particles: {0}".format(blendstats.particles_sum_particles()))
+            col.label(text="Particles: {0}".format(blendstats.count_emitted_particles()))
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.particles_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.particles_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_particles()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_particles()))
             col.separator()
-            col.label(text="Visible: {0}".format(blendstats.particles_sum_visible()))
+            col.label(text="Visible: {0}".format(blendstats.count_emitted_particles_visible()))
 
         # TEXTURES
         elif dmgr.stats_mode == 'TEXTURES':
@@ -209,12 +209,12 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.textures_count()))
+            col.label(text="Total: {0}".format(blendstats.count_textures()))
             col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.textures_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.textures_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_textures()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_textures()))
 
         # WORLDS
         elif dmgr.stats_mode == 'WORLDS':
@@ -224,12 +224,12 @@ class DATAMGR_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(blendstats.worlds_count()))
+            col.label(text="Total: {0}".format(blendstats.count_worlds()))
             col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(blendstats.worlds_unused()))
-            col.label(text="Unnamed: {0}".format(blendstats.worlds_unnamed()))
+            col.label(text="Unused: {0}".format(blendstats.count_unused_worlds()))
+            col.label(text="Unnamed: {0}".format(blendstats.count_unnamed_worlds()))
 
 
 reg_list = [DATAMGR_PT_stats_panel]
