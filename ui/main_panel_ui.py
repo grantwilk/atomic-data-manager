@@ -54,48 +54,48 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         # LEFT COLUMN
         col = split.column(align=True)
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_collections", icon='GROUP', text="")
-        splitcol.prop(atom, "collections",
-                      text=ui_layouts.number_suffix("Collections", blendstats.count_unused_collections()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "collections", text=ui_layouts.number_suffix("Collections", blendstats.count_unused_collections()),
+                      icon='GROUP', toggle=True)
+        splitcol.operator("atomic.inspect_collections", icon='VIEWZOOM', text="")
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_lights", icon='LIGHT', text="")
-        splitcol.prop(atom, "lights",
-                      text=ui_layouts.number_suffix("Lights", blendstats.count_unused_lights()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "lights", text=ui_layouts.number_suffix("Lights", blendstats.count_unused_lights()),
+                      icon='LIGHT', toggle=True)
+        splitcol.operator("atomic.inspect_lights", icon='VIEWZOOM', text="")
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_node_groups", icon='NODETREE', text="")
-        splitcol.prop(atom, "node_groups",
-                      text=ui_layouts.number_suffix("Node Groups", blendstats.count_unused_node_groups()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "node_groups", text=ui_layouts.number_suffix("Node Groups", blendstats.count_unused_node_groups()),
+                      icon='NODETREE', toggle=True)
+        splitcol.operator("atomic.inspect_node_groups", icon='VIEWZOOM', text="")
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_textures", icon='TEXTURE', text="")
-        splitcol.prop(atom, "textures",
-                      text=ui_layouts.number_suffix("Textures", blendstats.count_unused_textures()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "textures", text=ui_layouts.number_suffix("Textures", blendstats.count_unused_textures()),
+                      icon='TEXTURE', toggle=True)
+        splitcol.operator("atomic.inspect_textures", icon='VIEWZOOM', text="")
 
         # RIGHT COLUMN
         col = split.column(align=True)
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_images", icon='IMAGE_DATA', text="")
-        splitcol.prop(atom, "images",
-                      text=ui_layouts.number_suffix("Images", blendstats.count_unused_images()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "images", text=ui_layouts.number_suffix("Images", blendstats.count_unused_images()),
+                      toggle=True, icon='IMAGE_DATA')
+        splitcol.operator("atomic.inspect_images", icon='VIEWZOOM', text="")
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_materials", icon='MATERIAL', text="")
-        splitcol.prop(atom, "materials",
-                      text=ui_layouts.number_suffix("Materials", blendstats.count_unused_materials()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "materials", text=ui_layouts.number_suffix("Materials", blendstats.count_unused_materials()),
+                      icon='MATERIAL', toggle=True)
+        splitcol.operator("atomic.inspect_materials", icon='VIEWZOOM', text="")
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_particles", icon='PARTICLES', text="")
-        splitcol.prop(atom, "particles",
-                      text=ui_layouts.number_suffix("Particles", blendstats.count_unused_particles()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "particles", text=ui_layouts.number_suffix("Particles", blendstats.count_unused_particles()),
+                      icon='PARTICLES', toggle=True)
+        splitcol.operator("atomic.inspect_particles", icon='VIEWZOOM', text="")
 
-        splitcol = col.split(factor=0.2, align=True)
-        splitcol.operator("atomic.inspect_worlds", icon='WORLD', text="")
-        splitcol.prop(atom, "worlds",
-                      text=ui_layouts.number_suffix("Worlds", blendstats.count_unused_worlds()), toggle=True)
+        splitcol = col.split(factor=0.8, align=True)
+        splitcol.prop(atom, "worlds", text=ui_layouts.number_suffix("Worlds", blendstats.count_unused_worlds()),
+                      icon='WORLD', toggle=True)
+        splitcol.operator("atomic.inspect_worlds", icon='VIEWZOOM', text="")
 
         # SELECTION OPERATORS
         row = layout.row(align=True)
