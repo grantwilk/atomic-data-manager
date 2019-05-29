@@ -53,9 +53,10 @@ def node_group(key):
 
 def particle(key):
     # removes a specific particle system
-    print(" >> ATOMIC WARNING:")
-    print(" >> Removing individual particle systems is not yet supported.")
+    delete_datablock(bpy.data.particles, key)
 
+    # code that might not delete the object when it deletes particles
+    # ... but blender doesn't let it to work >:(
     """
     users = blendusers.particles_objects(key)
     active_object = bpy.context.view_layer.objects.active
