@@ -19,8 +19,8 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ui.utils import ui_layouts, bl_stats
-from atomic_data_manager.ops.utils import nuke, clean
+from atomic_data_manager.ui.utils import ui_layouts
+from atomic_data_manager.ops.utils import nuke, clean, bl_stats
 
 
 # <editor-fold desc="Nuke Direct-Use Operators">

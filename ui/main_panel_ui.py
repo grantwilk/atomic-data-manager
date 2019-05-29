@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ui.utils import bl_stats
+from atomic_data_manager.ops.utils import bl_stats
 from atomic_data_manager.ui.utils import ui_layouts
 
 
