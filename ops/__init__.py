@@ -17,14 +17,16 @@ You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from atomic_data_manager.ops import main_ops, inspect_ops
+from atomic_data_manager.ops import main_ops, inspect_ops, direct_use_ops
 
 
 def register():
     main_ops.register()
     inspect_ops.register()
+    direct_use_ops.register()
 
 
 def unregister():
     main_ops.unregister()
     inspect_ops.unregister()
+    direct_use_ops.unregister()
