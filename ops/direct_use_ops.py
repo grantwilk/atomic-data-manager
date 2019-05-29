@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ui.utils import ui_layouts, blendstats
+from atomic_data_manager.ui.utils import ui_layouts, bl_stats
 from atomic_data_manager.ops.utils import nuke, clean
 
 
@@ -269,7 +269,7 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        collections = blendstats.get_unused_collections()
+        collections = bl_stats.get_unused_collections()
         ui_layouts.box_list(
             layout=layout,
             items=collections,
@@ -298,7 +298,7 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        images = blendstats.get_unused_images()
+        images = bl_stats.get_unused_images()
         ui_layouts.box_list(
             layout=layout,
             items=images,
@@ -327,7 +327,7 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        lights = blendstats.get_unused_lights()
+        lights = bl_stats.get_unused_lights()
         ui_layouts.box_list(
             layout=layout,
             items=lights,
@@ -356,7 +356,7 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        materials = blendstats.get_unused_materials()
+        materials = bl_stats.get_unused_materials()
         ui_layouts.box_list(
             layout=layout,
             items=materials,
@@ -385,7 +385,7 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        node_groups = blendstats.get_unused_node_groups()
+        node_groups = bl_stats.get_unused_node_groups()
         ui_layouts.box_list(
             layout=layout,
             items=node_groups,
@@ -414,7 +414,7 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        particles = blendstats.get_unused_particles()
+        particles = bl_stats.get_unused_particles()
         ui_layouts.box_list(
             layout=layout,
             items=particles,
@@ -443,7 +443,7 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        textures = blendstats.get_unused_textures()
+        textures = bl_stats.get_unused_textures()
         ui_layouts.box_list(
             layout=layout,
             items=textures,
@@ -472,7 +472,7 @@ class ATOMIC_OT_clean_worlds(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        worlds = blendstats.get_unused_worlds()
+        worlds = bl_stats.get_unused_worlds()
         ui_layouts.box_list(
             layout=layout,
             items=worlds,
