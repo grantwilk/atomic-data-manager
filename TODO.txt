@@ -6,7 +6,7 @@ Key:
 
 
 High Priority:
-+ Add a pie menu to quickly Nuke or Clean specific datablocks
+
 
 Low Priority:
 + Add detection and a warning for missing files
@@ -17,6 +17,7 @@ Completed Tasks:
 + See data you're about to delete before you delete it when using Nuke and Clean operators (5/28/19)
 * Find a more obvious way to implement inspection buttons (5/28/19)
 + Add search bar support to quickly Nuke or Clean specific datablocks (5/28/19)
++ Add a pie menu to quickly Nuke or Clean specific datablocks (5/29/19)
 
 Not Fixing:
 - Nuking in some project files causes Blender to crash (freak chance crash)
