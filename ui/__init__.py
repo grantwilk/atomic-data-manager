@@ -17,16 +17,19 @@ You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from atomic_data_manager.ui import main_panel_ui, stats_panel_ui, inspect_ui
+from atomic_data_manager.ui import main_panel_ui, stats_panel_ui, inspect_ui, pie_menu_ui
 
 
 def register():
     main_panel_ui.register()
     stats_panel_ui.register()
     inspect_ui.register()
+    pie_menu_ui.register()
 
 
 def unregister():
     main_panel_ui.unregister()
     stats_panel_ui.unregister()
     inspect_ui.unregister()
+    pie_menu_ui.unregister()
+
