@@ -130,7 +130,7 @@ def inspect_header(layout, atom_prop, data):
     row.enabled = is_valid_key
 
     # icon and depression changes depending on whether or not the object is using a fake user
-    if not data == bpy.data.collections:
+    if data != bpy.data.collections:
         if has_fake_user:
             row.operator("atomic.toggle_fake_user", text="", icon="FAKE_USER_ON", depress=True)
         else:
@@ -138,7 +138,7 @@ def inspect_header(layout, atom_prop, data):
 
     row.operator("atomic.inspection_duplicate", text="", icon="DUPLICATE")
 
-    if not data == bpy.data.collections:
+    if data != bpy.data.collections:
         row.operator("atomic.replace", text="", icon="UV_SYNC_SELECT")
 
     row.operator("atomic.rename", text="", icon="GREASEPENCIL")  # Alternate Icon: OUTLINER_DATA_FONT
