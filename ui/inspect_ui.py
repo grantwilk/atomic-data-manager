@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import blendusers
+from atomic_data_manager.ops.utils import bl_users
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -43,7 +43,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         )
 
         # Mesh Section
-        meshes = sorted(blendusers.collection_mesh(collections_field)) if collections_field != "" else []
+        meshes = sorted(bl_users.collection_mesh(collections_field)) if collections_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Meshes",
@@ -52,7 +52,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         )
 
         # Light Section
-        lights = sorted(blendusers.collection_light(collections_field)) if collections_field != "" else []
+        lights = sorted(bl_users.collection_light(collections_field)) if collections_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Lights",
@@ -61,7 +61,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         )
 
         # Camera Section
-        cameras = sorted(blendusers.collection_camera(collections_field)) if collections_field != "" else []
+        cameras = sorted(bl_users.collection_camera(collections_field)) if collections_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Cameras",
@@ -70,7 +70,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         )
 
         # Others Section
-        others = sorted(blendusers.collection_others(collections_field)) if collections_field != "" else []
+        others = sorted(bl_users.collection_others(collections_field)) if collections_field != "" else []
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Other",
@@ -78,7 +78,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         )
 
         # Child Collections Section
-        children = sorted(blendusers.collection_child(collections_field)) if collections_field != "" else []
+        children = sorted(bl_users.collection_child(collections_field)) if collections_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Child Collections",
@@ -118,7 +118,7 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         )
 
         # Materials Box List
-        materials = sorted(blendusers.image_materials(images_field)) if images_field != "" else []
+        materials = sorted(bl_users.image_materials(images_field)) if images_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Materials",
@@ -127,7 +127,7 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         )
 
         # Node Groups Box List
-        materials = sorted(blendusers.image_node_groups(images_field)) if images_field != "" else []
+        materials = sorted(bl_users.image_node_groups(images_field)) if images_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Node Groups",
@@ -136,7 +136,7 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         )
 
         # Objects Box List
-        objects = sorted(blendusers.image_objects(images_field)) if images_field != "" else []
+        objects = sorted(bl_users.image_objects(images_field)) if images_field != "" else []
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
@@ -144,7 +144,7 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         )
 
         # Worlds Box List
-        worlds = sorted(blendusers.image_worlds(images_field)) if images_field != "" else []
+        worlds = sorted(bl_users.image_worlds(images_field)) if images_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Worlds",
@@ -184,7 +184,7 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
         )
 
         # Light Objects Box List
-        lights = sorted(blendusers.lights_lights(lights_field)) if lights_field != "" else []
+        lights = sorted(bl_users.lights_lights(lights_field)) if lights_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Light Objects",
@@ -224,7 +224,7 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
         )
 
         # Objects Box List
-        objects = sorted(blendusers.material_objects(materials_field)) if materials_field != "" else []
+        objects = sorted(bl_users.material_objects(materials_field)) if materials_field != "" else []
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
@@ -263,7 +263,7 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         )
 
         # Materials Box List
-        materials = sorted(blendusers.node_groups_materials(node_groups_field)) \
+        materials = sorted(bl_users.node_groups_materials(node_groups_field)) \
             if node_groups_field != "" else []
         ui_layouts.box_list(
             layout=layout,
@@ -273,7 +273,7 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         )
 
         # Node Groups Box List
-        node_groups = sorted(blendusers.node_groups_node_groups(node_groups_field)) \
+        node_groups = sorted(bl_users.node_groups_node_groups(node_groups_field)) \
             if node_groups_field != "" else []
         ui_layouts.box_list(
             layout=layout,
@@ -283,7 +283,7 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         )
 
         # World Box List
-        worlds = sorted(blendusers.node_groups_world(node_groups_field)) \
+        worlds = sorted(bl_users.node_groups_world(node_groups_field)) \
             if node_groups_field != "" else []
         ui_layouts.box_list(
             layout=layout,
@@ -324,7 +324,7 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
         )
 
         # Objects Box List
-        objects = sorted(blendusers.particles_objects(particles_field)) if particles_field != "" else []
+        objects = sorted(bl_users.particles_objects(particles_field)) if particles_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Objects",
@@ -364,7 +364,7 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         )
 
         # Brushes Box List
-        brushes = sorted(blendusers.textures_brushes(textures_field)) if textures_field != "" else []
+        brushes = sorted(bl_users.textures_brushes(textures_field)) if textures_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Brushes",
@@ -373,7 +373,7 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         )
 
         # Particles Box List
-        particles = sorted(blendusers.textures_particles(textures_field)) if textures_field != "" else []
+        particles = sorted(bl_users.textures_particles(textures_field)) if textures_field != "" else []
         ui_layouts.box_list(
             layout=layout,
             title="Particles",
@@ -382,7 +382,7 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         )
 
         # Objects Box List
-        objects = sorted(blendusers.textures_objects(textures_field)) if textures_field != "" else []
+        objects = sorted(bl_users.textures_objects(textures_field)) if textures_field != "" else []
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
