@@ -25,7 +25,7 @@ from atomic_data_manager.ui.utils import ui_layouts, blendstats
 
 # Atomic Data Manager Nuke Operator
 class ATOMIC_OT_nuke(bpy.types.Operator):
-    """Removes all data from the selected categories"""
+    """Removes all data-blocks from the selected categories"""
     bl_idname = "atomic.nuke"
     bl_label = "CAUTION!"
 
@@ -157,7 +157,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
 
 # Atomic Data Manager Clean Operator
 class ATOMIC_OT_clean(bpy.types.Operator):
-    """Automatically removes all user-less data from the selected categories"""
+    """Removes all unused data-blocks from the selected categories"""
     bl_idname = "atomic.clean"
     bl_label = "Clean"
 
@@ -300,7 +300,7 @@ class ATOMIC_OT_undo(bpy.types.Operator):
 
 # Atomic Data Manager Smart Select Operator
 class ATOMIC_OT_smart_select(bpy.types.Operator):
-    """Auto-select categories with user-less data"""
+    """Auto-selects categories with unused data"""
     bl_idname = "atomic.smart_select"
     bl_label = "Smart Select"
 
