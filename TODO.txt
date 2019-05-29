@@ -6,7 +6,6 @@ Key:
 
 
 High Priority:
-+ Add search bar support to quickly Nuke or Clean specific datablocks
 + Add a pie menu to quickly Nuke or Clean specific datablocks
 
 Low Priority:
@@ -17,6 +16,7 @@ Completed Tasks:
 - Fix bug where the particle inspector lists all objects instead of the ones that use the particle system (5/13/19)
 + See data you're about to delete before you delete it when using Nuke and Clean operators (5/28/19)
 * Find a more obvious way to implement inspection buttons (5/28/19)
++ Add search bar support to quickly Nuke or Clean specific datablocks (5/28/19)
 
 Not Fixing:
 - Nuking in some project files causes Blender to crash (freak chance crash)
