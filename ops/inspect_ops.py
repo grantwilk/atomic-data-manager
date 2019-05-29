@@ -82,7 +82,7 @@ class ATOMIC_OT_inspection_rename(bpy.types.Operator):
 
 
 class ATOMIC_OT_inspection_replace(bpy.types.Operator):
-    """Replace a data-block with another data-block"""
+    """Replace all instances of this data-block with another data-block"""
     bl_idname = "atomic.replace"
     bl_label = "Replace Data-Block With"
 
@@ -182,7 +182,7 @@ class ATOMIC_OT_inspection_toggle_fake_user(bpy.types.Operator):
 
 # Atomic Data Manager Inspection Duplicate Operator
 class ATOMIC_OT_inspection_duplicate(bpy.types.Operator):
-    """Duplicate this data-block"""
+    """Make a single-user copy of this data-block"""
     bl_idname = "atomic.inspection_duplicate"
     bl_label = "Inspection Duplicate"
 
@@ -259,7 +259,7 @@ class ATOMIC_OT_inspection_duplicate(bpy.types.Operator):
 
 # Atomic Data Manager Inspection Delete Operator
 class ATOMIC_OT_inspection_delete(bpy.types.Operator):
-    """Forcibly delete this data-block"""
+    """Force delete this data-block"""
     bl_idname = "atomic.inspection_delete"
     bl_label = "Inspection Delete"
 
