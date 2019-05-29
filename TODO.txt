@@ -4,7 +4,7 @@ Key:
 - = fix bug
 
 High Priority:
-+ See data you're about to delete before you delete it when using Nuke and Clean operators
+
 - Fix bug where nuking in some project files causes Blender to crash
 - Fix bug where undo does not work after removing specific data-blocks
 - Fix bug where deleting particle systems on an object deletes the object as well
@@ -18,4 +18,5 @@ Low Priority:
 * Make less useful features (e.g. pin, duplicate, rename) less prominent
 
 Completed Tasks:
-- Fix bug where the particle inspector lists all objects instead of the ones that actually use the particle system
+- Fix bug where the particle inspector lists all objects instead of the ones that use the particle system (5/13/19)
++ See data you're about to delete before you delete it when using Nuke and Clean operators (5/28/19)
