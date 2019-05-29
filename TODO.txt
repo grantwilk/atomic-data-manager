@@ -3,20 +3,25 @@ Key:
 * = change feature
 - = fix bug
 
-High Priority:
 
-- Fix bug where nuking in some project files causes Blender to crash
-- Fix bug where undo does not work after removing specific data-blocks
-- Fix bug where deleting particle systems on an object deletes the object as well
+
+High Priority:
+- Deleting particle systems and light settings that are applied to an object will delete the object as well
+* Find a more obvious way to implement inspection buttons (magnifying glass button following icon-ed toggle button?)
 
 Low Priority:
 + Add search bar support to quickly Nuke or Clean specific datablocks
 + Add a pie menu to quickly Nuke or Clean specific datablocks
 + Add detection and a warning for missing files
 * Find a better location for deleting individual objects
-* Find a more obvious way to implement inspection buttons (magnifying glass button following icon-ed toggle button?)
-* Make less useful features (e.g. pin, duplicate, rename) less prominent
+* Make less useful features less prominent (e.g. pin, duplicate, rename)
+
+
 
 Completed Tasks:
 - Fix bug where the particle inspector lists all objects instead of the ones that use the particle system (5/13/19)
 + See data you're about to delete before you delete it when using Nuke and Clean operators (5/28/19)
+
+Not Fixing:
+- Nuking in some project files causes Blender to crash (freak chance crash)
+- Undo does not work after removing specific data-blocks (issue with Blender, not the add-on)
