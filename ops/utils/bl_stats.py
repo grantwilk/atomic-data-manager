@@ -154,6 +154,11 @@ def count_unnamed_images():
     return count_unnamed(bpy.data.images)
 
 
+def count_missing_images():
+    # returns the amount of images with a non-existent filepath in the current Blender file
+    return sum(1 if not os.path.isfile(image.filepath) else 0 for image in bpy.data.images)
+
+
 def count_lights():
     # returns the amount of lights in the current Blender file
     return count_total(bpy.data.lights)
@@ -182,11 +187,6 @@ def count_unused_materials():
 def count_unnamed_materials():
     # returns the amount of unnamed materials in the current Blender file
     return count_unnamed(bpy.data.materials)
-
-
-def count_missing_images():
-    # returns the amount of images with a non-existent filepath in the current Blender file
-    return sum(1 if not os.path.isfile(image.filepath) else 0 for image in bpy.data.images)
 
 
 def count_objects():
@@ -292,6 +292,15 @@ def get_unused_collections():
 def get_unused_images():
     # returns a list of keys of images with no users
     return get_unused(bpy.data.images)
+
+
+def get_missing_images():
+    # returns a list of keys of images with a non-existent filepath
+    missing_images = []
+    for image in bpy.data.images:
+        if not os.path.isfile(image.filepath):
+            missing_images.append(image.name)
+    return missing_images
 
 
 def get_unused_lights():
