@@ -72,7 +72,7 @@ def images_unused_size():
 # </editor-fold>
 
 
-# <editor-fold desc="Special-Use Helper Functions">
+# <editor-fold desc="Helper Functions">
 def is_unnamed(data, key):
     # returns true if an object is unnamed, false otherwise
     # a value is considered unnamed if it has a default name (e.g. Cube) or ends with ".###" (e.g. Rock.001)
@@ -91,7 +91,7 @@ def is_unnamed(data, key):
 
     return re.match(r'.*\.\d\d\d$', key) \
         or (data == bpy.data.collections and key.startswith("Collection")) \
-        or (data == bpy.data.images and key.startswith("Images")) \
+        or (data == bpy.data.images and key.startswith("Untitled")) \
         or (data == bpy.data.lights and key.startswith("Light")) \
         or (data == bpy.data.materials and key.startswith("Material")) \
         or (data == bpy.data.objects and key.startswith(default_obj_names)) \
@@ -156,7 +156,8 @@ def count_unnamed_images():
 
 def count_missing_images():
     # returns the amount of images with a non-existent filepath in the current Blender file
-    return sum(1 if not os.path.isfile(image.filepath) else 0 for image in bpy.data.images)
+    images = bpy.data.images
+    return sum(1 if image.name != "Render Result" and not os.path.isfile(image.filepath) else 0 for image in images)
 
 
 def count_lights():
@@ -298,8 +299,9 @@ def get_missing_images():
     # returns a list of keys of images with a non-existent filepath
     missing_images = []
     for image in bpy.data.images:
-        if not os.path.isfile(image.filepath):
+        if image.name != "Render Result" and not os.path.isfile(image.filepath):
             missing_images.append(image.name)
+
     return missing_images
 
 
