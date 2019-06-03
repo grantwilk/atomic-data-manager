@@ -23,6 +23,200 @@ from atomic_data_manager.ui.utils import ui_layouts
 from atomic_data_manager.ops.utils import nuke, clean, bl_stats
 
 
+# <editor-fold desc="Full Nuke/Clean Direct-User Operators">
+# Atomic Data Manager Nuke All Operator
+class ATOMIC_OT_nuke_all(bpy.types.Operator):
+    """Removes all data-blocks from the selected categories"""
+    bl_idname = "atomic.nuke_all"
+    bl_label = "CAUTION!"
+
+    def draw(self, context):
+        layout = self.layout
+
+        col = layout.column()
+        col.label(text="Remove the following data-blocks?")
+
+        collections = sorted(bpy.data.collections.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Collections",
+            items=collections,
+            icon="OUTLINER_OB_GROUP_INSTANCE"
+        )
+
+        images = sorted(bpy.data.images.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Images",
+            items=images,
+            icon="IMAGE_DATA"
+        )
+
+        lights = sorted(bpy.data.lights.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Lights",
+            items=lights,
+            icon="OUTLINER_OB_LIGHT"
+        )
+
+        materials = sorted(bpy.data.materials.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Materials",
+            items=materials,
+            icon="MATERIAL"
+        )
+
+        node_groups = sorted(bpy.data.node_groups.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Node Groups",
+            items=node_groups,
+            icon="NODETREE"
+        )
+
+        particles = sorted(bpy.data.particles.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Particle Systems",
+            items=particles,
+            icon="PARTICLES"
+        )
+
+        textures = sorted(bpy.data.textures.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Textures",
+            items=textures,
+            icon="TEXTURE"
+        )
+
+        worlds = sorted(bpy.data.worlds.keys())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Worlds",
+            items=worlds,
+            icon="WORLD"
+        )
+
+        row = layout.row()  # extra spacing
+
+    def execute(self, context):
+
+        nuke.collections()
+        nuke.images()
+        nuke.lights()
+        nuke.materials()
+        nuke.node_groups()
+        nuke.particles()
+        nuke.textures()
+        nuke.worlds()
+
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+
+# Atomic Data Manager Clean All Operator
+class ATOMIC_OT_clean_all(bpy.types.Operator):
+    """Removes all unused data-blocks from the selected categories"""
+    bl_idname = "atomic.clean_all"
+    bl_label = "Clean All"
+
+    def draw(self, context):
+        layout = self.layout
+
+        col = layout.column()
+        col.label(text="Remove the following data-blocks?")
+
+        collections = sorted(bl_stats.get_unused_collections())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Collections",
+            items=collections,
+            icon="OUTLINER_OB_GROUP_INSTANCE"
+        )
+
+        images = sorted(bl_stats.get_unused_images())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Images",
+            items=images,
+            icon="IMAGE_DATA"
+        )
+
+        lights = sorted(bl_stats.get_unused_lights())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Lights",
+            items=lights,
+            icon="OUTLINER_OB_LIGHT"
+        )
+
+        materials = sorted(bl_stats.get_unused_materials())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Materials",
+            items=materials,
+            icon="MATERIAL"
+        )
+
+        node_groups = sorted(bl_stats.get_unused_node_groups())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Node Groups",
+            items=node_groups,
+            icon="NODETREE"
+        )
+
+        particles = sorted(bl_stats.get_unused_particles())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Particle Systems",
+            items=particles,
+            icon="PARTICLES"
+        )
+
+        textures = sorted(bl_stats.get_unused_textures())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Textures",
+            items=textures,
+            icon="TEXTURE"
+        )
+
+        worlds = sorted(bl_stats.get_unused_worlds())
+        ui_layouts.box_list(
+            layout=layout,
+            title="Worlds",
+            items=worlds,
+            icon="WORLD"
+        )
+
+        row = layout.row()  # extra spacing
+
+    def execute(self, context):
+
+        clean.collections()
+        clean.images()
+        clean.lights()
+        clean.materials()
+        clean.node_groups()
+        clean.particles()
+        clean.textures()
+        clean.worlds()
+
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+# </editor-fold>
+
+
 # <editor-fold desc="Nuke Direct-Use Operators">
 class ATOMIC_OT_nuke_collections(bpy.types.Operator):
     """Removes all collections"""
@@ -491,7 +685,10 @@ class ATOMIC_OT_clean_worlds(bpy.types.Operator):
 # </editor-fold>
 
 
-reg_list = [ATOMIC_OT_nuke_collections,
+reg_list = [ATOMIC_OT_nuke_all,
+            ATOMIC_OT_clean_all,
+
+            ATOMIC_OT_nuke_collections,
             ATOMIC_OT_nuke_images,
             ATOMIC_OT_nuke_lights,
             ATOMIC_OT_nuke_materials,
