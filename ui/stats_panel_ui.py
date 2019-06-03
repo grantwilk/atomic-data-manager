@@ -115,7 +115,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
 
             col = split.column()
             col.label(text="Total: {0}".format(bl_stats.count_images()))
-            col.label(text="Placeholder")  # todo
+            col.label(text="Missing: {0}".format(bl_stats.count_missing_images()))
             col.separator()
             col.label(text="Total Size: {0}".format(bl_stats.images_size()))
 
