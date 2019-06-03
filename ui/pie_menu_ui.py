@@ -29,10 +29,12 @@ class ATOMIC_MT_main_pie(bpy.types.Menu):
         layout = self.layout
         pie = layout.menu_pie()
 
+        pie.operator("atomic.nuke_all", text="Nuke All", icon="GHOST_ENABLED")
+        pie.operator("atomic.clean_all", text="Clean All", icon="PARTICLEMODE")
         pie.operator("atomic.undo", text="Undo", icon="LOOP_BACK")
         pie.operator("wm.call_menu_pie", text="Inspect", icon="VIEWZOOM").name = "ATOMIC_MT_inspect_pie"
-        pie.operator("wm.call_menu_pie", text="Clean", icon="PARTICLEMODE").name = "ATOMIC_MT_clean_pie"
         pie.operator("wm.call_menu_pie", text="Nuke", icon="GHOST_ENABLED").name = "ATOMIC_MT_nuke_pie"
+        pie.operator("wm.call_menu_pie", text="Clean", icon="PARTICLEMODE").name = "ATOMIC_MT_clean_pie"
 
 
 class ATOMIC_MT_nuke_pie(bpy.types.Menu):
