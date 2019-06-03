@@ -22,7 +22,7 @@ import os
 import re
 
 
-# <editor-fold desc="Size Helper Functions">
+# <editor-fold desc="Size Functions">
 def to_file_size(size_bytes):
     # returns the number of bytes converted to the appropriate size rounded to one decimal with a unit suffix
     # e.g. size_bytes = 1024 will return "1 KB"
@@ -51,6 +51,24 @@ def blend_size():
     blend_filesize = to_file_size(blend_bytesize)
 
     return blend_filesize
+
+
+def images_size():
+    # returns the size of all images in the current Blender file in scaled units as a string
+    images_bytesize = sum(image.packed_file.size if image.packed_file is not None else 0 for image in bpy.data.images)
+    images_filesize = to_file_size(images_bytesize)
+
+    return images_filesize
+
+
+def images_unused_size():
+    # returns the size of all unused images in the current Blender file in scaled units as a string
+    images_unused_bytesize = sum(
+        image.packed_file.size if image.packed_file is not None and image.users == 0 else 0 for image in
+        bpy.data.images)
+    images_unused_filesize = to_file_size(images_unused_bytesize)
+
+    return images_unused_filesize
 # </editor-fold>
 
 
@@ -151,24 +169,6 @@ def count_unnamed_lights():
     return count_unnamed(bpy.data.lights)
 
 
-def images_size():
-    # returns the size of all images in the current Blender file in scaled units as a string
-    images_bytesize = sum(image.packed_file.size if image.packed_file is not None else 0 for image in bpy.data.images)
-    images_filesize = to_file_size(images_bytesize)
-
-    return images_filesize
-
-
-def images_unused_size():
-    # returns the size of all unused images in the current Blender file in scaled units as a string
-    images_unused_bytesize = sum(
-        image.packed_file.size if image.packed_file is not None and image.users == 0 else 0 for image in
-        bpy.data.images)
-    images_unused_filesize = to_file_size(images_unused_bytesize)
-
-    return images_unused_filesize
-
-
 def count_materials():
     # returns the amount of materials in the current Blender file
     return count_total(bpy.data.materials)
@@ -182,6 +182,11 @@ def count_unused_materials():
 def count_unnamed_materials():
     # returns the amount of unnamed materials in the current Blender file
     return count_unnamed(bpy.data.materials)
+
+
+def count_missing_images():
+    # returns the amount of images with a non-existent filepath in the current Blender file
+    return sum(1 if not os.path.isfile(image.filepath) else 0 for image in bpy.data.images)
 
 
 def count_objects():
