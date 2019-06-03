@@ -157,7 +157,7 @@ def count_unnamed_images():
 def count_missing_images():
     # returns the amount of images with a non-existent filepath in the current Blender file
     images = bpy.data.images
-    return sum(1 if image.name != "Render Result" and not os.path.isfile(image.filepath) else 0 for image in images)
+    return sum(1 if image.filepath and not os.path.isfile(image.filepath) else 0 for image in images)
 
 
 def count_lights():
@@ -299,7 +299,7 @@ def get_missing_images():
     # returns a list of keys of images with a non-existent filepath
     missing_images = []
     for image in bpy.data.images:
-        if image.name != "Render Result" and not os.path.isfile(image.filepath):
+        if image.filepath and not os.path.isfile(image.filepath):
             missing_images.append(image.name)
 
     return missing_images
