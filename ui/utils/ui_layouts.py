@@ -20,7 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 
 
-def box_list(layout, title=None, items=None, icon=None):
+def box_list(layout, title=None, items=None, columns=2, icon=None):
     # a title label followed by a box that contains a two column list of items, each of which is preceded by a
     # uniform icon that does not change depending on the objects type
 
@@ -35,7 +35,7 @@ def box_list(layout, title=None, items=None, icon=None):
 
     if items is not None and len(items) != 0:
         # Section List
-        flow = box.column_flow(columns=2)
+        flow = box.column_flow(columns=columns)
         for item in items:
             if icon is not None:
                 flow.label(text=item, icon=icon)
@@ -48,7 +48,7 @@ def box_list(layout, title=None, items=None, icon=None):
         row.label(text="none")
 
 
-def box_list_diverse(layout, title, items):
+def box_list_diverse(layout, title, items, columns=2):
     # a title label follwed by a box that contains a two column list of items, each of which is preceded by an icon
     # that changes depending on the type of object that is being listed
 
@@ -60,7 +60,7 @@ def box_list_diverse(layout, title, items):
 
     if len(items) != 0:
         # Section List
-        flow = box.column_flow(columns=3)
+        flow = box.column_flow(columns=columns)
         objects = bpy.data.objects
         for item in items:
             if objects[item].type == 'ARMATURE':
