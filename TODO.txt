@@ -6,12 +6,10 @@ Key:
 
 
 High Priority:
-
++ Implement missing file recovery options
 
 Low Priority:
-+ Add a warning on file open for missing files
 * Find a way to position missing file warnings in the center of the screen
-- Prevent warnings from appearing on startup
 * Find a better implementation for images size
 
 
@@ -23,6 +21,8 @@ Completed Tasks:
 + Add a pie menu to quickly Nuke or Clean specific datablocks (5/29/19)
 + Add "Nuke All" and "Clean All" functions to the pie menu (6/3/19)
 + Add detection for missing files (6/3/19)
++ Add a warning on file open for missing files (6/3/19)
+- Prevent warnings from appearing on startup (6/3/19)
 
 Not Fixing:
 - Nuking in some project files causes Blender to crash (freak chance crash)
