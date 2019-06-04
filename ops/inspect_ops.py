@@ -148,7 +148,7 @@ class ATOMIC_OT_inspection_replace(bpy.types.Operator):
         return wm.invoke_props_dialog(self, width=200)
 
 
-# Atomic Data Manager Inspection Rename Operator
+# Atomic Data Manager Inspection Toggle Fake User Operator
 class ATOMIC_OT_inspection_toggle_fake_user(bpy.types.Operator):
     """Save this data-block even if it has no users"""
     bl_idname = "atomic.toggle_fake_user"
