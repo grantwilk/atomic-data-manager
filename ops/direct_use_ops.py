@@ -23,46 +23,6 @@ from atomic_data_manager.ui.utils import ui_layouts
 from atomic_data_manager.ops.utils import nuke, clean, bl_stats
 
 
-# Atomic Data Manager Detect Missing Files Operator
-class ATOMIC_OT_detect_missing(bpy.types.Operator):
-    """Detects missing files in the project"""
-    bl_idname = "atomic.detect_missing"
-    bl_label = "WARNING: Missing Files!"
-
-    def draw(self, context):
-        layout = self.layout
-
-        missing_images = bl_stats.get_missing_images()
-
-        if not missing_images:
-            row = layout.row()
-            row.label(text="No missing files were detected!")
-
-            ui_layouts.box_list(
-                layout=layout
-            )
-
-        else:
-            row = layout.row()
-            row.label(text="Atomic has detected one or more missing files in your Blender project!")
-
-            ui_layouts.box_list(
-                layout=layout,
-                title="Images",
-                items=missing_images,
-                icon="IMAGEDATA"
-            )
-
-        row = layout.row()  # extra space
-
-    def execute(self, context):
-        return {'FINISHED'}
-
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
-
 # <editor-fold desc="Full Nuke/Clean Direct-User Operators">
 # Atomic Data Manager Nuke All Operator
 class ATOMIC_OT_nuke_all(bpy.types.Operator):
