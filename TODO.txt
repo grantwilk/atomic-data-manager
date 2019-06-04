@@ -9,7 +9,9 @@ High Priority:
 
 
 Low Priority:
-+ Add a warning on startup for missing files
++ Add a warning on file open for missing files
+* Find a way to position missing file warnings in the center of the screen
+- Prevent warnings from appearing on startup
 * Find a better implementation for images size
 
 
