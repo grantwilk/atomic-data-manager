@@ -6,7 +6,8 @@ Key:
 
 
 High Priority:
-+ Implement missing file recovery options
++ Implement search and replace operations for missing file detections
+- Remove placeholders in the statistics panel
 
 Low Priority:
 * Find a way to position missing file warnings in the center of the screen
