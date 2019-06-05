@@ -59,28 +59,32 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
 
     # Other Properties
     active_inspection: bpy.props.EnumProperty(
-        items=[('COLLECTIONS', 'Collections', 'Collections'),
-               ('IMAGES', 'Images', 'Images'),
-               ('LIGHTS', 'Lights', 'Lights'),
-               ('MATERIALS', 'Materials', 'Materials'),
-               ('NODE_GROUPS', 'Node Groups', 'Node Groups'),
-               ('PARTICLES', 'Particles', 'Particles'),
-               ('TEXTURES', 'Textures', 'Textures'),
-               ('WORLDS', 'Worlds', 'Worlds')],
+        items=[
+            ('COLLECTIONS', 'Collections', 'Collections'),
+            ('IMAGES', 'Images', 'Images'),
+            ('LIGHTS', 'Lights', 'Lights'),
+            ('MATERIALS', 'Materials', 'Materials'),
+            ('NODE_GROUPS', 'Node Groups', 'Node Groups'),
+            ('PARTICLES', 'Particles', 'Particles'),
+            ('TEXTURES', 'Textures', 'Textures'),
+            ('WORLDS', 'Worlds', 'Worlds')
+        ],
         default='COLLECTIONS'
     )
 
     stats_mode: bpy.props.EnumProperty(
-        items=[('OVERVIEW', 'Overview', 'Overview', 'FILE', 0),
-               ('COLLECTIONS', 'Collections', 'Collections', 'GROUP', 1),
-               ('IMAGES', 'Images', 'Images', 'IMAGE_DATA', 2),
-               ('LIGHTS', 'Lights', 'Lights', 'LIGHT', 3),
-               ('MATERIALS', 'Materials', 'Materials', 'MATERIAL', 4),
-               ('OBJECTS', 'Objects', 'Objects', 'OBJECT_DATA', 5),
-               ('NODE_GROUPS', 'Node Groups', 'Node Groups', 'NODETREE', 6),
-               ('PARTICLES', 'Particle Systems', 'Particle Systems', 'PARTICLES', 7),
-               ('TEXTURES', 'Textures', 'Textures', 'TEXTURE', 8),
-               ('WORLDS', 'Worlds', 'Worlds', 'WORLD', 9)],
+        items=[
+            ('OVERVIEW', 'Overview', 'Overview', 'FILE', 0),
+            ('COLLECTIONS', 'Collections', 'Collections', 'GROUP', 1),
+            ('IMAGES', 'Images', 'Images', 'IMAGE_DATA', 2),
+            ('LIGHTS', 'Lights', 'Lights', 'LIGHT', 3),
+            ('MATERIALS', 'Materials', 'Materials', 'MATERIAL', 4),
+            ('OBJECTS', 'Objects', 'Objects', 'OBJECT_DATA', 5),
+            ('NODE_GROUPS', 'Node Groups', 'Node Groups', 'NODETREE', 6),
+            ('PARTICLES', 'Particle Systems', 'Particle Systems', 'PARTICLES', 7),
+            ('TEXTURES', 'Textures', 'Textures', 'TEXTURE', 8),
+            ('WORLDS', 'Worlds', 'Worlds', 'WORLD', 9)
+        ],
         default='OVERVIEW'
     )
 
