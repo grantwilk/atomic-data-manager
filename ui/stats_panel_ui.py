@@ -188,14 +188,9 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
             col.label(text="Total: {0}".format(bl_stats.count_particles()))
             col.label(text="Placeholder")  # todo
-            col.separator()
-            col.label(text="Particles: {0}".format(bl_stats.count_emitted_particles()))
-
             col = split.column()
             col.label(text="Unused: {0}".format(bl_stats.count_unused_particles()))
             col.label(text="Unnamed: {0}".format(bl_stats.count_unnamed_particles()))
-            col.separator()
-            col.label(text="Visible: {0}".format(bl_stats.count_emitted_particles_visible()))
 
         # TEXTURES
         elif atom.stats_mode == 'TEXTURES':
