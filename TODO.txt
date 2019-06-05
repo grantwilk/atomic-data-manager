@@ -7,6 +7,7 @@ Key:
 
 High Priority:
 + Implement search and replace operations for missing file detections
++ Add a button to force-detect missing files
 - Remove placeholders in the statistics panel
 - Remove extra particle system statistics
 
