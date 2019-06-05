@@ -8,6 +8,7 @@ Key:
 High Priority:
 + Implement search and replace operations for missing file detections
 - Remove placeholders in the statistics panel
+- Remove extra particle system statistics
 
 Low Priority:
 * Find a way to position missing file warnings in the center of the screen
