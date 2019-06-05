@@ -8,12 +8,10 @@ Key:
 High Priority:
 + Implement search and replace operations for missing file detections
 + Add a button to force-detect missing files
-- Remove placeholders in the statistics panel
-- Remove extra particle system statistics
+- Find an alternative for placeholder statistics
 
 Low Priority:
 * Find a way to position missing file warnings in the center of the screen
-* Find a better implementation for images size
 
 
 Completed Tasks:
@@ -26,6 +24,7 @@ Completed Tasks:
 + Add detection for missing files (6/3/19)
 + Add a warning on file open for missing files (6/3/19)
 - Prevent warnings from appearing on startup (6/3/19)
+- Remove extra particle system statistics (6/5/19)
 
 Not Fixing:
 - Nuking in some project files causes Blender to crash (freak chance crash)
@@ -34,3 +33,4 @@ Not Fixing:
   particle settings -- they can't be deleted separately)
 * Find a better location for deleting individual objects (it's fine where it is)
 * Make less useful features less prominent (e.g. pin, duplicate, rename) (they're fine where they are)
+* Find a better implementation for images size (not do-able with the way Blender stores images)
