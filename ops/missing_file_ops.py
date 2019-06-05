@@ -77,12 +77,12 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
     def execute(self, context):
         if self.recovery_option == 'RELOAD':
             bpy.ops.atomic.reload_missing('INVOKE_DEFAULT')
-        elif self.recovery_option == 'REMOVE':
-            bpy.ops.atomic.remove_missing('INVOKE_DEFAULT')
         elif self.recovery_option == 'SEARCH':
             bpy.ops.atomic.search_missing('INVOKE_DEFAULT')
         elif self.recovery_option == 'REPLACE':
             bpy.ops.atomic.replace_missing('INVOKE_DEFAULT')
+        elif self.recovery_option == 'REMOVE':
+            bpy.ops.atomic.remove_missing('INVOKE_DEFAULT')
 
         return {'FINISHED'}
 
@@ -139,36 +139,6 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# Atomic Data Manager Remove Missing Files Operator
-class ATOMIC_OT_remove_missing(bpy.types.Operator):
-    """Removes all missing files from the project"""
-    bl_idname = "atomic.remove_missing"
-    bl_label = "Remove Missing Files"
-
-    def draw(self, context):
-        layout = self.layout
-        row = layout.row()
-        row.label(text="Remove the following data-blocks?")
-
-        ui_layouts.box_list(
-            layout=layout,
-            items=bl_stats.get_missing_images(),
-            icon="IMAGE_DATA",
-            columns=2
-        )
-
-        row = layout.row()  # extra space
-
-    def execute(self, context):
-        for image_key in bl_stats.get_missing_images():
-            bpy.data.images.remove(bpy.data.images[image_key])
-        return {'FINISHED'}
-
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
-
 # Atomic Data Manager Search for Missing Files Operator
 class ATOMIC_OT_search_missing(bpy.types.Operator):
     """Searches for missing files"""
@@ -209,8 +179,38 @@ class ATOMIC_OT_replace_missing(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Remove Missing Files Operator
+class ATOMIC_OT_remove_missing(bpy.types.Operator):
+    """Removes all missing files from the project"""
+    bl_idname = "atomic.remove_missing"
+    bl_label = "Remove Missing Files"
+
+    def draw(self, context):
+        layout = self.layout
+        row = layout.row()
+        row.label(text="Remove the following data-blocks?")
+
+        ui_layouts.box_list(
+            layout=layout,
+            items=bl_stats.get_missing_images(),
+            icon="IMAGE_DATA",
+            columns=2
+        )
+
+        row = layout.row()  # extra space
+
+    def execute(self, context):
+        for image_key in bl_stats.get_missing_images():
+            bpy.data.images.remove(bpy.data.images[image_key])
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+
 @persistent
-def call_detect_missing(dummy=None):
+def autodetect_missing_files(dummy=None):
     if bl_stats.get_missing_images():
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
@@ -219,9 +219,9 @@ reg_list = [
     ATOMIC_OT_detect_missing,
     ATOMIC_OT_reload_missing,
     ATOMIC_OT_reload_report,
-    ATOMIC_OT_remove_missing,
     ATOMIC_OT_search_missing,
     ATOMIC_OT_replace_missing,
+    ATOMIC_OT_remove_missing
     ]
 
 
@@ -229,7 +229,7 @@ def register():
     for item in reg_list:
         register_class(item)
 
-    bpy.app.handlers.load_post.append(call_detect_missing)
+    bpy.app.handlers.load_post.append(autodetect_missing_files)
 
 
 def unregister():
