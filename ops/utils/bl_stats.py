@@ -215,16 +215,6 @@ def count_unnamed_particles():
     return count_unnamed(bpy.data.particles)
 
 
-def count_emitted_particles():
-    # returns the  number of particles emitted in all particle systems in the current Blender file
-    return sum(particle.count for particle in bpy.data.particles)
-
-
-def count_emitted_particles_visible():
-    # returns the the number of visible particles emitted in all particle systems in the current Blender file
-    return sum(int(particle.count * (particle.display_percentage / 100)) for particle in bpy.data.particles)
-
-
 def count_node_groups():
     # returns the amount of node groups in the current Blender file
     return count_total(bpy.data.node_groups)
