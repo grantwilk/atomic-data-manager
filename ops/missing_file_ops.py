@@ -20,7 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 from bpy.app.handlers import persistent
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import bl_stats
+from atomic_data_manager.ops.utils import bl_missing
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -43,7 +43,7 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = bl_stats.get_missing_images()
+        missing_images = bl_missing.get_images()
 
         if missing_images:
             row = layout.row()
@@ -98,7 +98,7 @@ class ATOMIC_OT_reload_missing(bpy.types.Operator):
     bl_label = "Reload Missing Files"
 
     def execute(self, context):
-        for image_key in bl_stats.get_missing_images():
+        for image_key in bl_missing.get_images():
             bpy.data.images[image_key].reload()
         bpy.ops.atomic.reload_report('INVOKE_DEFAULT')
         return {'FINISHED'}
@@ -112,7 +112,7 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = bl_stats.get_missing_images()
+        missing_images = bl_missing.get_images()
 
         if missing_images:
             row = layout.row()
@@ -192,7 +192,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
 
         ui_layouts.box_list(
             layout=layout,
-            items=bl_stats.get_missing_images(),
+            items=bl_missing.get_images(),
             icon="IMAGE_DATA",
             columns=2
         )
@@ -200,7 +200,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
         row = layout.row()  # extra space
 
     def execute(self, context):
-        for image_key in bl_stats.get_missing_images():
+        for image_key in bl_missing.get_images():
             bpy.data.images.remove(bpy.data.images[image_key])
         return {'FINISHED'}
 
@@ -211,7 +211,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    if bl_stats.get_missing_images():
+    if bl_missing.get_images():
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
 
