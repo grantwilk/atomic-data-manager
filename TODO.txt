@@ -6,6 +6,7 @@ Key:
 
 High Priority:
 * Find an alternative for placeholder statistics
++ Add detection for missing libraries (links)
 + Add a button to launch detection for missing files
 + Implement search and replace operations for missing file detections
 
