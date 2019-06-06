@@ -285,16 +285,6 @@ def get_unused_images():
     return get_unused(bpy.data.images)
 
 
-def get_missing_images():
-    # returns a list of keys of images with a non-existent filepath
-    missing_images = []
-    for image in bpy.data.images:
-        if image.filepath and not os.path.isfile(image.filepath):
-            missing_images.append(image.name)
-
-    return missing_images
-
-
 def get_unused_lights():
     # returns a list of keys of lights with no users
     return get_unused(bpy.data.lights)
