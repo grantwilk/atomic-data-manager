@@ -36,7 +36,7 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
             ('RELOAD', 'Reload Missing Files', 'Reload the missing files from their existing filepaths'),
             ('SEARCH', 'Search for Missing Files (under development)', 'Search for the missing files in a directory'),
             ('REPLACE', 'Specify Replacement Files (under development)', 'Replace missing files with new files'),
-            ('REMOVE', 'Remove Missing Files', 'Remove the missing files from the project'),
+            ('REMOVE', 'Remove Missing Files (images only)', 'Remove the missing files from the project'),
             ],
         default='IGNORE'
     )
@@ -44,17 +44,29 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
     def draw(self, context):
         layout = self.layout
         missing_images = bl_missing.get_images()
+        missing_libraries = bl_missing.get_libraries()
 
-        if missing_images:
+        if missing_images or missing_libraries:
             row = layout.row()
             row.label(text="Atomic has detected one or more missing files in your project!")
 
-            ui_layouts.box_list(
-                layout=layout,
-                items=missing_images,
-                icon="IMAGE_DATA",
-                columns=3
-            )
+            if missing_images:
+                ui_layouts.box_list(
+                    layout=layout,
+                    title="Images",
+                    items=missing_images,
+                    icon="IMAGE_DATA",
+                    columns=3
+                )
+
+            if missing_libraries:
+                ui_layouts.box_list(
+                    layout=layout,
+                    title="Libraries",
+                    items=missing_libraries,
+                    icon="LIBRARY_DATA_DIRECT",
+                    columns=3
+                )
 
             row = layout.separator()  # extra space
 
@@ -98,8 +110,15 @@ class ATOMIC_OT_reload_missing(bpy.types.Operator):
     bl_label = "Reload Missing Files"
 
     def execute(self, context):
+        # reload images
         for image_key in bl_missing.get_images():
             bpy.data.images[image_key].reload()
+
+        # reload libraries
+        for lib_key in bl_missing.get_libraries():
+            bpy.data.libraries[lib_key].reload()
+
+        # call reload report
         bpy.ops.atomic.reload_report('INVOKE_DEFAULT')
         return {'FINISHED'}
 
@@ -113,17 +132,27 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
     def draw(self, context):
         layout = self.layout
         missing_images = bl_missing.get_images()
+        missing_libraries = bl_missing.get_libraries()
 
-        if missing_images:
+        if missing_images or missing_libraries:
             row = layout.row()
             row.label(text="Atomic was unable to reload the following files:")
 
-            ui_layouts.box_list(
-                layout=self.layout,
-                items=missing_images,
-                icon='IMAGE_DATA',
-                columns=3
-            )
+            if missing_images:
+                ui_layouts.box_list(
+                    layout=self.layout,
+                    items=missing_images,
+                    icon='IMAGE_DATA',
+                    columns=3
+                )
+
+            if missing_libraries:
+                ui_layouts.box_list(
+                    layout=self.layout,
+                    items=missing_images,
+                    icon='LIBRARY_DATA_DIRECT',
+                    columns=3
+                )
 
         else:
             row = layout.row()
@@ -202,6 +231,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
     def execute(self, context):
         for image_key in bl_missing.get_images():
             bpy.data.images.remove(bpy.data.images[image_key])
+
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -211,7 +241,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    if bl_missing.get_images():
+    if bl_missing.get_images() or bl_missing.get_libraries():
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
 
