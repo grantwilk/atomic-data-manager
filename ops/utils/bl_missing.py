@@ -21,11 +21,21 @@ import bpy
 import os
 
 
+def get_missing(data):
+    # returns a list of keys of datablocks with a non-existent filepath
+    missing = []
+    for datablock in data:
+        if datablock.filepath and not os.path.isfile(datablock.filepath):
+            missing.append(datablock.name)
+
+    return missing
+
+
 def get_images():
     # returns a list of keys of images with a non-existent filepath
-    missing_images = []
-    for image in bpy.data.images:
-        if image.filepath and not os.path.isfile(image.filepath):
-            missing_images.append(image.name)
+    return get_missing(bpy.data.images)
 
-    return missing_images
+
+def get_libraries():
+    # returns a list of keys of libraries with a non-existent filepath
+    return get_missing(bpy.data.libraries)
