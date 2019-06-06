@@ -4,13 +4,13 @@ Key:
 - = fix bug
 
 
-
 High Priority:
+* Find an alternative for placeholder statistics
++ Add a button to launch detection for missing files
 + Implement search and replace operations for missing file detections
-+ Add a button to force-detect missing files
-- Find an alternative for placeholder statistics
 
 Low Priority:
++ Add a feature to list and allow the user to rename all "unnamed" objects at once
 * Find a way to position missing file warnings in the center of the screen
 
 
@@ -18,8 +18,8 @@ Completed Tasks:
 - Fix bug where the particle inspector lists all objects instead of the ones that use the particle system (5/13/19)
 + See data you're about to delete before you delete it when using Nuke and Clean operators (5/28/19)
 * Find a more obvious way to implement inspection buttons (5/28/19)
-+ Add search bar support to quickly Nuke or Clean specific datablocks (5/28/19)
-+ Add a pie menu to quickly Nuke or Clean specific datablocks (5/29/19)
++ Add search bar support to quickly Nuke or Clean specific data-blocks (5/28/19)
++ Add a pie menu to quickly Nuke or Clean specific data-blocks (5/29/19)
 + Add "Nuke All" and "Clean All" functions to the pie menu (6/3/19)
 + Add detection for missing files (6/3/19)
 + Add a warning on file open for missing files (6/3/19)
