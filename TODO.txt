@@ -6,11 +6,11 @@ Key:
 
 High Priority:
 * Find an alternative for placeholder statistics
-+ Add detection for missing libraries (links)
 + Add a button to launch detection for missing files
 + Implement search and replace operations for missing file detections
 
 Low Priority:
++ Add support for removing libraries for missing file recovery
 + Add a feature to list and allow the user to rename all "unnamed" objects at once
 * Find a way to position missing file warnings in the center of the screen
 
@@ -26,6 +26,7 @@ Completed Tasks:
 + Add a warning on file open for missing files (6/3/19)
 - Prevent warnings from appearing on startup (6/3/19)
 - Remove extra particle system statistics (6/5/19)
++ Add detection for missing libraries (links) (6/6/19)
 
 Not Fixing:
 - Nuking in some project files causes Blender to crash (freak chance crash)
