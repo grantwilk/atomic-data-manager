@@ -123,7 +123,7 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
             layout=layout,
             title="Materials",
             items=materials,
-            icon="NODE_MATERIAL"
+            icon="MATERIAL"
         )
 
         # Node Groups Box List
@@ -269,7 +269,7 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
             layout=layout,
             title="Materials",
             items=materials,
-            icon="NODE_MATERIAL"
+            icon="MATERIAL"
         )
 
         # Node Groups Box List
