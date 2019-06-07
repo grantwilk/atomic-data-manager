@@ -29,6 +29,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
     The statistics panel is nested in the main Atomic Data Manager panel.
     This panel contains statistics about the file and each data set in the Blender file.
     """
+    bl_idname = "ATOMIC_PT_stats_panel"
     bl_label = "Stats for Nerds"
     bl_space_type = "PROPERTIES"
     bl_region_type = "WINDOW"
