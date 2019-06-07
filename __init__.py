@@ -57,6 +57,22 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     textures_field: bpy.props.StringProperty()
     worlds_field: bpy.props.StringProperty()
 
+    # Preferences Properties
+    enable_missing_file_warning: bpy.props.BoolProperty(
+        description="Display a warning if Atomic detects one or more missing files in your project",
+        default=True
+    )
+
+    enable_stats_for_nerds: bpy.props.BoolProperty(
+        description="Display the \"Stats for Nerds\" panel in the main Atomic Data Manager panel",
+        default=True
+    )
+
+    ignore_fake_users: bpy.props.BoolProperty(
+        description="Ignore fake users and treat them as if they don't exist while cleaning data",
+        default=False
+    )
+
     # Other Properties
     active_inspection: bpy.props.EnumProperty(
         items=[
