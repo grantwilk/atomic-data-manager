@@ -34,9 +34,9 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
         items=[
             ('IGNORE', 'Ignore Missing Files', 'Ignore the missing files and leave them offline'),
             ('RELOAD', 'Reload Missing Files', 'Reload the missing files from their existing filepaths'),
-            ('SEARCH', 'Search for Missing Files (under development)', 'Search for the missing files in a directory'),
-            ('REPLACE', 'Specify Replacement Files (under development)', 'Replace missing files with new files'),
-            ('REMOVE', 'Remove Missing Files (images only)', 'Remove the missing files from the project'),
+            ('REMOVE', 'Remove Missing Files', 'Remove the missing files from the project'),
+            ('SEARCH', 'Search for Missing Files (coming soon)', 'Search for the missing files in a directory'),
+            ('REPLACE', 'Specify Replacement Files (coming soon)', 'Replace missing files with new files'),
             ],
         default='IGNORE'
     )
@@ -168,46 +168,6 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# Atomic Data Manager Search for Missing Files Operator
-class ATOMIC_OT_search_missing(bpy.types.Operator):
-    """Searches for missing files"""
-    bl_idname = "atomic.search_missing"
-    bl_label = "Search for Missing Files"
-
-    def draw(self, context):
-        layout = self.layout
-
-        row = layout.row()
-        row.label(text="Unsupported Operation!")
-
-    def execute(self, context):
-        return {'FINISHED'}
-
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
-
-# Atomic Data Manager Replace Missing Files Operator
-class ATOMIC_OT_replace_missing(bpy.types.Operator):
-    """Replace missing files"""
-    bl_idname = "atomic.replace_missing"
-    bl_label = "Replace Missing Files"
-
-    def draw(self, context):
-        layout = self.layout
-
-        row = layout.row()
-        row.label(text="Unsupported Operation!")
-
-    def execute(self, context):
-        return {'FINISHED'}
-
-    def invoke(self, context, event):
-        wm = context.window_manager
-        return wm.invoke_props_dialog(self)
-
-
 # Atomic Data Manager Remove Missing Files Operator
 class ATOMIC_OT_remove_missing(bpy.types.Operator):
     """Removes all missing files from the project"""
@@ -232,6 +192,48 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
         for image_key in bl_missing.get_images():
             bpy.data.images.remove(bpy.data.images[image_key])
 
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+
+# TODO: Implement search for missing once file browser bugs are fixed
+# Atomic Data Manager Search for Missing Files Operator
+class ATOMIC_OT_search_missing(bpy.types.Operator):
+    """Searches for missing files"""
+    bl_idname = "atomic.search_missing"
+    bl_label = "Search for Missing Files"
+
+    def draw(self, context):
+        layout = self.layout
+
+        row = layout.row()
+        row.label(text="Unsupported Operation!")
+
+    def execute(self, context):
+        return {'FINISHED'}
+
+    def invoke(self, context, event):
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
+
+
+# TODO: Implement replace missing once file browser bugs are fixed
+# Atomic Data Manager Replace Missing Files Operator
+class ATOMIC_OT_replace_missing(bpy.types.Operator):
+    """Replace missing files"""
+    bl_idname = "atomic.replace_missing"
+    bl_label = "Replace Missing Files"
+
+    def draw(self, context):
+        layout = self.layout
+
+        row = layout.row()
+        row.label(text="Unsupported Operation!")
+
+    def execute(self, context):
         return {'FINISHED'}
 
     def invoke(self, context, event):
