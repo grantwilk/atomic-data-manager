@@ -31,7 +31,7 @@ bl_info = {
     "location": "Properties > Scene",
     "category": "Data",
     "description": "An advanced set of data management tools for Blender.",
-    "wiki_url": "https://github.com/grantwilk/Atomic-Data-Manager",  # TODO
+    "wiki_url": "https://remingtoncreative.com/software/blender/atomic-data-manager",
     "tracker_url": "https://github.com/grantwilk/atomic-data-manager/issues"
 }
 
