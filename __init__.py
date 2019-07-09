@@ -1,5 +1,5 @@
 """
-Copyright (C) 2019 Grant Wilk
+Copyright (C) 2019 Remington Creative
 
 This file is part of Atomic Data Manager.
 
@@ -24,7 +24,7 @@ from atomic_data_manager import ui, ops
 
 bl_info = {
     "name": "Atomic Data Manager",
-    "author": "Grant Wilk",
+    "author": "Remington Creative",
     "blender": (2, 80, 0),
     "version": (1, 0, 0),
     "location": "Properties > Scene",

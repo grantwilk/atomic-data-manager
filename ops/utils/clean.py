@@ -1,5 +1,5 @@
 """
-Copyright (C) 2019 Grant Wilk
+Copyright (C) 2019 Remington Creative
 
 This file is part of Atomic Data Manager.
 
