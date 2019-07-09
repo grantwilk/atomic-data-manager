@@ -54,7 +54,8 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         name='Months',
         description="Number of months between checking for updates",
         default=0,
-        min=0
+        min=0,
+        max=6
     )
     updater_intrval_days: bpy.props.IntProperty(
         name='Days',
