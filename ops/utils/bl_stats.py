@@ -20,6 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 import os
 import re
+from atomic_data_manager import config
 
 
 # <editor-fold desc="Size Functions">
@@ -112,7 +113,7 @@ def count_unused(data):
     # returns the amount of unused data-blocks in a set of data
     atom = bpy.context.scene.atomic
     no_users = sum(1 if datablock.users == 0 else 0 for datablock in data)
-    fake_users = sum(1 if atom.ignore_fake_users and datablock.use_fake_user and datablock.users == 1
+    fake_users = sum(1 if config.ignore_fake_users and datablock.use_fake_user and datablock.users == 1
                      else 0 for datablock in data)
     return no_users + fake_users
 
@@ -273,7 +274,7 @@ def get_unused(data):
     for datablock in data:
         if datablock.users == 0:
             unused_data.append(datablock.name)
-        elif atom.ignore_fake_users and datablock.users == 1 and datablock.use_fake_user:
+        elif config.ignore_fake_users and datablock.users == 1 and datablock.use_fake_user:
             unused_data.append(datablock.name)
     return unused_data
 

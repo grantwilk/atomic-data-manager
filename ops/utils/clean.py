@@ -16,7 +16,9 @@ General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
+
 import bpy
+from atomic_data_manager import config
 
 
 def clean_data(data):
@@ -25,7 +27,7 @@ def clean_data(data):
     for key in data.keys():
         if data[key].users == 0:
             data.remove(data[key])
-        elif atom.ignore_fake_users and data[key].users == 1 and data[key].use_fake_user:
+        elif config.ignore_fake_users and data[key].users == 1 and data[key].use_fake_user:
             data.remove(data[key])
 
 
