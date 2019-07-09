@@ -47,7 +47,7 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     auto_check_update: bpy.props.BoolProperty(
         name="Auto-check for Update",
         description="If enabled, auto-check for updates using an interval",
-        default=False,
+        default=True,
     )
 
     updater_intrval_months: bpy.props.IntProperty(
@@ -81,11 +81,9 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     def draw(self, context):
         layout = self.layout
 
-        row = layout.row()
-        row.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
-
-        row = layout.row()
-        row.prop(self, "ignore_fake_users", text="Ignore Fake Users")
+        col = layout.column()
+        col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
+        col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
 
         addon_updater_ops.update_settings_ui(self, context)
 
