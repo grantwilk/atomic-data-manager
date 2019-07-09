@@ -208,10 +208,9 @@ class addon_updater_install_popup(bpy.types.Operator):
 
 # User preference check-now operator
 class addon_updater_check_now(bpy.types.Operator):
-	bl_label = "Check now for "+updater.addon+" update"
+	bl_label = "Check for Updates"
 	bl_idname = updater.addon+".updater_check_now"
-	bl_description = "Check now for an update to the {x} addon".format(
-														x=updater.addon)
+	bl_description = "Check for an update to Atomic Data Manager"
 	bl_options = {'REGISTER', 'INTERNAL'}
 
 	def execute(self,context):
@@ -305,8 +304,7 @@ class addon_updater_update_now(bpy.types.Operator):
 class addon_updater_update_target(bpy.types.Operator):
 	bl_label = updater.addon+" version target"
 	bl_idname = updater.addon+".updater_update_target"
-	bl_description = "Install a targeted version of the {x} addon".format(
-														x=updater.addon)
+	bl_description = "Install a targeted version of Atomic Data Manager"
 	bl_options = {'REGISTER', 'INTERNAL'}
 
 	def target_version(self, context):
@@ -892,7 +890,7 @@ def update_settings_ui(self, context, element=None):
 		return
 
 	# auto-update settings
-	box.label(text="Updater Settings")
+	box.label(text="Update Atomic Data Manager")
 	row = box.row()
 
 	# special case to tell user to restart blender, if set that way
@@ -902,24 +900,17 @@ def update_settings_ui(self, context, element=None):
 			row.label(text="Restart blender to complete update", icon="ERROR")
 			return
 
-	split = layout_split(row, factor=0.3)
-	subcol = split.column()
-	subcol.prop(settings, "auto_check_update")
-	subcol = split.column()
+	subcol = box.column()
+	subcol.prop(settings, "auto_check_update", text="Automatically check for updates every:")
 
-	if settings.auto_check_update==False:
-		subcol.enabled = False
-	subrow = subcol.row()
-	subrow.label(text="Interval between checks")
 	subrow = subcol.row(align=True)
+	subrow.enabled = settings.auto_check_update
 	checkcol = subrow.column(align=True)
-	checkcol.prop(settings,"updater_intrval_months")
+	checkcol.prop(settings, "updater_intrval_months")
 	checkcol = subrow.column(align=True)
-	checkcol.prop(settings,"updater_intrval_days")
+	checkcol.prop(settings, "updater_intrval_days")
 	checkcol = subrow.column(align=True)
-	checkcol.prop(settings,"updater_intrval_hours")
-	checkcol = subrow.column(align=True)
-	checkcol.prop(settings,"updater_intrval_minutes")
+	checkcol.prop(settings, "updater_intrval_hours")
 
 	# checking / managing updates
 	row = box.row()
