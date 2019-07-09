@@ -45,15 +45,11 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     def draw(self, context):
         layout = self.layout
 
-        split = layout.split()
+        row = layout.row()
+        row.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
 
-        col = split.column()
-        col.label(text="UI Preferences:")
-        col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
-
-        col = split.column()
-        col.label(text="Other Preferences:")
-        col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
+        row = layout.row()
+        row.prop(self, "ignore_fake_users", text="Ignore Fake Users")
 
 
 reg_list = [ATOMIC_PT_preferences_panel]
