@@ -21,6 +21,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 from bpy.utils import register_class, unregister_class
 from atomic_data_manager import ui, ops
+from atomic_data_manager.updater import addon_updater_ops
 
 bl_info = {
     "name": "Atomic Data Manager",
@@ -31,7 +32,7 @@ bl_info = {
     "category": "Data",
     "description": "An advanced set of data management tools for Blender.",
     "wiki_url": "https://github.com/grantwilk/Atomic-Data-Manager",  # TODO
-    "tracker_url": "https://github.com/grantwilk/Atomic-Data-Manager/issues"
+    "tracker_url": "https://github.com/grantwilk/atomic-data-manager/issues"
 }
 
 
@@ -96,14 +97,19 @@ def register():
     register_class(ATOMIC_PG_main)
     bpy.types.Scene.atomic = bpy.props.PointerProperty(type=ATOMIC_PG_main)
 
+    # Atomic package registration
     ui.register()
     ops.register()
+
+    # Add-on updater registration
+    addon_updater_ops.register(bl_info)
 
 
 def unregister():
     unregister_class(ATOMIC_PG_main)
     del bpy.types.Scene.atomic
 
+    # Atomic package unregistration
     ui.unregister()
     ops.unregister()
 
