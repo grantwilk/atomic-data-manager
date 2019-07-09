@@ -21,8 +21,11 @@ import bpy
 
 def clean_data(data):
     # removes all unused data-blocks from the indicated set of data
+    atom = bpy.context.scene.atomic
     for key in data.keys():
         if data[key].users == 0:
+            data.remove(data[key])
+        elif atom.ignore_fake_users and data[key].users == 1 and data[key].use_fake_user:
             data.remove(data[key])
 
 

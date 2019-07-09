@@ -110,7 +110,11 @@ def count_total(data):
 
 def count_unused(data):
     # returns the amount of unused data-blocks in a set of data
-    return sum(1 if datablock.users == 0 else 0 for datablock in data)
+    atom = bpy.context.scene.atomic
+    no_users = sum(1 if datablock.users == 0 else 0 for datablock in data)
+    fake_users = sum(1 if atom.ignore_fake_users and datablock.use_fake_user and datablock.users == 1
+                     else 0 for datablock in data)
+    return no_users + fake_users
 
 
 def count_unnamed(data):
@@ -264,9 +268,12 @@ def count_unnamed_worlds():
 # <editor-fold desc="Get Functions">
 def get_unused(data):
     # returns a list of keys of data with no users in the specified set of data
+    atom = bpy.context.scene.atomic
     unused_data = []
     for datablock in data:
         if datablock.users == 0:
+            unused_data.append(datablock.name)
+        elif atom.ignore_fake_users and datablock.users == 1 and datablock.use_fake_user:
             unused_data.append(datablock.name)
     return unused_data
 
