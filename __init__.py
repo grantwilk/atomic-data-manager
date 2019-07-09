@@ -69,7 +69,7 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     )
 
     ignore_fake_users: bpy.props.BoolProperty(
-        description="Ignore fake users and treat them as if they don't exist while cleaning data",
+        description="Let the clean tool remove unused data-blocks even if they have fake users",
         default=False
     )
 
