@@ -243,7 +243,8 @@ class ATOMIC_OT_replace_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    if bl_missing.get_images() or bl_missing.get_libraries():
+    atom = bpy.context.scene.atomic
+    if atom.enable_missing_file_warning and (bl_missing.get_images() or bl_missing.get_libraries()):
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
 
