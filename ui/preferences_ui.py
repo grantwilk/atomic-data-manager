@@ -20,7 +20,6 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 from bpy.utils import register_class, unregister_class
 from atomic_data_manager import config
-from atomic_data_manager.ui import stats_panel_ui
 
 
 # Updates Atomic variables in config.py for global use
