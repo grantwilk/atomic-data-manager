@@ -90,7 +90,7 @@ def get_user_preferences(context=None):
 	if hasattr(context, "user_preferences"):
 		prefs = context.user_preferences.addons.get(__package__, None)
 	elif hasattr(context, "preferences"):
-		prefs = context.preferences.addons.get(__package__, None)
+		prefs = context.preferences.addons.get("atomic_data_manager", None)
 	if prefs:
 		return prefs.preferences
 	# To make the addon stable and non-exception prone, return None

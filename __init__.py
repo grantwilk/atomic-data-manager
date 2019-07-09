@@ -94,6 +94,9 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
 
 
 def register():
+    # Add-on updater registration
+    addon_updater_ops.register(bl_info)
+
     register_class(ATOMIC_PG_main)
     bpy.types.Scene.atomic = bpy.props.PointerProperty(type=ATOMIC_PG_main)
 
@@ -101,15 +104,11 @@ def register():
     ui.register()
     ops.register()
 
-    # Add-on updater registration
-    addon_updater_ops.register(bl_info)
-
 
 def unregister():
-    unregister_class(ATOMIC_PG_main)
-    del bpy.types.Scene.atomic
-
     # Atomic package unregistration
     ui.unregister()
     ops.unregister()
 
+    unregister_class(ATOMIC_PG_main)
+    del bpy.types.Scene.atomic

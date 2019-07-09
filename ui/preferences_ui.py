@@ -26,7 +26,6 @@ from atomic_data_manager import config
 # Updates Atomic variables in config.py for global use
 def update_preferences(self, context):
     config.enable_missing_file_warning = self.enable_missing_file_warning
-    config.enable_stats_for_nerds = self.enable_stats_for_nerds
     config.ignore_fake_users = self.ignore_fake_users
 
 
@@ -97,9 +96,10 @@ def register():
     for cls in reg_list:
         register_class(cls)
 
-    # Make sure add-on preferences are updated on registration
+    # Make sure global preferences are updated on registration
     preferences = bpy.context.preferences
-    addon_prefs = preferences.addons["atomic_data_manager"].preferences
+    addon_prefs = preferences.addons.get("atomic_data_manager").preferences
+
     config.enable_missing_file_warning = addon_prefs.enable_missing_file_warning
     config.ignore_fake_users = addon_prefs.ignore_fake_users
 
