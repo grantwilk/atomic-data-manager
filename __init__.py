@@ -30,7 +30,7 @@ bl_info = {
     "version": (1, 0, 0),
     "location": "Properties > Scene",
     "category": "Data",
-    "description": "An advanced set of data management tools for Blender.",
+    "description": "Blender's most advanced set of data management tools.",
     "wiki_url": "https://remingtoncreative.com/software/blender/atomic-data-manager",
     "tracker_url": "https://github.com/grantwilk/atomic-data-manager/issues"
 }
@@ -42,7 +42,7 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     collections: bpy.props.BoolProperty(default=False)
     images: bpy.props.BoolProperty(default=False)
     lights: bpy.props.BoolProperty(default=False)
-    materials: bpy.props.BoolProperty(default=False)
+0    materials: bpy.props.BoolProperty(default=False)
     node_groups: bpy.props.BoolProperty(default=False)
     particles: bpy.props.BoolProperty(default=False)
     textures: bpy.props.BoolProperty(default=False)
