@@ -27,7 +27,7 @@ from atomic_data_manager import config
 
 # Atomic Data Manager Detect Missing Files Operator
 class ATOMIC_OT_detect_missing(bpy.types.Operator):
-    """Detects missing files in the project"""
+    """Detect missing files in this project"""
     bl_idname = "atomic.detect_missing"
     bl_label = "Missing File Detection"
 
@@ -171,7 +171,7 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
 
 # Atomic Data Manager Remove Missing Files Operator
 class ATOMIC_OT_remove_missing(bpy.types.Operator):
-    """Removes all missing files from the project"""
+    """Remove all missing files from this project"""
     bl_idname = "atomic.remove_missing"
     bl_label = "Remove Missing Files"
 
@@ -203,7 +203,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
 # TODO: Implement search for missing once file browser bugs are fixed
 # Atomic Data Manager Search for Missing Files Operator
 class ATOMIC_OT_search_missing(bpy.types.Operator):
-    """Searches for missing files"""
+    """Search a specified directory for the missing files"""
     bl_idname = "atomic.search_missing"
     bl_label = "Search for Missing Files"
 
@@ -224,7 +224,7 @@ class ATOMIC_OT_search_missing(bpy.types.Operator):
 # TODO: Implement replace missing once file browser bugs are fixed
 # Atomic Data Manager Replace Missing Files Operator
 class ATOMIC_OT_replace_missing(bpy.types.Operator):
-    """Replace missing files"""
+    """Replace each missing file with a new file"""
     bl_idname = "atomic.replace_missing"
     bl_label = "Replace Missing Files"
 
@@ -244,7 +244,6 @@ class ATOMIC_OT_replace_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    atom = bpy.context.scene.atomic
     if config.enable_missing_file_warning and (bl_missing.get_images() or bl_missing.get_libraries()):
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
