@@ -24,9 +24,9 @@ from atomic_data_manager.ops.utils import duplicate, delete
 
 # Atomic Data Manager Inspection Rename Operator
 class ATOMIC_OT_inspection_rename(bpy.types.Operator):
-    """Rename this data-block"""
+    """Give this data-block a new name"""
     bl_idname = "atomic.rename"
-    bl_label = "Rename Data-Block To"
+    bl_label = "Rename Data-Block"
 
     def draw(self, context):
         atom = bpy.context.scene.atomic
@@ -84,7 +84,7 @@ class ATOMIC_OT_inspection_rename(bpy.types.Operator):
 class ATOMIC_OT_inspection_replace(bpy.types.Operator):
     """Replace all instances of this data-block with another data-block"""
     bl_idname = "atomic.replace"
-    bl_label = "Replace Data-Block With"
+    bl_label = "Replace Data-Block"
 
     def draw(self, context):
         atom = bpy.context.scene.atomic
@@ -182,9 +182,9 @@ class ATOMIC_OT_inspection_toggle_fake_user(bpy.types.Operator):
 
 # Atomic Data Manager Inspection Duplicate Operator
 class ATOMIC_OT_inspection_duplicate(bpy.types.Operator):
-    """Make a single-user copy of this data-block"""
+    """Make an exact copy of this data-block"""
     bl_idname = "atomic.inspection_duplicate"
-    bl_label = "Inspection Duplicate"
+    bl_label = "Duplicate Data-Block"
 
     def execute(self, context):
         atom = bpy.context.scene.atomic
@@ -259,9 +259,9 @@ class ATOMIC_OT_inspection_duplicate(bpy.types.Operator):
 
 # Atomic Data Manager Inspection Delete Operator
 class ATOMIC_OT_inspection_delete(bpy.types.Operator):
-    """Force delete this data-block"""
+    """Forcibly remove this data-block from the project"""
     bl_idname = "atomic.inspection_delete"
-    bl_label = "Inspection Delete"
+    bl_label = "Delete Data-Block"
 
     def execute(self, context):
         atom = bpy.context.scene.atomic
