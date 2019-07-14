@@ -25,7 +25,7 @@ from atomic_data_manager.ui.utils import ui_layouts
 
 # Atomic Data Manager Nuke Operator
 class ATOMIC_OT_nuke(bpy.types.Operator):
-    """Removes all data-blocks from the selected categories"""
+    """Remove all data-blocks from the selected categories"""
     bl_idname = "atomic.nuke"
     bl_label = "CAUTION!"
 
@@ -157,7 +157,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
 
 # Atomic Data Manager Clean Operator
 class ATOMIC_OT_clean(bpy.types.Operator):
-    """Removes all unused data-blocks from the selected categories"""
+    """Remove all unused data-blocks from the selected categories"""
     bl_idname = "atomic.clean"
     bl_label = "Clean"
 
@@ -289,7 +289,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
 # Atomic Data Manager Undo Operator
 class ATOMIC_OT_undo(bpy.types.Operator):
-    """Undoes the previous action"""
+    """Undo the previous action"""
     bl_idname = "atomic.undo"
     bl_label = "Undo"
 
@@ -300,7 +300,7 @@ class ATOMIC_OT_undo(bpy.types.Operator):
 
 # Atomic Data Manager Smart Select Operator
 class ATOMIC_OT_smart_select(bpy.types.Operator):
-    """Auto-selects categories with unused data"""
+    """Auto-select categories with unused data"""
     bl_idname = "atomic.smart_select"
     bl_label = "Smart Select"
 
@@ -321,7 +321,7 @@ class ATOMIC_OT_smart_select(bpy.types.Operator):
 
 # Atomic Data Manager Select All Operator
 class ATOMIC_OT_select_all(bpy.types.Operator):
-    """Selects all categories"""
+    """Select all categories"""
     bl_idname = "atomic.select_all"
     bl_label = "Select All"
 
@@ -339,7 +339,7 @@ class ATOMIC_OT_select_all(bpy.types.Operator):
 
 # Atomic Data Manager Deselect All Operator
 class ATOMIC_OT_deselect_all(bpy.types.Operator):
-    """Deselects all categories"""
+    """Deselect all categories"""
     bl_idname = "atomic.deselect_all"
     bl_label = "Deselect All"
 
