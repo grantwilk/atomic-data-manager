@@ -30,8 +30,8 @@ bl_info = {
     "version": (1, 0, 0),
     "location": "Properties > Scene",
     "category": "Data",
-    "description": "Blender's most advanced set of data management tools.",
-    "wiki_url": "https://remingtoncreative.com/software/blender/atomic-data-manager",
+    "description": "Intelligent Data Management for Blender.",
+    "wiki_url": "https://remingtoncreative.com/software/blender/atomic",
     "tracker_url": "https://github.com/grantwilk/atomic-data-manager/issues"
 }
 
