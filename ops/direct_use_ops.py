@@ -26,7 +26,7 @@ from atomic_data_manager.ops.utils import nuke, clean, bl_stats
 # <editor-fold desc="Full Nuke/Clean Direct-User Operators">
 # Atomic Data Manager Nuke All Operator
 class ATOMIC_OT_nuke_all(bpy.types.Operator):
-    """Removes all data-blocks from the selected categories"""
+    """Remove all data-blocks from the selected categories"""
     bl_idname = "atomic.nuke_all"
     bl_label = "CAUTION!"
 
@@ -122,7 +122,7 @@ class ATOMIC_OT_nuke_all(bpy.types.Operator):
 
 # Atomic Data Manager Clean All Operator
 class ATOMIC_OT_clean_all(bpy.types.Operator):
-    """Removes all unused data-blocks from the selected categories"""
+    """Remove all unused data-blocks from the selected categories"""
     bl_idname = "atomic.clean_all"
     bl_label = "Clean All"
 
@@ -219,7 +219,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
 
 # <editor-fold desc="Nuke Direct-Use Operators">
 class ATOMIC_OT_nuke_collections(bpy.types.Operator):
-    """Removes all collections"""
+    """Remove all collections from this project"""
     bl_idname = "atomic.nuke_collections"
     bl_label = "Nuke Collections"
 
@@ -248,7 +248,7 @@ class ATOMIC_OT_nuke_collections(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_images(bpy.types.Operator):
-    """Removes all images"""
+    """Remove all images from this project"""
     bl_idname = "atomic.nuke_images"
     bl_label = "Nuke Images"
 
@@ -277,7 +277,7 @@ class ATOMIC_OT_nuke_images(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_lights(bpy.types.Operator):
-    """Removes all lights"""
+    """Remove all lights from this project"""
     bl_idname = "atomic.nuke_lights"
     bl_label = "Nuke Lights"
 
@@ -306,7 +306,7 @@ class ATOMIC_OT_nuke_lights(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_materials(bpy.types.Operator):
-    """Removes all materials"""
+    """Remove all materials from this project"""
     bl_idname = "atomic.nuke_materials"
     bl_label = "Nuke Materials"
 
@@ -335,7 +335,7 @@ class ATOMIC_OT_nuke_materials(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_node_groups(bpy.types.Operator):
-    """Removes all node groups"""
+    """Remove all node groups from this project"""
     bl_idname = "atomic.nuke_node_groups"
     bl_label = "Nuke Node Groups"
 
@@ -364,7 +364,7 @@ class ATOMIC_OT_nuke_node_groups(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_particles(bpy.types.Operator):
-    """Removes all particle systems"""
+    """Remove all particle systems from this project"""
     bl_idname = "atomic.nuke_particles"
     bl_label = "Nuke Particles"
 
@@ -393,7 +393,7 @@ class ATOMIC_OT_nuke_particles(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_textures(bpy.types.Operator):
-    """Removes all textures"""
+    """Remove all textures from this project"""
     bl_idname = "atomic.nuke_textures"
     bl_label = "Nuke Textures"
 
@@ -422,7 +422,7 @@ class ATOMIC_OT_nuke_textures(bpy.types.Operator):
 
 
 class ATOMIC_OT_nuke_worlds(bpy.types.Operator):
-    """Removes all worlds"""
+    """Remove all worlds from this project"""
     bl_idname = "atomic.nuke_worlds"
     bl_label = "Nuke Worlds"
 
@@ -453,7 +453,7 @@ class ATOMIC_OT_nuke_worlds(bpy.types.Operator):
 
 # <editor-fold desc="Clean Direct-Use Operators">
 class ATOMIC_OT_clean_collections(bpy.types.Operator):
-    """Removes all unused collections"""
+    """Remove all unused collections from this project"""
     bl_idname = "atomic.clean_collections"
     bl_label = "Clean Collections"
 
@@ -482,7 +482,7 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_images(bpy.types.Operator):
-    """Removes all unused images"""
+    """Remove all unused images from this project"""
     bl_idname = "atomic.clean_images"
     bl_label = "Clean Images"
 
@@ -511,7 +511,7 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_lights(bpy.types.Operator):
-    """Removes all unused lights"""
+    """Remove all unused lights from this project"""
     bl_idname = "atomic.clean_lights"
     bl_label = "Clean Lights"
 
@@ -540,7 +540,7 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_materials(bpy.types.Operator):
-    """Removes all unused materials"""
+    """Remove all unused materials from this project"""
     bl_idname = "atomic.clean_materials"
     bl_label = "Clean Materials"
 
@@ -569,7 +569,7 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
-    """Removes all unused node groups"""
+    """Remove all unused node groups from this project"""
     bl_idname = "atomic.clean_node_groups"
     bl_label = "Clean Node Groups"
 
@@ -598,7 +598,7 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_particles(bpy.types.Operator):
-    """Removes all unused particle systems"""
+    """Remove all unused particle systems from this project"""
     bl_idname = "atomic.clean_particles"
     bl_label = "Clean Particles"
 
@@ -627,7 +627,7 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_textures(bpy.types.Operator):
-    """Removes all unused textures"""
+    """Remove all unused textures from this project"""
     bl_idname = "atomic.clean_textures"
     bl_label = "Clean Textures"
 
@@ -656,7 +656,7 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
 
 
 class ATOMIC_OT_clean_worlds(bpy.types.Operator):
-    """Removes all unused worlds"""
+    """Remove all unused worlds from this project"""
     bl_idname = "atomic.clean_worlds"
     bl_label = "Clean Worlds"
 
