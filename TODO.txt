@@ -5,12 +5,13 @@ Key:
 
 
 High Priority:
-* Find an alternative for placeholder statistics
+* Fix bug where objects with particle systems are not detected
+* Find an alternative for empty spots in statistics
 + Implement search and replace operations for missing file detections
 
 Low Priority:
 + Add support for removing libraries for missing file recovery
-+ Add a feature to list and allow the user to rename all "unnamed" objects at once
++ Add a feature that allows the user to rename all "unnamed" objects at once
 * Find a way to position missing file warnings in the center of the screen
 
 
