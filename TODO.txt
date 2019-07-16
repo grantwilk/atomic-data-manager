@@ -5,7 +5,6 @@ Key:
 
 
 High Priority:
-* Fix bug where objects with particle systems are not detected
 * Find an alternative for empty spots in statistics
 + Implement search and replace operations for missing file detections
 
@@ -31,6 +30,7 @@ Completed Tasks:
 + Add and implement a full set of add-on preferences (7/9/19)
 + Add support for CG Cookie's add-on updater (7/9/19)
 * Fix bug where packed files are detected as missing (7/16/19)
+* Fix bug where certain objects with particle systems are not detected (7/16/19)
 
 Not Fixing:
 - Nuking in some project files causes Blender to crash (freak chance crash)
