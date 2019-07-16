@@ -18,7 +18,6 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import bpy
-from atomic_data_manager.ops.utils import users
 
 
 def delete_datablock(data, key):
