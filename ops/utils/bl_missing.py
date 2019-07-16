@@ -22,10 +22,10 @@ import os
 
 
 def get_missing(data):
-    # returns a list of keys of datablocks with a non-existent filepath
+    # returns a list of keys of non-packed datablocks with a non-existent filepath
     missing = []
     for datablock in data:
-        if datablock.filepath and not os.path.isfile(datablock.filepath):
+        if datablock.filepath and not os.path.isfile(datablock.filepath) and datablock.packed_files != []:
             missing.append(datablock.name)
 
     return missing
