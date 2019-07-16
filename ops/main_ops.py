@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import clean, nuke, bl_stats
+from atomic_data_manager.ops.utils import clean, nuke, stats
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -178,7 +178,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Collections Section
         if atom.collections:
-            collections = sorted(bl_stats.get_unused_collections())
+            collections = sorted(stats.get_unused_collections())
             ui_layouts.box_list(
                 layout=layout,
                 title="Collections",
@@ -188,7 +188,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Images Section
         if atom.images:
-            images = sorted(bl_stats.get_unused_images())
+            images = sorted(stats.get_unused_images())
             ui_layouts.box_list(
                 layout=layout,
                 title="Images",
@@ -198,7 +198,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Lights Section
         if atom.lights:
-            lights = sorted(bl_stats.get_unused_lights())
+            lights = sorted(stats.get_unused_lights())
             ui_layouts.box_list(
                 layout=layout,
                 title="Lights",
@@ -208,7 +208,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Materials Section
         if atom.materials:
-            materials = sorted(bl_stats.get_unused_materials())
+            materials = sorted(stats.get_unused_materials())
             ui_layouts.box_list(
                 layout=layout,
                 title="Materials",
@@ -218,7 +218,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Node Group Section
         if atom.node_groups:
-            node_groups = sorted(bl_stats.get_unused_node_groups())
+            node_groups = sorted(stats.get_unused_node_groups())
             ui_layouts.box_list(
                 layout=layout,
                 title="Node Groups",
@@ -228,7 +228,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Particles Section
         if atom.particles:
-            particles = sorted(bl_stats.get_unused_particles())
+            particles = sorted(stats.get_unused_particles())
             ui_layouts.box_list(
                 layout=layout,
                 title="Particle Systems",
@@ -238,7 +238,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Textures Section
         if atom.textures:
-            textures = sorted(bl_stats.get_unused_textures())
+            textures = sorted(stats.get_unused_textures())
             ui_layouts.box_list(
                 layout=layout,
                 title="Textures",
@@ -248,7 +248,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # Worlds Section
         if atom.worlds:
-            worlds = sorted(bl_stats.get_unused_worlds())
+            worlds = sorted(stats.get_unused_worlds())
             ui_layouts.box_list(
                 layout=layout,
                 title="Worlds",
