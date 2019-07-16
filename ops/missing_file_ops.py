@@ -20,7 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 from bpy.app.handlers import persistent
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import bl_missing
+from atomic_data_manager.ops.utils import missing
 from atomic_data_manager.ui.utils import ui_layouts
 from atomic_data_manager import config
 
@@ -44,8 +44,8 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = bl_missing.get_images()
-        missing_libraries = bl_missing.get_libraries()
+        missing_images = missing.get_images()
+        missing_libraries = missing.get_libraries()
 
         if missing_images or missing_libraries:
             row = layout.row()
@@ -112,11 +112,11 @@ class ATOMIC_OT_reload_missing(bpy.types.Operator):
 
     def execute(self, context):
         # reload images
-        for image_key in bl_missing.get_images():
+        for image_key in missing.get_images():
             bpy.data.images[image_key].reload()
 
         # reload libraries
-        for lib_key in bl_missing.get_libraries():
+        for lib_key in missing.get_libraries():
             bpy.data.libraries[lib_key].reload()
 
         # call reload report
@@ -132,8 +132,8 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = bl_missing.get_images()
-        missing_libraries = bl_missing.get_libraries()
+        missing_images = missing.get_images()
+        missing_libraries = missing.get_libraries()
 
         if missing_images or missing_libraries:
             row = layout.row()
@@ -182,7 +182,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
 
         ui_layouts.box_list(
             layout=layout,
-            items=bl_missing.get_images(),
+            items=missing.get_images(),
             icon="IMAGE_DATA",
             columns=2
         )
@@ -190,7 +190,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
         row = layout.row()  # extra space
 
     def execute(self, context):
-        for image_key in bl_missing.get_images():
+        for image_key in missing.get_images():
             bpy.data.images.remove(bpy.data.images[image_key])
 
         return {'FINISHED'}
@@ -244,7 +244,7 @@ class ATOMIC_OT_replace_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    if config.enable_missing_file_warning and (bl_missing.get_images() or bl_missing.get_libraries()):
+    if config.enable_missing_file_warning and (missing.get_images() or missing.get_libraries()):
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
 
