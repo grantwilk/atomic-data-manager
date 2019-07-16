@@ -42,7 +42,7 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     collections: bpy.props.BoolProperty(default=False)
     images: bpy.props.BoolProperty(default=False)
     lights: bpy.props.BoolProperty(default=False)
-0    materials: bpy.props.BoolProperty(default=False)
+    materials: bpy.props.BoolProperty(default=False)
     node_groups: bpy.props.BoolProperty(default=False)
     particles: bpy.props.BoolProperty(default=False)
     textures: bpy.props.BoolProperty(default=False)
