@@ -25,7 +25,7 @@ def get_missing(data):
     # returns a list of keys of non-packed datablocks with a non-existent filepath
     missing = []
     for datablock in data:
-        if datablock.filepath and not os.path.isfile(datablock.filepath) and datablock.packed_files != []:
+        if datablock.filepath and not os.path.isfile(datablock.filepath) and not datablock.packed_files.keys():
             missing.append(datablock.name)
 
     return missing
