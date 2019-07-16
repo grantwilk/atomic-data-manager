@@ -244,7 +244,7 @@ def particles_objects(particle_key):
     for obj in bpy.data.objects:
         if obj.type == 'MESH':
             for particle in obj.particle_systems:
-                if particle_key == particle.name:
+                if particle_key == particle.settings.name:
                     users.append(obj.name)
 
     return distinct(users)
