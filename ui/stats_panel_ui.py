@@ -40,7 +40,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
         atom = bpy.context.scene.atomic
 
         row = layout.row()
-        row.label(text="Data Sets:")
+        row.label(text="Categories:")
         row.prop(atom, "stats_mode", expand=True, icon_only=True)
 
         box = layout.box()
