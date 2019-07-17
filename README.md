@@ -8,13 +8,10 @@ https://remingtoncreative.com/software/blender/atomic/
 
 
 ## ENJOY A CLEANER PROJECT
-Atomic Data Manager offers Blender artists an intelligent data management solution.
-
-This feature-packed add-on provides artists with every tool they need to keep unwanted and unused data out of their Blender files.
-
-Even better, Atomic's real-time data analysis and automated data removal tools allow its users to clean their projects in a flash.
+Atomic Data Manager offers Blender artists an intelligent data management solution. This feature-packed add-on provides artists with every tool they need to keep unwanted and unused data out of their Blender files. Even better, Atomic's real-time data analysis and automated data removal tools allow its users to clean their projects in a flash.
 
 ![spring_window_shaded-min](https://remingtoncreative.com/wp-content/uploads/2019/07/spring_window_shaded-min-uai-1440x810.jpg)
+
 
 ## UNMATCHED FEATURE SET
 
@@ -28,12 +25,14 @@ Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Acci
 
 ###### \* feature coming soon
 
+
 ## TAKE A VIDEO TOUR
 ![video-thumb](https://remingtoncreative.com/wp-content/uploads/2019/07/spring_inspect_images-min.jpg)
 
 | Keep Your Projects Clean | Reduce File Sizes | Optimize for Render Farms |
 |--|--|--|
 | Everyone appreciates a clean project. Use Atomic's intelligent toolset to keep your projects looking spiffy. | Atomic reduces file sizes by removing unused data from your projects. That way, there's more space for other stuff! | Render farms prioritize smaller projects. Atomic can optimize your files so they render sooner! |
+
 
 ## GET ATOMIC
 
@@ -43,6 +42,4 @@ Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Acci
 
 
 
-**Like the Add-on?**
-
-[Consider Supporting Me!](https://remingtoncreative.com/support/)
+**Like the Add-on?** [Consider Supporting Me!](https://remingtoncreative.com/support/)
