@@ -17,12 +17,29 @@ You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-# Atomic Data Manager Global Preferences
-# Do NOT edit these values!
-# Edit them in Blender's preferences instead
+import bpy
+import webbrowser
+from bpy.utils import register_class, unregister_class
 
-enable_missing_file_warning = True
-enable_support_me_popup = False
-ignore_fake_users = False
 
-last_support_me_popup = 0
+class ATOMIC_OT_support_me_web(bpy.types.Operator):
+    """Opens the Remington Creative \"Support Me\" webpage"""
+    bl_idname = "atomic.support_me_web"
+    bl_label = "Support Me"
+
+    def execute(self, context):
+        webbrowser.open("https://remingtoncreative.com/support/")
+        return {'FINISHED'}
+
+
+reg_list = [ATOMIC_OT_support_me_web]
+
+
+def register():
+    for cls in reg_list:
+        register_class(cls)
+
+
+def unregister():
+    for cls in reg_list:
+        unregister_class(cls)

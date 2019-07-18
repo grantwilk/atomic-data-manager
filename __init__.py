@@ -106,6 +106,10 @@ def register():
 
 
 def unregister():
+
+    # Add-on updated unregistration
+    addon_updater_ops.unregister()
+
     # Atomic package unregistration
     ui.unregister()
     ops.unregister()

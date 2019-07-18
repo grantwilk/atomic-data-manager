@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from atomic_data_manager.ops import main_ops, inspect_ops, direct_use_ops, missing_file_ops
+from atomic_data_manager.ops import main_ops, inspect_ops, direct_use_ops, missing_file_ops, support_me_ops
 
 
 def register():
@@ -25,6 +25,7 @@ def register():
     inspect_ops.register()
     direct_use_ops.register()
     missing_file_ops.register()
+    support_me_ops.register()
 
 
 def unregister():
@@ -32,3 +33,4 @@ def unregister():
     inspect_ops.unregister()
     direct_use_ops.unregister()
     missing_file_ops.unregister()
+    support_me_ops.unregister()

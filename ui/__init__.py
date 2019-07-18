@@ -18,7 +18,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from atomic_data_manager.ui import \
-    main_panel_ui, stats_panel_ui, inspect_ui, missing_file_ui, pie_menu_ui, preferences_ui
+    main_panel_ui, stats_panel_ui, inspect_ui, missing_file_ui, pie_menu_ui, preferences_ui, support_me_ui
 
 
 def register():
@@ -28,6 +28,7 @@ def register():
     missing_file_ui.register()
     pie_menu_ui.register()
     preferences_ui.register()
+    support_me_ui.register()
 
 
 def unregister():
@@ -37,3 +38,4 @@ def unregister():
     missing_file_ui.unregister()
     pie_menu_ui.unregister()
     preferences_ui.unregister()
+    support_me_ui.unregister()

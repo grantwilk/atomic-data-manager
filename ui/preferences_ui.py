@@ -23,24 +23,24 @@ from atomic_data_manager.updater import addon_updater_ops
 from atomic_data_manager import config
 
 
-# Returns the user preferences for Atomic
-def get_atomic_preferences():
-    preferences = bpy.context.preferences
-    return preferences.addons.get("atomic_data_manager").preferences
-
-
 # Copies the values of the variables in config.py to Atomic's preferences for long-term storage
 def copy_config_to_prefs():
-    atomic_preferences = get_atomic_preferences()
-    atomic_preferences.enable_missing_file_warning = config.enable_missing_file_warning
-    atomic_preferences.ignore_fake_users = config.ignore_fake_users
+    bpy.context.preferences.addons[
+        "atomic_data_manager"].preferences.last_support_me_popup = config.last_support_me_popup
+
+    bpy.context.preferences.addons[
+        "atomic_data_manager"].preferences.enable_support_me_popup = config.enable_support_me_popup
 
 
 # Copies the values of Atomic's preferences to the variables in config.py for global use
 def copy_prefs_to_config(self, context):
-    atomic_preferences = get_atomic_preferences()
+    preferences = bpy.context.preferences
+    atomic_preferences = preferences.addons.get("atomic_data_manager").preferences
+
     config.enable_missing_file_warning = atomic_preferences.enable_missing_file_warning
+    config.enable_support_me_popup = atomic_preferences.enable_support_me_popup
     config.ignore_fake_users = atomic_preferences.ignore_fake_users
+    config.last_support_me_popup = atomic_preferences.last_support_me_popup
 
 
 class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
@@ -49,17 +49,24 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     # Preference Properties
     enable_missing_file_warning: bpy.props.BoolProperty(
         description="Display a warning if Atomic detects missing files in your project",
+        default=True,
         update=copy_prefs_to_config
     )
 
     enable_support_me_popup: bpy.props.BoolProperty(
         description="Occasionally display a popup asking if you would like to support Remington Creative",
+        default=True,
         update=copy_prefs_to_config
     )
 
     ignore_fake_users: bpy.props.BoolProperty(
         description="Let the clean tool remove unused data-blocks even if they have fake users",
+        default=False,
         update=copy_prefs_to_config
+    )
+
+    last_support_me_popup: bpy.props.FloatProperty(
+        default=0
     )
 
     # CG Cookie Add-on Updater Properties
@@ -102,10 +109,12 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
 
         col = layout.column()
         col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
-        col.prop(self, "enable_support_me_popup", text="Enable Support Me Popup")
+        col.prop(self, "enable_support_me_popup", text="Show \"Support Me\" Popup")
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
 
-        row = layout.row()  # extra space
+        print(self.last_support_me_popup)
+
+        separator = layout.separator()  # extra space
 
         addon_updater_ops.update_settings_ui(self, context)
 
