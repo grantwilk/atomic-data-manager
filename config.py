@@ -22,7 +22,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 # Edit them in Blender's preferences instead
 
 enable_missing_file_warning = True
-enable_support_me_popup = False
+enable_support_me_popup = True
 ignore_fake_users = False
 
 last_support_me_popup = 0
