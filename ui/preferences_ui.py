@@ -23,22 +23,24 @@ from atomic_data_manager.updater import addon_updater_ops
 from atomic_data_manager import config
 
 
-# Copies the values of the variables in config.py to Atomic's preferences for long-term storage
-def copy_config_to_prefs(self, context):
+# Returns the user preferences for Atomic
+def get_atomic_preferences():
     preferences = bpy.context.preferences
-    atomic_prefs = preferences.addons.get("atomic_data_manager").preferences
+    return preferences.addons.get("atomic_data_manager").preferences
 
-    atomic_prefs.enable_missing_file_warning = config.enable_missing_file_warning
-    atomic_prefs.ignore_fake_users = config.ignore_fake_users
+
+# Copies the values of the variables in config.py to Atomic's preferences for long-term storage
+def copy_config_to_prefs():
+    atomic_preferences = get_atomic_preferences()
+    atomic_preferences.enable_missing_file_warning = config.enable_missing_file_warning
+    atomic_preferences.ignore_fake_users = config.ignore_fake_users
 
 
 # Copies the values of Atomic's preferences to the variables in config.py for global use
 def copy_prefs_to_config(self, context):
-    preferences = bpy.context.preferences
-    atomic_prefs = preferences.addons.get("atomic_data_manager").preferences
-
-    config.enable_missing_file_warning = atomic_prefs.enable_missing_file_warning
-    config.ignore_fake_users = atomic_prefs.ignore_fake_users
+    atomic_preferences = get_atomic_preferences()
+    config.enable_missing_file_warning = atomic_preferences.enable_missing_file_warning
+    config.ignore_fake_users = atomic_preferences.ignore_fake_users
 
 
 class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
@@ -110,7 +112,7 @@ def register():
         register_class(cls)
 
     # Make sure global preferences are updated on registration
-    copy_prefs_to_config()
+    copy_prefs_to_config(None, None)
 
 
 def unregister():
