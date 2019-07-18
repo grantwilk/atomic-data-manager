@@ -23,17 +23,17 @@ from atomic_data_manager.updater import addon_updater_ops
 from atomic_data_manager import config
 
 
-def update_preferences(self, context):
+# Copies the values of the variables in config.py to Atomic's preferences for long-term storage
+def copy_config_to_prefs(self, context):
     preferences = bpy.context.preferences
     atomic_prefs = preferences.addons.get("atomic_data_manager").preferences
 
+    atomic_prefs.enable_missing_file_warning = config.enable_missing_file_warning
     atomic_prefs.ignore_fake_users = config.ignore_fake_users
 
 
-
-
-# Updates Atomic variables in config.py for global use
-def update_config(self, context):
+# Copies the values of Atomic's preferences to the variables in config.py for global use
+def copy_prefs_to_config(self, context):
     preferences = bpy.context.preferences
     atomic_prefs = preferences.addons.get("atomic_data_manager").preferences
 
@@ -47,12 +47,12 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     # Preference Properties
     enable_missing_file_warning: bpy.props.BoolProperty(
         description="Display a warning if Atomic detects missing files in your project",
-        update=update_config
+        update=copy_prefs_to_config
     )
 
     ignore_fake_users: bpy.props.BoolProperty(
         description="Let the clean tool remove unused data-blocks even if they have fake users",
-        update=update_config
+        update=copy_prefs_to_config
     )
 
     # CG Cookie Add-on Updater Properties
@@ -110,7 +110,7 @@ def register():
         register_class(cls)
 
     # Make sure global preferences are updated on registration
-    update_config()
+    copy_prefs_to_config()
 
 
 def unregister():
