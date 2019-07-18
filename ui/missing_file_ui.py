@@ -25,7 +25,7 @@ from atomic_data_manager.ops.utils import missing
 from atomic_data_manager.ui.utils import ui_layouts
 
 
-# Atomic Data Manager Detect Missing Files Operator
+# Atomic Data Manager Detect Missing Files Popup
 class ATOMIC_OT_detect_missing(bpy.types.Operator):
     """Detect missing files in this project"""
     bl_idname = "atomic.detect_missing"
