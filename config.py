@@ -23,7 +23,6 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 # UI Preferences
 enable_missing_file_warning = False
-enable_stats_for_nerds = False
 
 # Other Preferences
 ignore_fake_users = False
