@@ -52,6 +52,11 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         update=copy_prefs_to_config
     )
 
+    enable_support_me_popup: bpy.props.BoolProperty(
+        description="Occasionally display a popup asking if you would like to support Remington Creative",
+        update=copy_prefs_to_config
+    )
+
     ignore_fake_users: bpy.props.BoolProperty(
         description="Let the clean tool remove unused data-blocks even if they have fake users",
         update=copy_prefs_to_config
@@ -97,6 +102,7 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
 
         col = layout.column()
         col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
+        col.prop(self, "enable_support_me_popup", text="Enable Support Me Popup")
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
 
         row = layout.row()  # extra space

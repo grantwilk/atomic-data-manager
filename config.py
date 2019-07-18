@@ -21,5 +21,6 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 # Do NOT edit these values!
 # Edit them in Blender's preferences instead
 
-enable_missing_file_warning = False
+enable_missing_file_warning = True
+enable_support_me_popup = False
 ignore_fake_users = False
