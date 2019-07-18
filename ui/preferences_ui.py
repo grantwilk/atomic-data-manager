@@ -24,7 +24,7 @@ from atomic_data_manager import config
 
 
 # Updates Atomic variables in config.py for global use
-def update_preferences(self, context):
+def update_config(self, context):
     config.enable_missing_file_warning = self.enable_missing_file_warning
     config.ignore_fake_users = self.ignore_fake_users
 
@@ -35,12 +35,12 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     # Preference Properties
     enable_missing_file_warning: bpy.props.BoolProperty(
         description="Display a warning if Atomic detects missing files in your project",
-        update=update_preferences
+        update=update_config
     )
 
     ignore_fake_users: bpy.props.BoolProperty(
         description="Let the clean tool remove unused data-blocks even if they have fake users",
-        update=update_preferences
+        update=update_config
     )
 
     # CG Cookie Add-on Updater Properties
@@ -84,6 +84,8 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         col = layout.column()
         col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
+
+        row = layout.row()  # extra space
 
         addon_updater_ops.update_settings_ui(self, context)
 
