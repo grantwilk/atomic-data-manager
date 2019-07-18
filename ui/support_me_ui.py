@@ -34,7 +34,7 @@ def update_preferences(self, context):
 # Show the support me popup if config's enable_support_me_popup is true
 @persistent
 def show_support_me_popup(dummy=None):
-    support_me_interval = 60  # seconds
+    support_me_interval = 259200  # 3 days in seconds
     next_show_time = config.last_support_me_popup + support_me_interval
 
     if config.enable_support_me_popup and time.time() > next_show_time:
