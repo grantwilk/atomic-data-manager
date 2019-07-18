@@ -25,22 +25,20 @@ from atomic_data_manager import config
 from atomic_data_manager.ui import preferences_ui
 
 
-# Copy the popup operator's value to its respective config variable, then have preferences_ui copy it to preferences
-def update_preferences(self, context):
-    config.enable_support_me_popup = not self.stop_showing_support_popup
-    preferences_ui.copy_config_to_prefs()
-
+# Copy the inverse of the local stop_showing_support_popup to Atomic's preferences for enable_support_me_popup
+def update_enable_show_support_me_popup(self, context):
+    preferences_ui.set_enable_support_me_popup(not self.stop_showing_support_popup)
 
 # Show the support me popup if config's enable_support_me_popup is true
 @persistent
 def show_support_me_popup(dummy=None):
+    current_time = int(str(int(time.time()))[:-6])
     support_me_interval = 259200  # 3 days in seconds
-    next_show_time = config.last_support_me_popup + support_me_interval
+    next_time = config.last_support_me_popup + support_me_interval
 
-    if config.enable_support_me_popup and time.time() > next_show_time:
+    if config.enable_support_me_popup and current_time > next_time:
+        preferences_ui.set_last_support_me_popup(current_time)
         bpy.ops.atomic.show_support_me('INVOKE_DEFAULT')
-        config.last_support_me_popup = time.time()
-        preferences_ui.copy_config_to_prefs()
 
 
 # Atomic Data Manager Support Me Popup
@@ -52,7 +50,7 @@ class ATOMIC_OT_support_me_popup(bpy.types.Operator):
 
     stop_showing_support_popup: bpy.props.BoolProperty(
         default=False,
-        update=update_preferences
+        update=update_enable_show_support_me_popup
     )
 
     def draw(self, context):

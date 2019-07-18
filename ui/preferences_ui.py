@@ -23,13 +23,14 @@ from atomic_data_manager.updater import addon_updater_ops
 from atomic_data_manager import config
 
 
-# Copies the values of the variables in config.py to Atomic's preferences for long-term storage
-def copy_config_to_prefs():
-    bpy.context.preferences.addons[
-        "atomic_data_manager"].preferences.last_support_me_popup = config.last_support_me_popup
+# Sets the value of the enable_support_me_popup boolean property
+def set_enable_support_me_popup(value):
+    bpy.context.preferences.addons["atomic_data_manager"].preferences.enable_support_me_popup = value
 
-    bpy.context.preferences.addons[
-        "atomic_data_manager"].preferences.enable_support_me_popup = config.enable_support_me_popup
+
+# Sets the value of the last_support_me_popup float property
+def set_last_support_me_popup(time):
+    bpy.context.preferences.addons["atomic_data_manager"].preferences.last_support_me_popup = time
 
 
 # Copies the values of Atomic's preferences to the variables in config.py for global use
@@ -66,7 +67,8 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     )
 
     last_support_me_popup: bpy.props.FloatProperty(
-        default=0
+        default=0,
+        update=copy_prefs_to_config
     )
 
     # CG Cookie Add-on Updater Properties
@@ -111,6 +113,7 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
         col.prop(self, "enable_support_me_popup", text="Show \"Support Me\" Popup")
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
+        col.prop(self, "last_support_me_popup")
 
         separator = layout.separator()  # extra space
 
