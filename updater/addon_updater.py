@@ -441,8 +441,8 @@ class Singleton_updater(object):
 	def verbose(self, value):
 		try:
 			self._verbose = bool(value)
-			if self._verbose == True:
-				print(self._addon+" updater verbose is enabled")
+			# if self._verbose == True:
+			# 	print(self._addon+" updater verbose is enabled")
 		except:
 			raise ValueError("Verbose must be a boolean value")
 
@@ -1427,9 +1427,9 @@ class Singleton_updater(object):
 		if os.path.isfile(jpath):
 			with open(jpath) as data_file:
 				self._json = json.load(data_file)
-				if self._verbose:
-					print("{} Updater: Read in JSON settings from file".format(
-						self._addon))
+				# if self._verbose:
+				# 	print("{} Updater: Read in JSON settings from file".format(
+				# 		self._addon))
 		else:
 			# set data structure
 			self._json = {

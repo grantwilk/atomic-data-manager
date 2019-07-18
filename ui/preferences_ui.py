@@ -112,8 +112,6 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         col.prop(self, "enable_support_me_popup", text="Show \"Support Me\" Popup")
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
 
-        print(self.last_support_me_popup)
-
         separator = layout.separator()  # extra space
 
         addon_updater_ops.update_settings_ui(self, context)
