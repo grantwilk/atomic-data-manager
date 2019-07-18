@@ -23,10 +23,22 @@ from atomic_data_manager.updater import addon_updater_ops
 from atomic_data_manager import config
 
 
+def update_preferences(self, context):
+    preferences = bpy.context.preferences
+    atomic_prefs = preferences.addons.get("atomic_data_manager").preferences
+
+    atomic_prefs.ignore_fake_users = config.ignore_fake_users
+
+
+
+
 # Updates Atomic variables in config.py for global use
 def update_config(self, context):
-    config.enable_missing_file_warning = self.enable_missing_file_warning
-    config.ignore_fake_users = self.ignore_fake_users
+    preferences = bpy.context.preferences
+    atomic_prefs = preferences.addons.get("atomic_data_manager").preferences
+
+    config.enable_missing_file_warning = atomic_prefs.enable_missing_file_warning
+    config.ignore_fake_users = atomic_prefs.ignore_fake_users
 
 
 class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
@@ -98,11 +110,7 @@ def register():
         register_class(cls)
 
     # Make sure global preferences are updated on registration
-    preferences = bpy.context.preferences
-    addon_prefs = preferences.addons.get("atomic_data_manager").preferences
-
-    config.enable_missing_file_warning = addon_prefs.enable_missing_file_warning
-    config.ignore_fake_users = addon_prefs.ignore_fake_users
+    update_config()
 
 
 def unregister():
