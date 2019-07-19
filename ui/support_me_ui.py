@@ -69,11 +69,11 @@ class ATOMIC_OT_support_me_popup(bpy.types.Operator):
         separator = layout.separator()
 
         row = layout.row()
-        row.scale_y = 2
-        row.operator("atomic.support_me_web", text="Support Remington Creative", icon="FUND")
+        row.prop(self, "stop_showing_support_popup", text="Never Show Again")
 
         row = layout.row()
-        row.prop(self, "stop_showing_support_popup", text="Never Show Again")
+        row.scale_y = 2
+        row.operator("atomic.support_me_web", text="Support Remington Creative", icon="FUND")
 
     def execute(self, context):
         return {'FINISHED'}
