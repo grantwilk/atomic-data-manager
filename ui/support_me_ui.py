@@ -25,6 +25,12 @@ from atomic_data_manager import config
 from atomic_data_manager.ui import preferences_ui
 
 
+# Returns the current day since the start of the computer clock
+def get_current_day():
+    seconds_per_day = 86400
+    return int(time.time() / seconds_per_day)
+
+
 # Copy the inverse of the local stop_showing_support_popup to Atomic's preferences for enable_support_me_popup
 def update_enable_show_support_me_popup(self, context):
     preferences_ui.set_enable_support_me_popup(not self.stop_showing_support_popup)
@@ -32,12 +38,13 @@ def update_enable_show_support_me_popup(self, context):
 # Show the support me popup if config's enable_support_me_popup is true
 @persistent
 def show_support_me_popup(dummy=None):
-    current_time = int(str(int(time.time()))[:-6])
-    support_me_interval = 259200  # 3 days in seconds
-    next_time = config.last_support_me_popup + support_me_interval
+    popup_interval = 5  # days
 
-    if config.enable_support_me_popup and current_time > next_time:
-        preferences_ui.set_last_support_me_popup(current_time)
+    current_day = get_current_day()
+    next_day = config.last_popup_day + popup_interval
+
+    if config.enable_support_me_popup and current_day >= next_day:
+        preferences_ui.set_last_popup_day(current_day)
         bpy.ops.atomic.show_support_me('INVOKE_DEFAULT')
 
 
@@ -57,16 +64,16 @@ class ATOMIC_OT_support_me_popup(bpy.types.Operator):
         layout = self.layout
 
         col = layout.column(align=True)
-        col.label(text="Please consider supporting Remington Creative!")
+        col.label(text="Consider supporting our free software development!")
 
         separator = layout.separator()
 
         row = layout.row()
         row.scale_y = 2
-        row.operator("atomic.support_me_web", text="Support Me", icon="FUND")
+        row.operator("atomic.support_me_web", text="Support Remington Creative", icon="FUND")
 
         row = layout.row()
-        row.prop(self, "stop_showing_support_popup", text="Don't Show Me This")
+        row.prop(self, "stop_showing_support_popup", text="Never Show Again")
 
     def execute(self, context):
         return {'FINISHED'}
@@ -84,6 +91,10 @@ def register():
         register_class(cls)
 
     bpy.app.handlers.load_post.append(show_support_me_popup)
+
+    # Reset day counter if it equals zero of if it is in the future
+    if config.last_popup_day == 0 or config.last_popup_day > get_current_day():
+        preferences_ui.set_last_popup_day(get_current_day())
 
 
 def unregister():

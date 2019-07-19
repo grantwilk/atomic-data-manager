@@ -25,4 +25,4 @@ enable_missing_file_warning = True
 enable_support_me_popup = True
 ignore_fake_users = False
 
-last_support_me_popup = 0
+last_popup_day = 0

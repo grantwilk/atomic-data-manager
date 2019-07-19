@@ -28,9 +28,9 @@ def set_enable_support_me_popup(value):
     bpy.context.preferences.addons["atomic_data_manager"].preferences.enable_support_me_popup = value
 
 
-# Sets the value of the last_support_me_popup float property
-def set_last_support_me_popup(time):
-    bpy.context.preferences.addons["atomic_data_manager"].preferences.last_support_me_popup = time
+# Sets the value of the last_popup_day float property
+def set_last_popup_day(day):
+    bpy.context.preferences.addons["atomic_data_manager"].preferences.last_popup_day = day
 
 
 # Copies the values of Atomic's preferences to the variables in config.py for global use
@@ -41,7 +41,7 @@ def copy_prefs_to_config(self, context):
     config.enable_missing_file_warning = atomic_preferences.enable_missing_file_warning
     config.enable_support_me_popup = atomic_preferences.enable_support_me_popup
     config.ignore_fake_users = atomic_preferences.ignore_fake_users
-    config.last_support_me_popup = atomic_preferences.last_support_me_popup
+    config.last_popup_day = atomic_preferences.last_popup_day
 
 
 class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
@@ -66,7 +66,7 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         update=copy_prefs_to_config
     )
 
-    last_support_me_popup: bpy.props.FloatProperty(
+    last_popup_day: bpy.props.FloatProperty(
         default=0,
         update=copy_prefs_to_config
     )
@@ -113,7 +113,7 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
         col.prop(self, "enable_support_me_popup", text="Show \"Support Me\" Popup")
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
-        col.prop(self, "last_support_me_popup")
+        col.prop(self, "last_popup_day")
 
         separator = layout.separator()  # extra space
 
