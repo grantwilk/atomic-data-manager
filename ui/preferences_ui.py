@@ -113,7 +113,6 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         col.prop(self, "enable_missing_file_warning", text="Show Missing File Warning", )
         col.prop(self, "enable_support_me_popup", text="Show \"Support Me\" Popup")
         col.prop(self, "ignore_fake_users", text="Ignore Fake Users")
-        col.prop(self, "last_popup_day")
 
         separator = layout.separator()  # extra space
 
