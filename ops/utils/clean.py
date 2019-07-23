@@ -18,58 +18,52 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import bpy
-from atomic_data_manager import config
-from atomic_data_manager.stats import stats
-
-
-def clean_data(data):
-    # removes all unused.py data-blocks from the indicated set of data
-    atom = bpy.context.scene.atomic
-    for key in data.keys():
-        if data[key].users == 0:
-            data.remove(data[key])
-        elif config.ignore_fake_users and data[key].users == 1 and data[key].use_fake_user:
-            data.remove(data[key])
+from atomic_data_manager.stats import unused
 
 
 def collections():
-    # removes all collections with no objects stored in them
-    for key in bpy.data.collections.keys():
-        if len(bpy.data.collections[key].all_objects.values()) == 0:
-            bpy.data.collections.remove(bpy.data.collections[key])
+    # removes all unused collections from the project
+    for collection_key in unused.collections():
+        bpy.data.collections.remove(bpy.data.collections[collection_key])
 
 
 def images():
-    # removes all unused.py images
-    clean_data(bpy.data.images)
+    # removes all unused images from the project
+    for image_key in unused.images():
+        bpy.data.images.remove(bpy.data.images[image_key])
 
 
 def lights():
-    # removes all unused.py lights
-    clean_data(bpy.data.lights)
+    # removes all unused lights from the project
+    for light_key in unused.lights():
+        bpy.data.lights.remove(bpy.data.lights[light_key])
 
 
 def materials():
-    # removes all unused.py materials
-    for material_key in stats.get_unused_materials():
-        bpy.data.materials.remove(bpy.data.materials[material_key])
+    # removes all unused materials from the project
+    for light_key in unused.materials():
+        bpy.data.materials.remove(bpy.data.materials[light_key])
 
 
 def node_groups():
-    # removes all unused.py node groups
-    clean_data(bpy.data.node_groups)
+    # removes all unused node groups from the project
+    for node_group_key in unused.node_groups():
+        bpy.data.node_groups.remove(bpy.data.node_groups[node_group_key])
 
 
 def particles():
-    # removes all unused.py particle systems
-    clean_data(bpy.data.particles)
+    # removes all unused particle systems from the project
+    for particle_key in unused.particles():
+        bpy.data.particles.remove(bpy.data.particles[particle_key])
 
 
 def textures():
-    # removes all unused.py textures
-    clean_data(bpy.data.textures)
+    # removes all unused textures from the project
+    for texture_key in unused.textures():
+        bpy.data.textures.remove(bpy.data.textures[texture_key])
 
 
 def worlds():
-    # removes all unused.py worlds
-    clean_data(bpy.data.worlds)
+    # removes all unused worlds from the project
+    for world_key in unused.worlds():
+        bpy.data.worlds.remove(bpy.data.worlds[world_key])
