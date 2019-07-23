@@ -21,7 +21,7 @@ import bpy
 from bpy.app.handlers import persistent
 from bpy.utils import register_class, unregister_class
 from atomic_data_manager import config
-from atomic_data_manager.ops.utils import missing
+from atomic_data_manager.stats import missing
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -44,8 +44,8 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = missing.get_images()
-        missing_libraries = missing.get_libraries()
+        missing_images = missing.images()
+        missing_libraries = missing.libraries()
 
         if missing_images or missing_libraries:
             row = layout.row()
@@ -106,7 +106,7 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    if config.enable_missing_file_warning and (missing.get_images() or missing.get_libraries()):
+    if config.enable_missing_file_warning and (missing.images() or missing.libraries()):
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
 

@@ -22,8 +22,7 @@ Contains functions that count quantities of various data-blocks.
 """
 
 import bpy
-from atomic_data_manager.ops.utils import unused
-from atomic_data_manager.ops.utils import unnamed
+from atomic_data_manager.stats import unused, unnamed
 
 
 def collections():

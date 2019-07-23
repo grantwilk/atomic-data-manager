@@ -31,11 +31,11 @@ def get_missing(data):
     return missing
 
 
-def get_images():
+def images():
     # returns a list of keys of images with a non-existent filepath
     return get_missing(bpy.data.images)
 
 
-def get_libraries():
+def libraries():
     # returns a list of keys of libraries with a non-existent filepath
     return get_missing(bpy.data.libraries)

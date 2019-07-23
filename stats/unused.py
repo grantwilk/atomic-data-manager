@@ -23,7 +23,7 @@ not have any users, as determined by atomic_data_manager.ops.utils.users.
 """
 
 import bpy
-from atomic_data_manager.ops.utils import users
+from atomic_data_manager.stats import users
 
 
 def collections():

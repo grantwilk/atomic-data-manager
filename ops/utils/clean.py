@@ -19,10 +19,11 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from atomic_data_manager import config
+from atomic_data_manager.stats import stats
 
 
 def clean_data(data):
-    # removes all unused data-blocks from the indicated set of data
+    # removes all unused.py data-blocks from the indicated set of data
     atom = bpy.context.scene.atomic
     for key in data.keys():
         if data[key].users == 0:
@@ -39,35 +40,36 @@ def collections():
 
 
 def images():
-    # removes all unused images
+    # removes all unused.py images
     clean_data(bpy.data.images)
 
 
 def lights():
-    # removes all unused lights
+    # removes all unused.py lights
     clean_data(bpy.data.lights)
 
 
 def materials():
-    # removes all unused materials
-    clean_data(bpy.data.materials)
+    # removes all unused.py materials
+    for material_key in stats.get_unused_materials():
+        bpy.data.materials.remove(bpy.data.materials[material_key])
 
 
 def node_groups():
-    # removes all unused node groups
+    # removes all unused.py node groups
     clean_data(bpy.data.node_groups)
 
 
 def particles():
-    # removes all unused particle systems
+    # removes all unused.py particle systems
     clean_data(bpy.data.particles)
 
 
 def textures():
-    # removes all unused textures
+    # removes all unused.py textures
     clean_data(bpy.data.textures)
 
 
 def worlds():
-    # removes all unused worlds
+    # removes all unused.py worlds
     clean_data(bpy.data.worlds)

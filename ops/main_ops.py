@@ -19,7 +19,8 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import clean, nuke, stats
+from atomic_data_manager.ops.utils import clean, nuke
+from atomic_data_manager.stats import stats
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -157,7 +158,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
 
 # Atomic Data Manager Clean Operator
 class ATOMIC_OT_clean(bpy.types.Operator):
-    """Remove all unused data-blocks from the selected categories"""
+    """Remove all unused.py data-blocks from the selected categories"""
     bl_idname = "atomic.clean"
     bl_label = "Clean"
 
@@ -300,7 +301,7 @@ class ATOMIC_OT_undo(bpy.types.Operator):
 
 # Atomic Data Manager Smart Select Operator
 class ATOMIC_OT_smart_select(bpy.types.Operator):
-    """Auto-select categories with unused data"""
+    """Auto-select categories with unused.py data"""
     bl_idname = "atomic.smart_select"
     bl_label = "Smart Select"
 

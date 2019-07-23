@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import missing
+from atomic_data_manager.stats import missing
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -31,11 +31,11 @@ class ATOMIC_OT_reload_missing(bpy.types.Operator):
 
     def execute(self, context):
         # reload images
-        for image_key in missing.get_images():
+        for image_key in missing.images():
             bpy.data.images[image_key].reload()
 
         # reload libraries
-        for lib_key in missing.get_libraries():
+        for lib_key in missing.libraries():
             bpy.data.libraries[lib_key].reload()
 
         # call reload report
@@ -51,8 +51,8 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = missing.get_images()
-        missing_libraries = missing.get_libraries()
+        missing_images = missing.images()
+        missing_libraries = missing.libraries()
 
         if missing_images or missing_libraries:
             row = layout.row()
@@ -101,7 +101,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
 
         ui_layouts.box_list(
             layout=layout,
-            items=missing.get_images(),
+            items=missing.images(),
             icon="IMAGE_DATA",
             columns=2
         )
@@ -109,7 +109,7 @@ class ATOMIC_OT_remove_missing(bpy.types.Operator):
         row = layout.row()  # extra space
 
     def execute(self, context):
-        for image_key in missing.get_images():
+        for image_key in missing.images():
             bpy.data.images.remove(bpy.data.images[image_key])
 
         return {'FINISHED'}

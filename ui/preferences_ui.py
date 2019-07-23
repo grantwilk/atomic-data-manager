@@ -61,7 +61,7 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     )
 
     ignore_fake_users: bpy.props.BoolProperty(
-        description="Let the clean tool remove unused data-blocks even if they have fake users",
+        description="Let the clean tool remove unused.py data-blocks even if they have fake users",
         default=False,
         update=copy_prefs_to_config
     )
