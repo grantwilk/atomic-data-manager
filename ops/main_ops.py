@@ -359,12 +359,14 @@ class ATOMIC_OT_deselect_all(bpy.types.Operator):
         return {'FINISHED'}
 
 
-reg_list = [ATOMIC_OT_nuke,
-            ATOMIC_OT_clean,
-            ATOMIC_OT_undo,
-            ATOMIC_OT_smart_select,
-            ATOMIC_OT_select_all,
-            ATOMIC_OT_deselect_all]
+reg_list = [
+    ATOMIC_OT_nuke,
+    ATOMIC_OT_clean,
+    ATOMIC_OT_undo,
+    ATOMIC_OT_smart_select,
+    ATOMIC_OT_select_all,
+    ATOMIC_OT_deselect_all
+]
 
 
 def register():
