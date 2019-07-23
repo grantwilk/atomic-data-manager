@@ -15,17 +15,28 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the direct use operators, intended to be used with
+Atomic's pie menu interface. However, they can be implemented anywhere
+if they need to be.
+
+These operators basically wrap the functions from ops.utils.nuke.py and
+ops.utils.clean.py into operators so they can be easily called by other
+intefaces in Blender.
+
 """
 
 import bpy
-from bpy.utils import register_class, unregister_class
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from atomic_data_manager.ui.utils import ui_layouts
 from atomic_data_manager.ops.utils import nuke
 from atomic_data_manager.ops.utils import clean
 from atomic_data_manager.stats import unused
 
 
-# <editor-fold desc="Full Nuke/Clean Direct-User Operators">
 # Atomic Data Manager Nuke All Operator
 class ATOMIC_OT_nuke_all(bpy.types.Operator):
     """Remove all data-blocks from the selected categories"""
@@ -216,10 +227,9 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
     def invoke(self, context, event):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
-# </editor-fold>
 
 
-# <editor-fold desc="Nuke Direct-Use Operators">
+# Atomic Data Manager Nuke Collections Operator
 class ATOMIC_OT_nuke_collections(bpy.types.Operator):
     """Remove all collections from this project"""
     bl_idname = "atomic.nuke_collections"
@@ -249,6 +259,7 @@ class ATOMIC_OT_nuke_collections(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Images Operator
 class ATOMIC_OT_nuke_images(bpy.types.Operator):
     """Remove all images from this project"""
     bl_idname = "atomic.nuke_images"
@@ -278,6 +289,7 @@ class ATOMIC_OT_nuke_images(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Lights Operator
 class ATOMIC_OT_nuke_lights(bpy.types.Operator):
     """Remove all lights from this project"""
     bl_idname = "atomic.nuke_lights"
@@ -307,6 +319,7 @@ class ATOMIC_OT_nuke_lights(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Materials Operator
 class ATOMIC_OT_nuke_materials(bpy.types.Operator):
     """Remove all materials from this project"""
     bl_idname = "atomic.nuke_materials"
@@ -336,6 +349,7 @@ class ATOMIC_OT_nuke_materials(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Node Groups Operator
 class ATOMIC_OT_nuke_node_groups(bpy.types.Operator):
     """Remove all node groups from this project"""
     bl_idname = "atomic.nuke_node_groups"
@@ -365,6 +379,7 @@ class ATOMIC_OT_nuke_node_groups(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Particles Operator
 class ATOMIC_OT_nuke_particles(bpy.types.Operator):
     """Remove all particle systems from this project"""
     bl_idname = "atomic.nuke_particles"
@@ -394,6 +409,7 @@ class ATOMIC_OT_nuke_particles(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Textures Operator
 class ATOMIC_OT_nuke_textures(bpy.types.Operator):
     """Remove all textures from this project"""
     bl_idname = "atomic.nuke_textures"
@@ -423,6 +439,7 @@ class ATOMIC_OT_nuke_textures(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Nuke Worlds Operator
 class ATOMIC_OT_nuke_worlds(bpy.types.Operator):
     """Remove all worlds from this project"""
     bl_idname = "atomic.nuke_worlds"
@@ -450,10 +467,9 @@ class ATOMIC_OT_nuke_worlds(bpy.types.Operator):
     def invoke(self, context, event):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
-# </editor-fold>
 
 
-# <editor-fold desc="Clean Direct-Use Operators">
+# Atomic Data Manager Clean Collections Operator
 class ATOMIC_OT_clean_collections(bpy.types.Operator):
     """Remove all unused.py collections from this project"""
     bl_idname = "atomic.clean_collections"
@@ -483,6 +499,7 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Clean Images Operator
 class ATOMIC_OT_clean_images(bpy.types.Operator):
     """Remove all unused.py images from this project"""
     bl_idname = "atomic.clean_images"
@@ -511,7 +528,7 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
-
+# Atomic Data Manager Clean Lights Operator
 class ATOMIC_OT_clean_lights(bpy.types.Operator):
     """Remove all unused.py lights from this project"""
     bl_idname = "atomic.clean_lights"
@@ -541,6 +558,7 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Clean Materials Operator
 class ATOMIC_OT_clean_materials(bpy.types.Operator):
     """Remove all unused.py materials from this project"""
     bl_idname = "atomic.clean_materials"
@@ -570,6 +588,7 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Clean Node Groups Operator
 class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
     """Remove all unused.py node groups from this project"""
     bl_idname = "atomic.clean_node_groups"
@@ -599,6 +618,7 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Clean Particles Operator
 class ATOMIC_OT_clean_particles(bpy.types.Operator):
     """Remove all unused.py particle systems from this project"""
     bl_idname = "atomic.clean_particles"
@@ -628,6 +648,7 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Clean Textures Operator
 class ATOMIC_OT_clean_textures(bpy.types.Operator):
     """Remove all unused.py textures from this project"""
     bl_idname = "atomic.clean_textures"
@@ -657,6 +678,7 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
+# Atomic Data Manager Clean Worlds Operator
 class ATOMIC_OT_clean_worlds(bpy.types.Operator):
     """Remove all unused.py worlds from this project"""
     bl_idname = "atomic.clean_worlds"
@@ -684,29 +706,30 @@ class ATOMIC_OT_clean_worlds(bpy.types.Operator):
     def invoke(self, context, event):
         wm = context.window_manager
         return wm.invoke_props_dialog(self)
-# </editor-fold>
 
 
-reg_list = [ATOMIC_OT_nuke_all,
-            ATOMIC_OT_clean_all,
+reg_list = [
+    ATOMIC_OT_nuke_all,
+    ATOMIC_OT_clean_all,
 
-            ATOMIC_OT_nuke_collections,
-            ATOMIC_OT_nuke_images,
-            ATOMIC_OT_nuke_lights,
-            ATOMIC_OT_nuke_materials,
-            ATOMIC_OT_nuke_node_groups,
-            ATOMIC_OT_nuke_particles,
-            ATOMIC_OT_nuke_textures,
-            ATOMIC_OT_nuke_worlds,
+    ATOMIC_OT_nuke_collections,
+    ATOMIC_OT_nuke_images,
+    ATOMIC_OT_nuke_lights,
+    ATOMIC_OT_nuke_materials,
+    ATOMIC_OT_nuke_node_groups,
+    ATOMIC_OT_nuke_particles,
+    ATOMIC_OT_nuke_textures,
+    ATOMIC_OT_nuke_worlds,
 
-            ATOMIC_OT_clean_collections,
-            ATOMIC_OT_clean_images,
-            ATOMIC_OT_clean_lights,
-            ATOMIC_OT_clean_materials,
-            ATOMIC_OT_clean_node_groups,
-            ATOMIC_OT_clean_particles,
-            ATOMIC_OT_clean_textures,
-            ATOMIC_OT_clean_worlds]
+    ATOMIC_OT_clean_collections,
+    ATOMIC_OT_clean_images,
+    ATOMIC_OT_clean_lights,
+    ATOMIC_OT_clean_materials,
+    ATOMIC_OT_clean_node_groups,
+    ATOMIC_OT_clean_particles,
+    ATOMIC_OT_clean_textures,
+    ATOMIC_OT_clean_worlds
+]
 
 
 def register():

@@ -15,12 +15,20 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the operators used in the inspection UI's header.
+This includes the rename, replace, toggle fake user, delete, and duplicate
+operators.
+
 """
 
 import bpy
-from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import duplicate
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from atomic_data_manager.ops.utils import delete
+from atomic_data_manager.ops.utils import duplicate
 
 
 # Atomic Data Manager Inspection Rename Operator
@@ -82,6 +90,7 @@ class ATOMIC_OT_inspection_rename(bpy.types.Operator):
         return wm.invoke_props_dialog(self, width=200)
 
 
+# Atomic Data Manager Inspection Replaces Operator
 class ATOMIC_OT_inspection_replace(bpy.types.Operator):
     """Replace all instances of this data-block with another data-block"""
     bl_idname = "atomic.replace"
@@ -95,50 +104,112 @@ class ATOMIC_OT_inspection_replace(bpy.types.Operator):
         row = layout.row()
 
         if inspection == 'IMAGES':
-            row.prop_search(atom, "replace_field", bpy.data, "images", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "images",
+                text=""
+            )
+
         if inspection == 'LIGHTS':
-            row.prop_search(atom, "replace_field", bpy.data, "lights", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "lights",
+                text=""
+            )
+
         if inspection == 'MATERIALS':
-            row.prop_search(atom, "replace_field", bpy.data, "materials", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "materials",
+                text=""
+            )
+
         if inspection == 'NODE_GROUPS':
-            row.prop_search(atom, "replace_field", bpy.data, "node_groups", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "node_groups",
+                text=""
+            )
+
         if inspection == 'PARTICLES':
-            row.prop_search(atom, "replace_field", bpy.data, "particles", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "particles",
+                text=""
+            )
+
         if inspection == 'TEXTURES':
-            row.prop_search(atom, "replace_field", bpy.data, "textures", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "textures",
+                text=""
+            )
+
         if inspection == 'WORLDS':
-            row.prop_search(atom, "replace_field", bpy.data, "worlds", text="")
+            row.prop_search(
+                atom,
+                "replace_field",
+                bpy.data,
+                "worlds",
+                text=""
+            )
 
     def execute(self, context):
         atom = bpy.context.scene.atomic
         inspection = atom.active_inspection
 
-        if inspection == 'IMAGES' and atom.replace_field in bpy.data.images.keys():
-            bpy.data.images[atom.images_field].user_remap(bpy.data.images[atom.replace_field])
+        if inspection == 'IMAGES' and \
+                atom.replace_field in bpy.data.images.keys():
+            bpy.data.images[atom.images_field].user_remap(
+                bpy.data.images[atom.replace_field])
             atom.images_field = atom.replace_field
 
-        if inspection == 'LIGHTS' and atom.replace_field in bpy.data.lights.keys():
-            bpy.data.lights[atom.lights_field].user_remap(bpy.data.lights[atom.replace_field])
+        if inspection == 'LIGHTS' and \
+                atom.replace_field in bpy.data.lights.keys():
+            bpy.data.lights[atom.lights_field].user_remap(
+                bpy.data.lights[atom.replace_field])
             atom.lights_field = atom.replace_field
 
-        if inspection == 'MATERIALS' and atom.replace_field in bpy.data.materials.keys():
-            bpy.data.materials[atom.materials_field].user_remap(bpy.data.materials[atom.replace_field])
+        if inspection == 'MATERIALS' and \
+                atom.replace_field in bpy.data.materials.keys():
+            bpy.data.materials[atom.materials_field].user_remap(
+                bpy.data.materials[atom.replace_field])
             atom.materials_field = atom.replace_field
 
-        if inspection == 'NODE_GROUPS' and atom.replace_field in bpy.data.node_groups.keys():
-            bpy.data.node_groups[atom.node_groups_field].user_remap(bpy.data.node_groups[atom.replace_field])
+        if inspection == 'NODE_GROUPS' and \
+                atom.replace_field in bpy.data.node_groups.keys():
+            bpy.data.node_groups[atom.node_groups_field].user_remap(
+                bpy.data.node_groups[atom.replace_field])
             atom.node_groups_field = atom.replace_field
 
-        if inspection == 'PARTICLES' and atom.replace_field in bpy.data.particles.keys():
-            bpy.data.particles[atom.particles_field].user_remap(bpy.data.particles[atom.replace_field])
+        if inspection == 'PARTICLES' and \
+                atom.replace_field in bpy.data.particles.keys():
+            bpy.data.particles[atom.particles_field].user_remap(
+                bpy.data.particles[atom.replace_field])
             atom.particles_field = atom.replace_field
 
-        if inspection == 'TEXTURES' and atom.replace_field in bpy.data.textures.keys():
-            bpy.data.textures[atom.textures_field].user_remap(bpy.data.textures[atom.replace_field])
+        if inspection == 'TEXTURES' and \
+                atom.replace_field in bpy.data.textures.keys():
+            bpy.data.textures[atom.textures_field].user_remap(
+                bpy.data.textures[atom.replace_field])
             atom.textures_field = atom.replace_field
 
-        if inspection == 'WORLDS' and atom.replace_field in bpy.data.worlds.keys():
-            bpy.data.worlds[atom.worlds_field].user_remap(bpy.data.worlds[atom.replace_field])
+        if inspection == 'WORLDS' and \
+                atom.replace_field in bpy.data.worlds.keys():
+            bpy.data.worlds[atom.worlds_field].user_remap(
+                bpy.data.worlds[atom.replace_field])
             atom.worlds_field = atom.replace_field
 
         atom.replace_field = ""
@@ -161,22 +232,33 @@ class ATOMIC_OT_inspection_toggle_fake_user(bpy.types.Operator):
 
         if inspection == 'IMAGES':
             image = bpy.data.images[atom.images_field]
-            bpy.data.images[atom.images_field].use_fake_user = not image.use_fake_user
+            bpy.data.images[atom.images_field].use_fake_user = \
+                not image.use_fake_user
+
         if inspection == 'LIGHTS':
             light = bpy.data.lights[atom.lights_field]
-            bpy.data.lights[atom.lights_field].use_fake_user = not light.use_fake_user
+            bpy.data.lights[atom.lights_field].use_fake_user = \
+                not light.use_fake_user
+
         if inspection == 'MATERIALS':
             material = bpy.data.materials[atom.materials_field]
-            bpy.data.materials[atom.materials_field].use_fake_user = not material.use_fake_user
+            bpy.data.materials[atom.materials_field].use_fake_user = \
+                not material.use_fake_user
+
         if inspection == 'NODE_GROUPS':
             node_group = bpy.data.node_groups[atom.node_groups_field]
-            bpy.data.node_groups[atom.node_groups_field].use_fake_user = not node_group.use_fake_user
+            bpy.data.node_groups[atom.node_groups_field].use_fake_user = \
+                not node_group.use_fake_user
+
         if inspection == 'TEXTURES':
             texture = bpy.data.textures[atom.textures_field]
-            bpy.data.textures[atom.textures_field].use_fake_user = not texture.use_fake_user
+            bpy.data.textures[atom.textures_field].use_fake_user = \
+                not texture.use_fake_user
+
         if inspection == 'WORLDS':
             world = bpy.data.worlds[atom.worlds_field]
-            bpy.data.worlds[atom.worlds_field].use_fake_user = not world.use_fake_user
+            bpy.data.worlds[atom.worlds_field].use_fake_user = \
+                not world.use_fake_user
 
         return {'FINISHED'}
 
@@ -334,11 +416,13 @@ class ATOMIC_OT_inspection_delete(bpy.types.Operator):
         return {'FINISHED'}
 
 
-reg_list = [ATOMIC_OT_inspection_rename,
-            ATOMIC_OT_inspection_replace,
-            ATOMIC_OT_inspection_toggle_fake_user,
-            ATOMIC_OT_inspection_duplicate,
-            ATOMIC_OT_inspection_delete]
+reg_list = [
+    ATOMIC_OT_inspection_rename,
+    ATOMIC_OT_inspection_replace,
+    ATOMIC_OT_inspection_toggle_fake_user,
+    ATOMIC_OT_inspection_duplicate,
+    ATOMIC_OT_inspection_delete
+]
 
 
 def register():

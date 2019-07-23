@@ -15,10 +15,21 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file handles the registration of the atomic_data_manager.ui package
+
 """
 
-from atomic_data_manager.ui import \
-    main_panel_ui, stats_panel_ui, inspect_ui, missing_file_ui, pie_menu_ui, preferences_ui, support_me_ui
+from atomic_data_manager.ui import main_panel_ui
+from atomic_data_manager.ui import stats_panel_ui
+from atomic_data_manager.ui import inspect_ui
+from atomic_data_manager.ui import missing_file_ui
+from atomic_data_manager.ui import missing_file_ui
+from atomic_data_manager.ui import pie_menu_ui
+from atomic_data_manager.ui import preferences_ui
+from atomic_data_manager.ui import support_me_ui
 
 
 def register():

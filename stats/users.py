@@ -27,6 +27,7 @@ is the users of that type.
 
 e.g. If you were searching for all of the places where an image is used in
 a material would be searching for the image_materials() function.
+
 """
 
 import bpy
@@ -47,7 +48,9 @@ def collection_all(collection_key):
 
 
 def collection_cameras(collection_key):
-    # recursively returns a list of camera object keys that are in the collection and its child collections
+    # recursively returns a list of camera object keys that are in the
+    # collection and its child collections
+
     users = []
     collection = bpy.data.collections[collection_key]
 
@@ -67,7 +70,9 @@ def collection_cameras(collection_key):
 
 
 def collection_children(collection_key):
-    # returns a list of child collection keys that are in the collection  and its child collections
+    # returns a list of child collection keys that are in the collection
+    # and its child collections
+
     users = []
     collection = bpy.data.collections[collection_key]
 
@@ -83,7 +88,8 @@ def collection_children(collection_key):
 
 
 def collection_lights(collection_key):
-    # returns a list of light object keys that are in the collection indicated by collection_key
+    # returns a list of light object keys that are in the collection
+
     users = []
     collection = bpy.data.collections[collection_key]
 
@@ -103,7 +109,8 @@ def collection_lights(collection_key):
 
 
 def collection_meshes(collection_key):
-    # returns a list of mesh object keys that are in the collection indicated by collection_key
+    # returns a list of mesh object keys that are in the collection
+
     users = []
     collection = bpy.data.collections[collection_key]
 
@@ -123,8 +130,9 @@ def collection_meshes(collection_key):
 
 
 def collection_others(collection_key):
-    # returns a list of other object keys that are in the collection indicated by collection_key
-    # excludes cameras, lights, and meshes
+    # returns a list of other object keys that are in the collection
+    # NOTE: excludes cameras, lights, and meshes
+
     users = []
     collection = bpy.data.collections[collection_key]
 
@@ -160,7 +168,8 @@ def image_all(image_key):
 
 
 def image_materials(image_key):
-    # returns a list of material keys that use the image indicated by image_key
+    # returns a list of material keys that use the image
+
     users = []
 
     # node types that can have images
@@ -182,14 +191,16 @@ def image_materials(image_key):
 
                 # if image in node in node group in node tree
                 elif node.type == 'GROUP':
-                    if node.node_tree and node.node_tree.name in node_groups:
+                    if node.node_tree and \
+                            node.node_tree.name in node_groups:
                         users.append(mat.name)
 
     return distinct(users)
 
 
 def image_node_groups(image_key):
-    # recursively returns a list of node group keys that use the image indicated by image_key
+    # recursively returns a list of node group keys that use the image
+
     users = []
     image = bpy.data.images[image_key]
 
@@ -213,7 +224,8 @@ def image_node_groups(image_key):
 
 
 def image_textures(image_key):
-    # returns a list of texture keys that use the image indicated by image_key
+    # returns a list of texture keys that use the image
+
     users = []
     image = bpy.data.images[image_key]
 
@@ -245,7 +257,8 @@ def image_textures(image_key):
 
 
 def image_worlds(image_key):
-    # returns a list of world keys that use the image indicated by image_key
+    # returns a list of world keys that use the image
+
     users = []
     image = bpy.data.images[image_key]
 
@@ -273,11 +286,13 @@ def image_worlds(image_key):
 
 def light_all(light_key):
     # returns a list of keys of every data-block that uses this light
+
     return light_objects(light_key)
 
 
 def light_objects(light_key):
-    # returns a list of light object keys that use the light data specified by light_key
+    # returns a list of light object keys that use the light data
+
     users = []
     light = bpy.data.lights[light_key]
 
@@ -291,11 +306,13 @@ def light_objects(light_key):
 
 def material_all(material_key):
     # returns a list of keys of every data-block that uses this material
+
     return material_objects(material_key)
 
 
 def material_objects(material_key):
-    # returns a list of object keys that use the material data specified by material_key
+    # returns a list of object keys that use this material
+
     users = []
     material = bpy.data.materials[material_key]
 
@@ -313,7 +330,7 @@ def material_objects(material_key):
 
 
 def node_group_all(node_group_key):
-    # returns a list of keys of every data-block that uses this node_group
+    # returns a list of keys of every data-block that uses this node group
 
     users = [
         node_group_materials(node_group_key),
@@ -326,7 +343,9 @@ def node_group_all(node_group_key):
 
 
 def node_group_materials(node_group_key):
-    # returns a list of material keys that use the node group specified by node_group_key in their node trees
+    # returns a list of material keys that use the node group in their
+    # node trees
+
     users = []
     node_group = bpy.data.node_groups[node_group_key]
 
@@ -354,7 +373,9 @@ def node_group_materials(node_group_key):
 
 
 def node_group_node_groups(node_group_key):
-    # recursively returns a list of node group keys that use the node group specified by node_group_key
+    # recursively returns a list of node group keys that use this node
+    # group
+
     users = []
     this_node_group = bpy.data.node_groups[node_group_key]
 
@@ -377,6 +398,9 @@ def node_group_node_groups(node_group_key):
 
 
 def node_group_textures(node_group_key):
+    # returns a list of texture keys that use this node group in their
+    # node trees
+
     users = []
     node_group = bpy.data.node_groups[node_group_key]
 
@@ -404,7 +428,9 @@ def node_group_textures(node_group_key):
 
 
 def node_group_worlds(node_group_key):
-    # returns a list of world keys that use the node group specified by node_group_key in their node trees
+    # returns a list of world keys that use the node group in their node
+    # trees
+
     users = []
     node_group = bpy.data.node_groups[node_group_key]
 
@@ -424,7 +450,8 @@ def node_group_worlds(node_group_key):
                     if node.node_tree.name == node_group.name:
                         users.append(world.name)
 
-                    # if this node is one of the node groups that use our node group
+                    # if this node is one of the node groups that use
+                    # our node group
                     elif node.node_tree.name in node_group_users:
                         users.append(world.name)
 
@@ -432,12 +459,15 @@ def node_group_worlds(node_group_key):
 
 
 def particle_all(particle_key):
-    # returns a list of keys of every data-block that uses this particle system
+    # returns a list of keys of every data-block that uses this particle
+    # system
+
     return particle_objects(particle_key)
 
 
 def particle_objects(particle_key):
-    # returns a list of object keys that use the particle system indicted by particle_key
+    # returns a list of object keys that use the particle system
+
     users = []
     particle_system = bpy.data.particles[particle_key]
 
@@ -467,7 +497,8 @@ def texture_all(texture_key):
 
 
 def texture_brushes(texture_key):
-    # returns a list of brush keys that use the texture indicted by texture_key
+    # returns a list of brush keys that use the texture
+
     users = []
     texture = bpy.data.textures[texture_key]
 
@@ -484,7 +515,9 @@ def texture_brushes(texture_key):
 
 
 def texture_objects(texture_key):
-    # returns a list of object keys that use the texture indicted by texture_key in one of their modifiers
+    # returns a list of object keys that use the texture in one of their
+    # modifiers
+
     users = []
     texture = bpy.data.textures[texture_key]
 
@@ -518,7 +551,9 @@ def texture_objects(texture_key):
 
 
 def texture_particles(texture_key):
-    # returns a list of particle system keys that use the texture indicted by texture_key in their texture slots
+    # returns a list of particle system keys that use the texture in
+    # their texture slots
+
     users = []
     texture = bpy.data.particles[texture_key]
 
@@ -539,4 +574,5 @@ def texture_particles(texture_key):
 
 def distinct(seq):
     # returns a list of distinct elements
+
     return list(set(seq))

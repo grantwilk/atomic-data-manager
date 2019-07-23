@@ -15,9 +15,18 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file handles the registration of the atomic_data_manager.ops package
+
 """
 
-from atomic_data_manager.ops import main_ops, inspect_ops, direct_use_ops, missing_file_ops, support_me_ops
+from atomic_data_manager.ops import main_ops
+from atomic_data_manager.ops import inspect_ops
+from atomic_data_manager.ops import direct_use_ops
+from atomic_data_manager.ops import missing_file_ops
+from atomic_data_manager.ops import support_me_ops
 
 
 def register():

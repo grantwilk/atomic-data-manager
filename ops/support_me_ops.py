@@ -15,16 +15,26 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+
+---
+
+This file contains the operator for opening the Remington Creative
+support page in the web browser.
+
+
 """
 
 import bpy
 import webbrowser
-from bpy.utils import register_class, unregister_class
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 
 
-class ATOMIC_OT_support_me_web(bpy.types.Operator):
+# Atomic Data Manager Open Support Me Operator
+class ATOMIC_OT_open_support_me(bpy.types.Operator):
     """Opens the Remington Creative \"Support Me\" webpage"""
-    bl_idname = "atomic.support_me_web"
+    bl_idname = "atomic.open_support_me"
     bl_label = "Support Me"
 
     def execute(self, context):
@@ -32,7 +42,7 @@ class ATOMIC_OT_support_me_web(bpy.types.Operator):
         return {'FINISHED'}
 
 
-reg_list = [ATOMIC_OT_support_me_web]
+reg_list = [ATOMIC_OT_open_support_me]
 
 
 def register():

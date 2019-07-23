@@ -15,12 +15,20 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains Atomic's global properties and handles the
+registration for all packages within the add-on.
+
 """
 
 
 import bpy
-from bpy.utils import register_class, unregister_class
-from atomic_data_manager import ui, ops
+from bpy.utils import register_class
+from bpy.utils import unregister_class
+from atomic_data_manager import ops
+from atomic_data_manager import ui
 from atomic_data_manager.updater import addon_updater_ops
 
 bl_info = {
@@ -31,14 +39,16 @@ bl_info = {
     "location": "Properties > Scene",
     "category": "Remington Creative",
     "description": "An Intelligent Data Manager for Blender.",
-    "wiki_url": "https://remingtoncreative.com/software/blender/atomic",
-    "tracker_url": "https://github.com/grantwilk/atomic-data-manager/issues"
+    "wiki_url":
+        "https://remingtoncreative.com/software/blender/atomic",
+    "tracker_url":
+        "https://github.com/grantwilk/atomic-data-manager/issues"
 }
 
 
 # Atomic Data Manager Properties
 class ATOMIC_PG_main(bpy.types.PropertyGroup):
-    # Main Panel Toggle Buttons
+    # main panel toggle buttons
     collections: bpy.props.BoolProperty(default=False)
     images: bpy.props.BoolProperty(default=False)
     lights: bpy.props.BoolProperty(default=False)
@@ -48,7 +58,7 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     textures: bpy.props.BoolProperty(default=False)
     worlds: bpy.props.BoolProperty(default=False)
 
-    # Inspect Datablock Search Fields
+    # inspect data-block search fields
     collections_field: bpy.props.StringProperty()
     images_field: bpy.props.StringProperty()
     lights_field: bpy.props.StringProperty()
@@ -58,38 +68,134 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     textures_field: bpy.props.StringProperty()
     worlds_field: bpy.props.StringProperty()
 
-    # Other Properties
+    # enum for the inspection mode that is currently active
     active_inspection: bpy.props.EnumProperty(
         items=[
-            ('COLLECTIONS', 'Collections', 'Collections'),
-            ('IMAGES', 'Images', 'Images'),
-            ('LIGHTS', 'Lights', 'Lights'),
-            ('MATERIALS', 'Materials', 'Materials'),
-            ('NODE_GROUPS', 'Node Groups', 'Node Groups'),
-            ('PARTICLES', 'Particles', 'Particles'),
-            ('TEXTURES', 'Textures', 'Textures'),
-            ('WORLDS', 'Worlds', 'Worlds')
+            (
+                'COLLECTIONS',
+                'Collections',
+                'Collections'
+            ),
+            (
+                'IMAGES',
+                'Images',
+                'Images'
+            ),
+            (
+                'LIGHTS',
+                'Lights',
+                'Lights'
+            ),
+            (
+                'MATERIALS',
+                'Materials',
+                'Materials'
+            ),
+            (
+                'NODE_GROUPS',
+                'Node Groups',
+                'Node Groups'
+            ),
+            (
+                'PARTICLES',
+                'Particles',
+                'Particles'
+            ),
+            (
+                'TEXTURES',
+                'Textures',
+                'Textures'
+            ),
+            (
+                'WORLDS',
+                'Worlds',
+                'Worlds'
+            )
         ],
         default='COLLECTIONS'
     )
 
+    # enum for the type of data being shown in the stats panel
     stats_mode: bpy.props.EnumProperty(
         items=[
-            ('OVERVIEW', 'Overview', 'Overview', 'FILE', 0),
-            ('COLLECTIONS', 'Collections', 'Collections', 'GROUP', 1),
-            ('IMAGES', 'Images', 'Images', 'IMAGE_DATA', 2),
-            ('LIGHTS', 'Lights', 'Lights', 'LIGHT', 3),
-            ('MATERIALS', 'Materials', 'Materials', 'MATERIAL', 4),
-            ('OBJECTS', 'Objects', 'Objects', 'OBJECT_DATA', 5),
-            ('NODE_GROUPS', 'Node Groups', 'Node Groups', 'NODETREE', 6),
-            ('PARTICLES', 'Particle Systems', 'Particle Systems', 'PARTICLES', 7),
-            ('TEXTURES', 'Textures', 'Textures', 'TEXTURE', 8),
-            ('WORLDS', 'Worlds', 'Worlds', 'WORLD', 9)
+            (
+                'OVERVIEW',  # identifier
+                'Overview',  # title
+                'Overview',  # description
+                'FILE',      # icon
+                0            # number / id
+            ),
+            (
+                'COLLECTIONS',
+                'Collections',
+                'Collections',
+                'GROUP',
+                1
+            ),
+            (
+                'IMAGES',
+                'Images',
+                'Images',
+                'IMAGE_DATA',
+                2
+            ),
+            (
+                'LIGHTS',
+                'Lights',
+                'Lights',
+                'LIGHT',
+                3
+            ),
+            (
+                'MATERIALS',
+                'Materials',
+                'Materials',
+                'MATERIAL',
+                4
+            ),
+            (
+                'OBJECTS',
+                'Objects',
+                'Objects',
+                'OBJECT_DATA',
+                5
+            ),
+            (
+                'NODE_GROUPS',
+                'Node Groups',
+                'Node Groups',
+                'NODETREE',
+                6
+            ),
+            (
+                'PARTICLES',
+                'Particle Systems',
+                'Particle Systems',
+                'PARTICLES',
+                7
+            ),
+            (
+                'TEXTURES',
+                'Textures',
+                'Textures',
+                'TEXTURE',
+                8
+            ),
+            (
+                'WORLDS',
+                'Worlds',
+                'Worlds',
+                'WORLD',
+                9
+             )
         ],
         default='OVERVIEW'
     )
 
+    # text field for the inspect rename operator
     rename_field: bpy.props.StringProperty()
+
+    # search field for the inspect replace operator
     replace_field: bpy.props.StringProperty()
 
 

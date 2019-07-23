@@ -15,21 +15,28 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the user interface for Atomic's statistics subpanel.
+
+The statistics panel is nested in the main Atomic Data Manager panel. This
+panel contains statistics about the Blender file and each data category in
+it.
+
 """
 
 import bpy
-from bpy.utils import register_class, unregister_class
-from atomic_data_manager.stats import stats
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from atomic_data_manager.stats import count
+from atomic_data_manager.stats import misc
 from atomic_data_manager.ui.utils import ui_layouts
 
 
 # Atomic Data Manager Statistics SubPanel
 class ATOMIC_PT_stats_panel(bpy.types.Panel):
-    """
-    The statistics panel is nested in the main Atomic Data Manager panel.
-    This panel contains statistics about the file and each data set in the Blender file.
-    """
+    """The Atomic Data Manager \"Stats for Nerds\" panel"""
     bl_idname = "ATOMIC_PT_stats_panel"
     bl_label = "Stats for Nerds"
     bl_space_type = "PROPERTIES"
@@ -40,190 +47,360 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
         layout = self.layout
         atom = bpy.context.scene.atomic
 
+        # categories selector / header
         row = layout.row()
         row.label(text="Categories:")
         row.prop(atom, "stats_mode", expand=True, icon_only=True)
 
+        # statistics box
         box = layout.box()
 
-        # UI Implementation
-        # OVERVIEW
+        # overview statistics
         if atom.stats_mode == 'OVERVIEW':
+
+            # category header label
             row = box.row()
             row.label(text="Overview", icon='FILE')
 
-            # BLEND FILE SIZE STATISTIC
+            # blender project file size statistic
             row = box.row()
-            row.label(text="Blend File Size:     " + stats.blend_size())
+            row.label(text="Blend File Size:     " + misc.blend_size())
 
             # DATA SET STATISTICS
             split = box.split()
 
-            # LEFT COLUMN
+            # left column
             col = split.column()
+
+            # left column category labels
             col.label(text="Collections")
             col.label(text="Lights")
             col.label(text="Node Groups")
             col.label(text="Textures")
 
             col = split.column()
-            col.label(
-                text=ui_layouts.number_suffix(str(count.collections()), count.unused_collections()))
-            col.label(
-                text=ui_layouts.number_suffix(str(count.lights()), count.unused_lights()))
-            col.label(
-                text=ui_layouts.number_suffix(str(count.node_groups()), count.unused_node_groups()))
-            col.label(
-                text=ui_layouts.number_suffix(str(count.textures()), count.unused_textures()))
 
-            # RIGHT COLUMN
+            # collection count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.collections()),
+                    count.unused_collections()
+                )
+            )
+
+            # light count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.lights()),
+                    count.unused_lights()
+                )
+            )
+
+            # node group count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.node_groups()),
+                    count.unused_node_groups()
+                )
+            )
+
+            # texture count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.textures()),
+                    count.unused_textures()
+                )
+            )
+
+            # right column
             col = split.column()
+
+            # right column category labels
             col.label(text="Images")
             col.label(text="Materials")
             col.label(text="Particles")
             col.label(text="Worlds")
 
             col = split.column()
-            col.label(
-                text=ui_layouts.number_suffix(str(count.images()), count.unused_images()))
-            col.label(
-                text=ui_layouts.number_suffix(str(count.materials()), count.unused_materials()))
-            col.label(
-                text=ui_layouts.number_suffix(str(count.particles()), count.unused_particles()))
-            col.label(
-                text=ui_layouts.number_suffix(str(count.worlds()), count.unused_worlds()))
 
-        # COLLECTIONS
+            # image count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.images()),
+                    count.unused_images()
+                )
+            )
+
+            # material count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.materials()),
+                    count.unused_materials()
+                )
+            )
+
+            # particle system count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.particles()),
+                    count.unused_particles()
+                )
+            )
+
+            # world count
+            col.label(
+                text=ui_layouts.number_suffix(
+                    str(count.worlds()),
+                    count.unused_worlds()
+                )
+            )
+
+        # collection statistics
         elif atom.stats_mode == 'COLLECTIONS':
+
+            # category header label
             row = box.row()
             row.label(text="Collections", icon='GROUP')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.collections()))
-            # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.collections())
+            )
+
+            # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_collections()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_collections()))
 
-        # IMAGES
+            col.label(
+                text="Unused: {0}".format(count.unused_collections())
+            )
+
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_collections())
+            )
+
+        # image statistics
         elif atom.stats_mode == 'IMAGES':
+
+            # category header label
             row = box.row()
             row.label(text="Images", icon='IMAGE_DATA')
 
             split = box.split()
 
+            # total and missing count
             col = split.column()
-            col.label(text="Total: {0}".format(count.images()))
-            col.label(text="Missing: {0}".format(count.missing_images()))
 
+            col.label(
+                text="Total: {0}".format(count.images())
+            )
+
+            col.label(
+                text="Missing: {0}".format(count.missing_images())
+            )
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_images()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_images()))
 
-        # LIGHTS
+            col.label(
+                text="Unused: {0}".format(count.unused_images())
+            )
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_images())
+            )
+
+        # light statistics
         elif atom.stats_mode == 'LIGHTS':
             row = box.row()
             row.label(text="Lights", icon='LIGHT')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.lights()))
-            # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.lights())
+            )
+
+            # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_lights()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_lights()))
 
-        # MATERIALS
+            col.label(
+                text="Unused: {0}".format(count.unused_lights())
+            )
+
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_lights())
+            )
+
+        # material statistics
         elif atom.stats_mode == 'MATERIALS':
+
+            # category header label
             row = box.row()
             row.label(text="Materials", icon='MATERIAL')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.materials()))
-            # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.materials())
+            )
+
+            # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_materials()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_materials()))
 
-        # OBJECTS
+            col.label(
+                text="Unused: {0}".format(count.unused_materials())
+            )
+
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_materials())
+            )
+
+        # object statistics
         elif atom.stats_mode == 'OBJECTS':
+
+            # category header label
             row = box.row()
             row.label(text="Objects", icon='OBJECT_DATA')
 
+            # total count
             split = box.split()
             col = split.column()
-            col.label(text="Total: {0}".format(count.objects()))
 
+            col.label(
+                text="Total: {0}".format(count.objects())
+            )
+
+            # unnamed count
             col = split.column()
-            col.label(text="Unnamed: {0}".format(count.unnamed_objects()))
 
-        # NODE GROUPS
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_objects())
+            )
+
+        # node group statistics
         elif atom.stats_mode == 'NODE_GROUPS':
+
+            # category header label
             row = box.row()
             row.label(text="Node Groups", icon='NODETREE')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.node_groups()))
-            # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.node_groups())
+            )
+
+            # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_node_groups()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_node_groups()))
+            col.label(
+                text="Unused: {0}".format(count.unused_node_groups())
+            )
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_node_groups())
+            )
 
-        # PARTICLES
+        # particle statistics
         elif atom.stats_mode == 'PARTICLES':
+
+            # category header label
             row = box.row()
             row.label(text="Particle Systems", icon='PARTICLES')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.particles()))
-            # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.particles())
+            )
+
+            # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_particles()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_particles()))
 
-        # TEXTURES
+            col.label(
+                text="Unused: {0}".format(count.unused_particles())
+            )
+
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_particles())
+            )
+
+        # texture statistics
         elif atom.stats_mode == 'TEXTURES':
             row = box.row()
             row.label(text="Textures", icon='TEXTURE')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.textures()))
-            # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.textures())
+            )
+
+            # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_textures()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_textures()))
 
-        # WORLDS
+            col.label(
+                text="Unused: {0}".format(count.unused_textures())
+            )
+
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_textures())
+            )
+
+        # world statistics
         elif atom.stats_mode == 'WORLDS':
             row = box.row()
             row.label(text="Worlds", icon='WORLD')
 
             split = box.split()
 
+            # total and placeholder count
             col = split.column()
-            col.label(text="Total: {0}".format(count.worlds()))
-            # # col.label(text="Placeholder")  # todo
 
+            col.label(
+                text="Total: {0}".format(count.worlds())
+            )
+
+            # # col.label(text="Placeholder")  # TODO: remove placeholder
+
+            # unused and unnamed count
             col = split.column()
-            col.label(text="Unused: {0}".format(count.unused_worlds()))
-            col.label(text="Unnamed: {0}".format(count.unnamed_worlds()))
+
+            col.label(
+                text="Unused: {0}".format(count.unused_worlds())
+            )
+
+            col.label(
+                text="Unnamed: {0}".format(count.unnamed_worlds())
+            )
 
 
 reg_list = [ATOMIC_PT_stats_panel]

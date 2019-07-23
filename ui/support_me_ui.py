@@ -15,29 +15,41 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the user interface and some helper functions for the
+support Remington Creative popup.
+
 """
 
 import bpy
 import time
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from bpy.app.handlers import persistent
-from bpy.utils import register_class, unregister_class
 from atomic_data_manager import config
 from atomic_data_manager.ui import preferences_ui
 
 
-# Returns the current day since the start of the computer clock
 def get_current_day():
+    # returns the current day since the start of the computer clock
     seconds_per_day = 86400
     return int(time.time() / seconds_per_day)
 
 
-# Copy the inverse of the local stop_showing_support_popup to Atomic's preferences for enable_support_me_popup
 def update_enable_show_support_me_popup(self, context):
-    preferences_ui.set_enable_support_me_popup(not self.stop_showing_support_popup)
+    # copy the inverse of the stop show support popup property to Atomic's
+    # enable support me popup preference
+    preferences_ui.set_enable_support_me_popup(
+        not self.stop_showing_support_popup)
 
-# Show the support me popup if config's enable_support_me_popup is true
+
 @persistent
 def show_support_me_popup(dummy=None):
+    # shows the support me popup if the 5 day interval has expired and the
+    # enable support me popup preference is enabled
+
     popup_interval = 5  # days
 
     current_day = get_current_day()
@@ -48,7 +60,7 @@ def show_support_me_popup(dummy=None):
         bpy.ops.atomic.show_support_me('INVOKE_DEFAULT')
 
 
-# Atomic Data Manager Support Me Popup
+# Atomic Data Manager Support Me Popup Operator
 class ATOMIC_OT_support_me_popup(bpy.types.Operator):
     """Displays the Atomic \"Support Me\" popup"""
     bl_idname = "atomic.show_support_me"
@@ -63,17 +75,28 @@ class ATOMIC_OT_support_me_popup(bpy.types.Operator):
     def draw(self, context):
         layout = self.layout
 
+        # call to action label
         col = layout.column(align=True)
-        col.label(text="Consider supporting our free software development!")
+        col.label(
+            text="Consider supporting our free software development!"
+        )
 
-        separator = layout.separator()
+        separator = layout.separator()  # extra space
 
+        # never show again toggle
         row = layout.row()
-        row.prop(self, "stop_showing_support_popup", text="Never Show Again")
+        row.prop(
+            self, "stop_showing_support_popup", text="Never Show Again"
+        )
 
+        # support remington creative button
         row = layout.row()
         row.scale_y = 2
-        row.operator("atomic.support_me_web", text="Support Remington Creative", icon="FUND")
+        row.operator(
+            "atomic.open_support_me",
+            text="Support Remington Creative",
+            icon="FUND"
+        )
 
     def execute(self, context):
         return {'FINISHED'}
@@ -92,8 +115,9 @@ def register():
 
     bpy.app.handlers.load_post.append(show_support_me_popup)
 
-    # Reset day counter if it equals zero of if it is in the future
-    if config.last_popup_day == 0 or config.last_popup_day > get_current_day():
+    # reset day counter if it equals zero of if it is in the future
+    if config.last_popup_day == 0 \
+            or config.last_popup_day > get_current_day():
         preferences_ui.set_last_popup_day(get_current_day())
 
 

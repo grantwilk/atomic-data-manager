@@ -15,6 +15,12 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains functions for removing all data-blocks from specified
+data categories.
+
 """
 
 import bpy
@@ -27,40 +33,40 @@ def nuke_data(data):
 
 
 def collections():
-    # removes all collections
+    # removes all collections from the project
     nuke_data(bpy.data.collections)
 
 
 def images():
-    # removes all images
+    # removes all images from the project
     nuke_data(bpy.data.images)
 
 
 def lights():
-    # removes all lights
+    # removes all lights from the project
     nuke_data(bpy.data.lights)
 
 
 def materials():
-    # removes all materials
+    # removes all materials from the project
     nuke_data(bpy.data.materials)
 
 
 def node_groups():
-    # removes all node groups
+    # removes all node groups from the project
     nuke_data(bpy.data.node_groups)
 
 
 def particles():
-    # removes all particle systems
+    # removes all particle systems from the project
     nuke_data(bpy.data.particles)
 
 
 def textures():
-    # removes all textures
+    # removes all textures from the project
     nuke_data(bpy.data.textures)
 
 
 def worlds():
-    # removes all worlds
+    # removes all worlds from the project
     nuke_data(bpy.data.worlds)

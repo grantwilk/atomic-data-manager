@@ -15,6 +15,12 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains functions for deleting individual data-blocks from
+Atomic's inspection inteface.
+
 """
 
 import bpy
@@ -53,25 +59,6 @@ def node_group(key):
 def particle(key):
     # removes a specific particle system
     delete_datablock(bpy.data.particles, key)
-
-    # code that might not delete the object when it deletes particles
-    # ... but blender doesn't let it to work >:(
-    """
-    users = blendusers.particles_objects(key)
-    active_object = bpy.context.view_layer.objects.active
-
-    for obj_key in users:
-        index = bpy.data.objects[obj_key].particle_systems.find(key)
-
-        # select the object
-        bpy.ops.object.select_all(action='DESELECT')
-        bpy.data.objects[1].select_set(True)
-        bpy.context.view_layer.objects.active = bpy.data.objects[obj_key]
-
-        if index != -1:
-            bpy.data.objects[obj_key].particle_systems.active_index = index
-            bpy.ops.object.particle_system_remove()
-    """
 
 
 def texture(key):

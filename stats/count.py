@@ -18,7 +18,8 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 ---
 
-Contains functions that count quantities of various data-blocks.
+This file contains functions that count quantities of various sets of data.
+
 """
 
 import bpy
@@ -29,134 +30,161 @@ from atomic_data_manager.stats import missing
 
 def collections():
     # returns the number of collections in the project
+
     return len(bpy.data.collections)
 
 
 def unused_collections():
     # returns the number of unused collections in the project
+
     return len(unused.collections())
 
 
 def unnamed_collections():
     # returns the number of unnamed collections in the project
+
     return len(unnamed.collections())
 
 
 def images():
     # returns the number of images in the project
+
     return len(bpy.data.images)
 
 
 def unused_images():
     # returns the number of unused images in the project
+
     return len(unused.images())
 
 
 def unnamed_images():
     # returns the number of unnamed images in the project
+
     return len(unnamed.images())
 
 
 def missing_images():
     # returns the number of missing images in the project
+
     return len(missing.images())
 
 
 def lights():
     # returns the number of lights in the project
+
     return len(bpy.data.lights)
 
 
 def unused_lights():
     # returns the number of unused lights in the project
+
     return len(unused.lights())
 
 
 def unnamed_lights():
     # returns the number of unnamed lights in the project
+
     return len(unnamed.lights())
 
 
 def materials():
     # returns the number of materials in the project
+
     return len(bpy.data.materials)
 
 
 def unused_materials():
     # returns the number of unused materials in the project
+
     return len(unused.materials())
 
 
 def unnamed_materials():
     # returns the number of unnamed materials in the project
+
     return len(unnamed.materials())
 
 
 def node_groups():
     # returns the number of node groups in the project
+
     return len(bpy.data.node_groups)
 
 
 def unused_node_groups():
     # returns the number of unused node groups in the project
+
     return len(unused.node_groups())
 
 
 def unnamed_node_groups():
     # returns the number of unnamed node groups in the project
+
     return len(unnamed.node_groups())
 
 
 def objects():
     # returns the number of objects in the project
+
     return len(bpy.data.objects)
 
 
 def unnamed_objects():
     # returns the number of unnamed objects in the project
+
     return len(unnamed.objects())
 
 
 def particles():
     # returns the number of particles in the project
+
     return len(bpy.data.particles)
 
 
 def unused_particles():
     # returns the number of unused particles in the project
+
     return len(unused.particles())
 
 
 def unnamed_particles():
     # returns the number of unnamed particle systems in the project
+
     return len(unnamed.particles())
 
 
 def textures():
     # returns the number of textures in the project
+
     return len(bpy.data.textures)
 
 
 def unused_textures():
     # returns the number of unused textures in the project
+
     return len(unused.textures())
 
 
 def unnamed_textures():
     # returns the number of unnamed textures in the project
+
     return len(unnamed.textures())
 
 
 def worlds():
     # returns the number of worlds in the project
+
     return len(bpy.data.worlds)
 
 
 def unused_worlds():
     # returns the number of unused worlds in the project
+
     return len(unused.worlds())
 
 
 def unnamed_worlds():
     # returns the number of unnamed worlds in the project
+
     return len(unnamed.worlds())

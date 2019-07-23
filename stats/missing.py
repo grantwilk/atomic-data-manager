@@ -15,6 +15,12 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains functions that detect missing files in the Blender
+project.
+
 """
 
 import bpy
@@ -22,10 +28,12 @@ import os
 
 
 def get_missing(data):
-    # returns a list of keys of non-packed datablocks with a non-existent filepath
+    # returns a list of keys of non-packed datablocks with non-existent
+    # filepaths
     missing = []
     for datablock in data:
-        if datablock.filepath and not os.path.isfile(datablock.filepath) and not datablock.packed_files.keys():
+        if datablock.filepath and not os.path.isfile(datablock.filepath) \
+                and not datablock.packed_files.keys():
             missing.append(datablock.name)
 
     return missing

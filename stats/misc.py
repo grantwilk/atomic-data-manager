@@ -15,16 +15,23 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains miscellaneous statistics functions.
+
 """
 
 import bpy
 import os
 
 
-# <editor-fold desc="Size Functions">
-def to_file_size(size_bytes):
-    # returns the number of bytes converted to the appropriate size rounded to one decimal with a unit suffix
-    # e.g. size_bytes = 1024 will return "1 KB"
+def blend_size():
+    # returns the size of the current Blender file as a string
+
+    filepath = bpy.data.filepath
+    size_bytes = os.stat(filepath).st_size if filepath != '' else -1
+
     kilobyte = 1024  # bytes
     megabyte = 1048576  # bytes
     gigabyte = 1073741824  # bytes
@@ -41,12 +48,3 @@ def to_file_size(size_bytes):
         size_scaled = "No Data!"
 
     return size_scaled
-
-
-def blend_size():
-    # returns the size of the current Blender file in scaled units as a string
-    blend_filepath = bpy.data.filepath
-    blend_bytesize = os.stat(blend_filepath).st_size if blend_filepath != '' else -1
-    blend_filesize = to_file_size(blend_bytesize)
-
-    return blend_filesize

@@ -15,15 +15,21 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the inspection user interface.
+
 """
 
 import bpy
-from bpy.utils import register_class, unregister_class
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from atomic_data_manager.stats import users
 from atomic_data_manager.ui.utils import ui_layouts
 
 
-# COLLECTIONS
+# Atomic Data Manager Inspect Collections UI Operator
 class ATOMIC_OT_inspect_collections(bpy.types.Operator):
     """Inspect Collections"""
     bl_idname = "atomic.inspect_collections"
@@ -33,17 +39,21 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         collections = bpy.data.collections
-        collections_field = atom.collections_field if atom.collections_field in collections.keys() else ""
+        collections_field = atom.collections_field \
+            if atom.collections_field in collections.keys() else ""
 
-        # Inspect Collections Header
+        # inspect collections box list
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="collections_field",
             data="collections"
         )
 
-        # Mesh Section
-        meshes = sorted(users.collection_meshes(collections_field)) if collections_field != "" else []
+        # mesh box list
+        meshes = sorted(
+            users.collection_meshes(collections_field)) \
+            if collections_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Meshes",
@@ -51,8 +61,11 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
             icon="OUTLINER_OB_MESH"
         )
 
-        # Light Section
-        lights = sorted(users.collection_lights(collections_field)) if collections_field != "" else []
+        # light box list
+        lights = sorted(
+            users.collection_lights(collections_field)) \
+            if collections_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Lights",
@@ -60,8 +73,11 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
             icon="OUTLINER_OB_LIGHT"
         )
 
-        # Camera Section
-        cameras = sorted(users.collection_cameras(collections_field)) if collections_field != "" else []
+        # camera box list
+        cameras = sorted(
+            users.collection_cameras(collections_field)) \
+            if collections_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Cameras",
@@ -69,16 +85,22 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
             icon="OUTLINER_OB_CAMERA"
         )
 
-        # Others Section
-        others = sorted(users.collection_others(collections_field)) if collections_field != "" else []
+        # other objects box list
+        others = sorted(
+            users.collection_others(collections_field)) \
+            if collections_field != "" else []
+
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Other",
             items=others
         )
 
-        # Child Collections Section
-        children = sorted(users.collection_children(collections_field)) if collections_field != "" else []
+        # child collections box list
+        children = sorted(
+            users.collection_children(collections_field)) \
+            if collections_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Child Collections",
@@ -98,7 +120,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# IMAGES
+# Atomic Data Manager Inspect Images UI Operator
 class ATOMIC_OT_inspect_images(bpy.types.Operator):
     """Inspect Images"""
     bl_idname = "atomic.inspect_images"
@@ -108,17 +130,21 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         images = bpy.data.images
-        images_field = atom.images_field if atom.images_field in images.keys() else ""
+        images_field = atom.images_field \
+            if atom.images_field in images.keys() else ""
 
-        # Inspect Images Header
+        # inspect images header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="images_field",
             data="images"
         )
 
-        # Materials Box List
-        materials = sorted(users.image_materials(images_field)) if images_field != "" else []
+        # materials box list
+        materials = sorted(
+            users.image_materials(images_field)) \
+            if images_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Materials",
@@ -126,8 +152,11 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
             icon="MATERIAL"
         )
 
-        # Node Groups Box List
-        materials = sorted(users.image_node_groups(images_field)) if images_field != "" else []
+        # node groups box list
+        materials = sorted(
+            users.image_node_groups(images_field)) \
+            if images_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Node Groups",
@@ -135,8 +164,11 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
             icon="NODETREE"
         )
 
-        # Textures Box List
-        textures = sorted(users.image_textures(images_field)) if images_field != "" else []
+        # textures box list
+        textures = sorted(
+            users.image_textures(images_field)) \
+            if images_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Textures",
@@ -144,8 +176,11 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
             icon="TEXTURE"
         )
 
-        # Worlds Box List
-        worlds = sorted(users.image_worlds(images_field)) if images_field != "" else []
+        # worlds box list
+        worlds = sorted(
+            users.image_worlds(images_field)) \
+            if images_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Worlds",
@@ -165,7 +200,7 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# LIGHTS
+# Atomic Data Manager Inspect Lights UI Operator
 class ATOMIC_OT_inspect_lights(bpy.types.Operator):
     """Inspect Lights"""
     bl_idname = "atomic.inspect_lights"
@@ -175,17 +210,21 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         lights = bpy.data.lights
-        lights_field = atom.lights_field if atom.lights_field in lights.keys() else ""
+        lights_field = atom.lights_field \
+            if atom.lights_field in lights.keys() else ""
 
-        # Inspect Lights Header
+        # inspect lights header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="lights_field",
             data="lights"
         )
 
-        # Light Objects Box List
-        lights = sorted(users.light_objects(lights_field)) if lights_field != "" else []
+        # light objects box list
+        lights = sorted(
+            users.light_objects(lights_field)) \
+            if lights_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Light Objects",
@@ -205,7 +244,7 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# MATERIALS
+# Atomic Data Manager Inspect Materials UI Operator
 class ATOMIC_OT_inspect_materials(bpy.types.Operator):
     """Inspect Materials"""
     bl_idname = "atomic.inspect_materials"
@@ -215,17 +254,21 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         materials = bpy.data.materials
-        materials_field = atom.materials_field if atom.materials_field in materials.keys() else ""
+        materials_field = atom.materials_field \
+            if atom.materials_field in materials.keys() else ""
 
-        # Inspect Materials Header
+        # inspect materials header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="materials_field",
             data="materials"
         )
 
-        # Objects Box List
-        objects = sorted(users.material_objects(materials_field)) if materials_field != "" else []
+        # objects box list
+        objects = sorted(
+            users.material_objects(materials_field)) \
+            if materials_field != "" else []
+
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
@@ -244,7 +287,7 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# NODE GROUPS
+# Atomic Data Manager Inspect Node Groups UI Operator
 class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
     """Inspect Node Groups"""
     bl_idname = "atomic.inspect_node_groups"
@@ -254,18 +297,21 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         node_groups = bpy.data.node_groups
-        node_groups_field = atom.node_groups_field if atom.node_groups_field in node_groups.keys() else ""
+        node_groups_field = atom.node_groups_field \
+            if atom.node_groups_field in node_groups.keys() else ""
 
-        # Inspect Node Groups Header
+        # inspect node groups header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="node_groups_field",
             data="node_groups"
         )
 
-        # Materials Box List
-        materials = sorted(users.node_group_materials(node_groups_field)) \
+        # materials box list
+        materials = sorted(
+            users.node_group_materials(node_groups_field)) \
             if node_groups_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Materials",
@@ -273,9 +319,11 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
             icon="MATERIAL"
         )
 
-        # Node Groups Box List
-        node_groups = sorted(users.node_group_node_groups(node_groups_field)) \
+        # node groups box list
+        node_groups = sorted(
+            users.node_group_node_groups(node_groups_field)) \
             if node_groups_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Node Groups",
@@ -283,9 +331,11 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
             icon="NODETREE"
         )
 
-        # World Box List
-        worlds = sorted(users.node_group_worlds(node_groups_field)) \
+        # world box list
+        worlds = sorted(
+            users.node_group_worlds(node_groups_field)) \
             if node_groups_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Worlds",
@@ -305,7 +355,7 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# PARTICLES
+# Atomic Data Manager Inspect Particles UI Operator
 class ATOMIC_OT_inspect_particles(bpy.types.Operator):
     """Inspect Particle Systems"""
     bl_idname = "atomic.inspect_particles"
@@ -315,17 +365,21 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         particles = bpy.data.particles
-        particles_field = atom.particles_field if atom.particles_field in particles.keys() else ""
+        particles_field = atom.particles_field \
+            if atom.particles_field in particles.keys() else ""
 
-        # Inspect Particles Header
+        # inspect particles header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="particles_field",
             data="particles"
         )
 
-        # Objects Box List
-        objects = sorted(users.particle_objects(particles_field)) if particles_field != "" else []
+        # objects box list
+        objects = sorted(
+            users.particle_objects(particles_field)) \
+            if particles_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Objects",
@@ -345,7 +399,7 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# TEXTURES
+# Atomic Data Manager Inspect Textures UI Operator
 class ATOMIC_OT_inspect_textures(bpy.types.Operator):
     """Inspect Textures"""
     bl_idname = "atomic.inspect_textures"
@@ -355,17 +409,21 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         layout = self.layout
         atom = bpy.context.scene.atomic
         textures = bpy.data.textures
-        textures_field = atom.textures_field if atom.textures_field in textures.keys() else ""
+        textures_field = atom.textures_field \
+            if atom.textures_field in textures.keys() else ""
 
-        # Inspect Textures Header
+        # inspect textures header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="textures_field",
             data="textures"
         )
 
-        # Brushes Box List
-        brushes = sorted(users.texture_brushes(textures_field)) if textures_field != "" else []
+        # brushes box list
+        brushes = sorted(
+            users.texture_brushes(textures_field)) \
+            if textures_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Brushes",
@@ -373,8 +431,11 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
             icon="BRUSH_DATA"
         )
 
-        # Particles Box List
-        particles = sorted(users.texture_particles(textures_field)) if textures_field != "" else []
+        # particles box list
+        particles = sorted(
+            users.texture_particles(textures_field)) \
+            if textures_field != "" else []
+
         ui_layouts.box_list(
             layout=layout,
             title="Particles",
@@ -382,8 +443,11 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
             icon="PARTICLES"
         )
 
-        # Objects Box List
-        objects = sorted(users.texture_objects(textures_field)) if textures_field != "" else []
+        # objects box list
+        objects = sorted(
+            users.texture_objects(textures_field)) \
+            if textures_field != "" else []
+
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
@@ -402,7 +466,7 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-# WORLDS
+# Atomic Data Manager Inspect Worlds UI Operator
 class ATOMIC_OT_inspect_worlds(bpy.types.Operator):
     """Inspect Worlds"""
     bl_idname = "atomic.inspect_worlds"
@@ -411,14 +475,14 @@ class ATOMIC_OT_inspect_worlds(bpy.types.Operator):
     def draw(self, context):
         layout = self.layout
 
-        # Inspect Worlds Header
+        # inspect worlds header
         ui_layouts.inspect_header(
             layout=layout,
             atom_prop="worlds_field",
             data="worlds"
         )
 
-        # Worlds Box List
+        # worlds box list
         ui_layouts.box_list(
             layout=layout,
             title="Worlds in Scene",

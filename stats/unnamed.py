@@ -20,6 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 This file contains functions that detect unnamed data-blocks in the
 Blender project.
+
 """
 
 import bpy
@@ -31,7 +32,8 @@ def collections():
     unnamed = []
 
     for collection in bpy.data.collections:
-        if re.match(r'.*\.\d\d\d$', collection.name) or collection.name.startswith("Collection"):
+        if re.match(r'.*\.\d\d\d$', collection.name) or \
+                collection.name.startswith("Collection"):
             unnamed.append(collection.name)
 
     return unnamed
@@ -42,7 +44,8 @@ def images():
     unnamed = []
 
     for image in bpy.data.images:
-        if re.match(r'.*\.\d\d\d$', image.name) or image.name.startswith("Untitled"):
+        if re.match(r'.*\.\d\d\d$', image.name) or \
+                image.name.startswith("Untitled"):
             unnamed.append(image.name)
 
     return unnamed
@@ -53,7 +56,8 @@ def lights():
     unnamed = []
 
     for light in bpy.data.lights:
-        if re.match(r'.*\.\d\d\d$', light.name) or light.name.startswith("Light"):
+        if re.match(r'.*\.\d\d\d$', light.name) or \
+                light.name.startswith("Light"):
             unnamed.append(light.name)
 
     return unnamed
@@ -64,7 +68,8 @@ def materials():
     unnamed = []
 
     for material in bpy.data.lights:
-        if re.match(r'.*\.\d\d\d$', material.name) or material.name.startswith("Material"):
+        if re.match(r'.*\.\d\d\d$', material.name) or \
+                material.name.startswith("Material"):
             unnamed.append(material.name)
 
     return unnamed
@@ -73,16 +78,72 @@ def materials():
 def objects():
     # returns the keys of all unnamed materials in the project
 
-    # the default names of all objects by category
-    curve_names = ["BezierCircle", "BezierCurve", "NurbsCircle", "NurbsCurve", "NurbsPath"]
-    gpencil_names = ["GPencil", "Stroke"]
-    light_names = ["Area", "Light", "Point", "Spot", "Sun"]
-    lprobe_names = ["IrradianceVolume", "ReflectionCubemap", "ReflectionPlane"]
-    mesh_names = ["Circle", "Cone", "Cube", "Cylinder", "Grid", "Icosphere", "Plane", "Sphere", "Torus"]
-    misc_names = ["Mball", "Text", "Armature", "Lattice", "Empty", "Camera", "Speaker", "Field"]
-    nurbs_names = ["SurfCircle", "SurfCurve", "SurfPatch", "SurfTorus", "Surface"]
+    # the default names all curve objects
+    curve_names = [
+        "BezierCircle",
+        "BezierCurve",
+        "NurbsCircle",
+        "NurbsCurve",
+        "NurbsPath"
+    ]
 
-    # the default names of all objects, compiled into one list
+    # the default names of all grease pencil objects
+    gpencil_names = [
+        "GPencil",
+        "Stroke"
+    ]
+
+    # the default names of all light objects
+    light_names = [
+        "Area",
+        "Light",
+        "Point",
+        "Spot",
+        "Sun"
+    ]
+
+    # the default names of all light probe objects
+    lprobe_names = [
+        "IrradianceVolume",
+        "ReflectionCubemap",
+        "ReflectionPlane"
+    ]
+
+    # the default names of all mesh objects
+    mesh_names = [
+        "Circle",
+        "Cone",
+        "Cube",
+        "Cylinder",
+        "Grid",
+        "Icosphere",
+        "Plane",
+        "Sphere",
+        "Torus"
+    ]
+
+    # the default names of all miscellaneous objects
+    misc_names = [
+        "Mball",
+        "Text",
+        "Armature",
+        "Lattice",
+        "Empty",
+        "Camera",
+        "Speaker",
+        "Field"
+    ]
+
+    # the default names of all nurbs objects
+    nurbs_names = [
+        "SurfCircle",
+        "SurfCurve",
+        "SurfPatch",
+        "SurfTorus",
+        "Surface"
+    ]
+
+    # the default names of all objects compiled into one list
     default_obj_names = [
         curve_names,
         gpencil_names,
@@ -96,7 +157,8 @@ def objects():
     unnamed = []
 
     for obj in bpy.data.objects:
-        if re.match(r'.*\.\d\d\d$', obj.name) or obj.name.startswith(default_obj_names):
+        if re.match(r'.*\.\d\d\d$', obj.name) or \
+                obj.name.startswith(default_obj_names):
             unnamed.append(obj.name)
 
     return unnamed
@@ -107,7 +169,8 @@ def node_groups():
     unnamed = []
 
     for node_group in bpy.data.node_groups:
-        if re.match(r'.*\.\d\d\d$', node_group.name) or node_group.name.startswith("NodeGroup"):
+        if re.match(r'.*\.\d\d\d$', node_group.name) or \
+                node_group.name.startswith("NodeGroup"):
             unnamed.append(node_group.name)
 
     return unnamed
@@ -118,7 +181,8 @@ def particles():
     unnamed = []
 
     for particle in bpy.data.particles:
-        if re.match(r'.*\.\d\d\d$', particle.name) or particle.name.startswith("ParticleSettings"):
+        if re.match(r'.*\.\d\d\d$', particle.name) or \
+                particle.name.startswith("ParticleSettings"):
             unnamed.append(particle.name)
 
     return unnamed
@@ -129,7 +193,8 @@ def textures():
     unnamed = []
 
     for texture in bpy.data.textures:
-        if re.match(r'.*\.\d\d\d$', texture.name) or texture.name.startswith("Texture"):
+        if re.match(r'.*\.\d\d\d$', texture.name) or \
+                texture.name.startswith("Texture"):
             unnamed.append(texture.name)
 
     return unnamed
@@ -140,7 +205,8 @@ def worlds():
     unnamed = []
 
     for world in bpy.data.worlds:
-        if re.match(r'.*\.\d\d\d$', world.name) or world.name.startswith("World"):
+        if re.match(r'.*\.\d\d\d$', world.name) or \
+                world.name.startswith("World"):
             unnamed.append(world.name)
 
     return unnamed

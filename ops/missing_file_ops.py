@@ -15,6 +15,18 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains operations for missing file handling. This includes
+the option to reload, remove, replace, and search for these missing files.
+
+It also contains the post-reload report dialog that appears after
+attempting to reload missing project files.
+
+# TODO: implement missing file replace and search once Blender fixes the
+# TODO: bugs with the file chooser not opening from a dialog
+
 """
 
 import bpy
@@ -57,7 +69,9 @@ class ATOMIC_OT_reload_report(bpy.types.Operator):
 
         if missing_images or missing_libraries:
             row = layout.row()
-            row.label(text="Atomic was unable to reload the following files:")
+            row.label(
+                text="Atomic was unable to reload the following files:"
+            )
 
             if missing_images:
                 ui_layouts.box_list(

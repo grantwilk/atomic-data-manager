@@ -15,13 +15,21 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains global copies of Atomic's preferences so that they
+can be easily access throughout the add-on.
+
+NOTE:
+    Changing the values of the variables will NOT change the values in the
+    Atomic's preferences. If you want to change a setting, change it in
+    Blender, not in here.
+
 """
 
-# Atomic Data Manager Global Preferences
-# Do NOT edit these values!
-# Edit them in Blender's preferences instead
-
 enable_missing_file_warning = True
+enable_pie_menu_ui = True
 enable_support_me_popup = True
 ignore_fake_users = False
 

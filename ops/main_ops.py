@@ -15,6 +15,13 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the main operators found in the main panel of the
+Atomic Data Manager interface. This includes nuke, clean, undo, and the
+various selection operations.
+
 """
 
 import bpy
@@ -40,14 +47,15 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
         col.label(text="Remove the following data-blocks?")
 
         # No Data Section
-        if not (atom.collections or atom.images or atom.lights or atom.materials
-                or atom.node_groups or atom.particles or atom.textures or atom.worlds):
+        if not (atom.collections or atom.images or atom.lights or
+                atom.materials or atom.node_groups or atom.particles or
+                atom.textures or atom.worlds):
 
             ui_layouts.box_list(
                 layout=layout,
             )
 
-        # Collections Section
+        # display when the main panel collections property is toggled
         if atom.collections:
             collections = sorted(bpy.data.collections.keys())
             ui_layouts.box_list(
@@ -57,7 +65,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="OUTLINER_OB_GROUP_INSTANCE"
             )
 
-        # Images Section
+        # display when the main panel images property is toggled
         if atom.images:
             images = sorted(bpy.data.images.keys())
             ui_layouts.box_list(
@@ -67,7 +75,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="IMAGE_DATA"
             )
 
-        # Lights Section
+        # display when the main panel lights property is toggled
         if atom.lights:
             lights = sorted(bpy.data.lights.keys())
             ui_layouts.box_list(
@@ -77,7 +85,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="OUTLINER_OB_LIGHT"
             )
 
-        # Materials Section
+        # display when the main panel materials property is toggled
         if atom.materials:
             materials = sorted(bpy.data.materials.keys())
             ui_layouts.box_list(
@@ -87,7 +95,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="MATERIAL"
             )
 
-        # Node Group Section
+        # display when the main panel node groups property is toggled
         if atom.node_groups:
             node_groups = sorted(bpy.data.node_groups.keys())
             ui_layouts.box_list(
@@ -97,7 +105,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="NODETREE"
             )
 
-        # Particles Section
+        # display when the main panel particle systems property is toggled
         if atom.particles:
             particles = sorted(bpy.data.particles.keys())
             ui_layouts.box_list(
@@ -107,7 +115,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="PARTICLES"
             )
 
-        # Textures Section
+        # display when the main panel textures property is toggled
         if atom.textures:
             textures = sorted(bpy.data.textures.keys())
             ui_layouts.box_list(
@@ -117,7 +125,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
                 icon="TEXTURE"
             )
 
-        # Worlds Section
+        # display when the main panel worlds property is toggled
         if atom.worlds:
             worlds = sorted(bpy.data.worlds.keys())
             ui_layouts.box_list(
@@ -134,18 +142,25 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
 
         if atom.collections:
             nuke.collections()
+
         if atom.images:
             nuke.images()
+
         if atom.lights:
             nuke.lights()
+
         if atom.materials:
             nuke.materials()
+
         if atom.node_groups:
             nuke.node_groups()
+
         if atom.particles:
             nuke.particles()
+
         if atom.textures:
             nuke.textures()
+
         if atom.worlds:
             nuke.worlds()
 
@@ -171,15 +186,16 @@ class ATOMIC_OT_clean(bpy.types.Operator):
         col = layout.column()
         col.label(text="Remove the following data-blocks?")
 
-        # No Data Section
-        if not (atom.collections or atom.images or atom.lights or atom.materials
-                or atom.node_groups or atom.particles or atom.textures or atom.worlds):
+        # display if no main panel properties are toggled
+        if not (atom.collections or atom.images or atom.lights or
+                atom.materials or atom.node_groups or atom.particles
+                or atom.textures or atom.worlds):
 
             ui_layouts.box_list(
                 layout=layout,
             )
 
-        # Collections Section
+        # display when the main panel collections property is toggled
         if atom.collections:
             collections = sorted(unused.collections())
             ui_layouts.box_list(
@@ -189,7 +205,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="OUTLINER_OB_GROUP_INSTANCE"
             )
 
-        # Images Section
+        # display when the main panel images property is toggled
         if atom.images:
             images = sorted(unused.images())
             ui_layouts.box_list(
@@ -199,7 +215,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="IMAGE_DATA"
             )
 
-        # Lights Section
+        # display when the main panel lights property is toggled
         if atom.lights:
             lights = sorted(unused.lights())
             ui_layouts.box_list(
@@ -209,7 +225,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="OUTLINER_OB_LIGHT"
             )
 
-        # Materials Section
+        # display when the main panel materials property is toggled
         if atom.materials:
             materials = sorted(unused.materials())
             ui_layouts.box_list(
@@ -219,7 +235,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="MATERIAL"
             )
 
-        # Node Group Section
+        # display when the main panel node groups property is toggled
         if atom.node_groups:
             node_groups = sorted(unused.node_groups())
             ui_layouts.box_list(
@@ -229,7 +245,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="NODETREE"
             )
 
-        # Particles Section
+        # display when the main panel particle systems property is toggled
         if atom.particles:
             particles = sorted(unused.particles())
             ui_layouts.box_list(
@@ -239,7 +255,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="PARTICLES"
             )
 
-        # Textures Section
+        # display when the main panel textures property is toggled
         if atom.textures:
             textures = sorted(unused.textures())
             ui_layouts.box_list(
@@ -249,7 +265,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
                 icon="TEXTURE"
             )
 
-        # Worlds Section
+        # display when the main panel worlds property is toggled
         if atom.worlds:
             worlds = sorted(unused.worlds())
             ui_layouts.box_list(
@@ -308,16 +324,15 @@ class ATOMIC_OT_smart_select(bpy.types.Operator):
     bl_label = "Smart Select"
 
     def execute(self, context):
-        data = bpy.data
 
-        bpy.context.scene.atomic.collections = any(len(collection.all_objects.values()) == 0 for collection in data.collections)
-        bpy.context.scene.atomic.images = any(image.users == 0 for image in data.images)
-        bpy.context.scene.atomic.lights = any(lights.users == 0 for lights in data.lights)
-        bpy.context.scene.atomic.materials = any(material.users == 0 for material in data.materials)
-        bpy.context.scene.atomic.node_groups = any(node_group.users == 0 for node_group in data.node_groups)
-        bpy.context.scene.atomic.particles = any(particle.users == 0 for particle in data.particles)
-        bpy.context.scene.atomic.textures = any(texture.users == 0 for texture in data.textures)
-        bpy.context.scene.atomic.worlds = any(world.users == 0 for world in data.worlds)
+        bpy.context.scene.atomic.collections = any(unused.collections())
+        bpy.context.scene.atomic.images = any(unused.images())
+        bpy.context.scene.atomic.lights = any(unused.lights())
+        bpy.context.scene.atomic.materials = any(unused.materials())
+        bpy.context.scene.atomic.node_groups = any(unused.node_groups())
+        bpy.context.scene.atomic.particles = any(unused.particles())
+        bpy.context.scene.atomic.textures = any(unused.textures())
+        bpy.context.scene.atomic.worlds = any(unused.worlds())
 
         return {'FINISHED'}
 

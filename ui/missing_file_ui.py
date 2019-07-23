@@ -15,11 +15,18 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains the user interface for the missing file dialog that
+pops up when missing files are detected on file load.
+
 """
 
 import bpy
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from bpy.app.handlers import persistent
-from bpy.utils import register_class, unregister_class
 from atomic_data_manager import config
 from atomic_data_manager.stats import missing
 from atomic_data_manager.ui.utils import ui_layouts
@@ -31,13 +38,34 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
     bl_idname = "atomic.detect_missing"
     bl_label = "Missing File Detection"
 
+    # missing file recovery option enum property
     recovery_option: bpy.props.EnumProperty(
         items=[
-            ('IGNORE', 'Ignore Missing Files', 'Ignore the missing files and leave them offline'),
-            ('RELOAD', 'Reload Missing Files', 'Reload the missing files from their existing filepaths'),
-            ('REMOVE', 'Remove Missing Files', 'Remove the missing files from the project'),
-            ('SEARCH', 'Search for Missing Files (coming soon)', 'Search for the missing files in a directory'),
-            ('REPLACE', 'Specify Replacement Files (coming soon)', 'Replace missing files with new files'),
+            (
+                'IGNORE',
+                'Ignore Missing Files',
+                'Ignore the missing files and leave them offline'
+             ),
+            (
+                'RELOAD',
+                'Reload Missing Files',
+                'Reload the missing files from their existing file paths'
+            ),
+            (
+                'REMOVE',
+                'Remove Missing Files',
+                'Remove the missing files from the project'
+            ),
+            (
+                'SEARCH',
+                'Search for Missing Files (coming soon)',
+                'Search for the missing files in a directory'
+            ),
+            (
+                'REPLACE',
+                'Specify Replacement Files (coming soon)',
+                'Replace missing files with new files'
+            ),
             ],
         default='IGNORE'
     )
@@ -47,10 +75,17 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
         missing_images = missing.images()
         missing_libraries = missing.libraries()
 
+        # missing files interface if missing files are found
         if missing_images or missing_libraries:
-            row = layout.row()
-            row.label(text="Atomic has detected one or more missing files in your project!")
 
+            # header warning
+            row = layout.row()
+            row.label(
+                text="Atomic has detected one or more missing files in "
+                     "your project!"
+            )
+
+            # missing images box list
             if missing_images:
                 ui_layouts.box_list(
                     layout=layout,
@@ -60,6 +95,7 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
                     columns=3
                 )
 
+            # missing libraries box list
             if missing_libraries:
                 ui_layouts.box_list(
                     layout=layout,
@@ -71,16 +107,19 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
             row = layout.separator()  # extra space
 
+            # recovery option selection
             row = layout.row()
             row.label(text="What would you like to do?")
 
             row = layout.row()
             row.prop(self, 'recovery_option', text="")
 
+        # missing files interface if no missing files are found
         else:
             row = layout.row()
             row.label(text="No missing files were found!")
 
+            # empty box list
             ui_layouts.box_list(
                 layout=layout
             )
@@ -88,14 +127,24 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
         row = layout.separator()  # extra space
 
     def execute(self, context):
+
+        # ignore missing files will take no action
+
+        # reload missing files
         if self.recovery_option == 'RELOAD':
             bpy.ops.atomic.reload_missing('INVOKE_DEFAULT')
-        elif self.recovery_option == 'SEARCH':
-            bpy.ops.atomic.search_missing('INVOKE_DEFAULT')
-        elif self.recovery_option == 'REPLACE':
-            bpy.ops.atomic.replace_missing('INVOKE_DEFAULT')
+
+        # remove missing files
         elif self.recovery_option == 'REMOVE':
             bpy.ops.atomic.remove_missing('INVOKE_DEFAULT')
+
+            # search for missing files
+        elif self.recovery_option == 'SEARCH':
+            bpy.ops.atomic.search_missing('INVOKE_DEFAULT')
+
+            # replace missing files
+        elif self.recovery_option == 'REPLACE':
+            bpy.ops.atomic.replace_missing('INVOKE_DEFAULT')
 
         return {'FINISHED'}
 
@@ -106,7 +155,10 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
 @persistent
 def autodetect_missing_files(dummy=None):
-    if config.enable_missing_file_warning and (missing.images() or missing.libraries()):
+    # invokes the detect missing popup when missing files are detected upon
+    # loading a new Blender project
+    if config.enable_missing_file_warning and \
+            (missing.images() or missing.libraries()):
         bpy.ops.atomic.detect_missing('INVOKE_DEFAULT')
 
 
@@ -117,6 +169,7 @@ def register():
     for item in reg_list:
         register_class(item)
 
+    # run missing file auto-detection after loading a Blender file
     bpy.app.handlers.load_post.append(autodetect_missing_files)
 
 
@@ -124,4 +177,5 @@ def unregister():
     for item in reg_list:
         unregister_class(item)
 
+    # stop running missing file auto-detection after loading a Blender file
     bpy.app.handlers.load_post.remove(autodetect_missing_files)

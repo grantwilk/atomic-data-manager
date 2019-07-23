@@ -15,6 +15,12 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains functions for duplicating data-blocks from Atomic's
+inspection interface.
+
 """
 
 import bpy
@@ -26,7 +32,8 @@ def duplicate_data(data, key):
 
 
 def collection(key):
-    # creates of copy of the specified collection and links it to the scene collection
+    # creates of copy of the specified collection and places it under the
+    # scene collection
     collections = bpy.data.collections
     scene_collection = bpy.context.scene.collection
 
