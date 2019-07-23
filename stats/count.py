@@ -93,18 +93,28 @@ def unnamed_materials():
 
 
 def node_groups():
-    # returns the number of node_groups in the project
+    # returns the number of node groups in the project
     return len(bpy.data.node_groups)
 
 
 def unused_node_groups():
-    # returns the number of unused node_groups in the project
+    # returns the number of unused node groups in the project
     return len(unused.node_groups())
 
 
 def unnamed_node_groups():
     # returns the number of unnamed node groups in the project
     return len(unnamed.node_groups())
+
+
+def objects():
+    # returns the number of objects in the project
+    return len(bpy.data.objects)
+
+
+def unnamed_objects():
+    # returns the number of unnamed objects in the project
+    return len(unnamed.objects())
 
 
 def particles():
