@@ -19,7 +19,8 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.ops.utils import duplicate, delete
+from atomic_data_manager.ops.utils import duplicate
+from atomic_data_manager.ops.utils import delete
 
 
 # Atomic Data Manager Inspection Rename Operator
