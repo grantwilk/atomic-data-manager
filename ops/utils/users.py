@@ -15,6 +15,18 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
+
+---
+
+This file contains functions that return the keys of data-blocks that
+use other data-blocks.
+
+They are titled as such that the first part of the function name is the
+type of the data being passed in and the second part of the function name
+is the users of that type.
+
+e.g. If you were searching for all of the places where an image is used in
+a material would be searching for the image_material() function.
 """
 
 import bpy
