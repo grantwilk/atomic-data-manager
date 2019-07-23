@@ -22,7 +22,9 @@ Contains functions that count quantities of various data-blocks.
 """
 
 import bpy
-from atomic_data_manager.stats import unused, unnamed
+from atomic_data_manager.stats import unused
+from atomic_data_manager.stats import unnamed
+from atomic_data_manager.stats import missing
 
 
 def collections():
@@ -53,6 +55,11 @@ def unused_images():
 def unnamed_images():
     # returns the number of unnamed images in the project
     return len(unnamed.images())
+
+
+def missing_images():
+    # returns the number of missing images in the project
+    return len(missing.images())
 
 
 def lights():
