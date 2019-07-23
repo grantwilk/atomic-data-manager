@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 
 import bpy
 from bpy.utils import register_class, unregister_class
-from atomic_data_manager.stats import stats
+from atomic_data_manager.stats import count
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -63,25 +63,25 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "collections",
-                      text=ui_layouts.number_suffix("Collections", stats.count_unused_collections()),
+                      text=ui_layouts.number_suffix("Collections", count.unused_collections()),
                       icon='GROUP', toggle=True)
         splitcol.operator("atomic.inspect_collections", icon='VIEWZOOM', text="")
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "lights",
-                      text=ui_layouts.number_suffix("Lights", stats.count_unused_lights()),
+                      text=ui_layouts.number_suffix("Lights", count.unused_lights()),
                       icon='LIGHT', toggle=True)
         splitcol.operator("atomic.inspect_lights", icon='VIEWZOOM', text="")
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "node_groups",
-                      text=ui_layouts.number_suffix("Node Groups", stats.count_unused_node_groups()),
+                      text=ui_layouts.number_suffix("Node Groups", count.unused_node_groups()),
                       icon='NODETREE', toggle=True)
         splitcol.operator("atomic.inspect_node_groups", icon='VIEWZOOM', text="")
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "textures",
-                      text=ui_layouts.number_suffix("Textures", stats.count_unused_textures()),
+                      text=ui_layouts.number_suffix("Textures", count.unused_textures()),
                       icon='TEXTURE', toggle=True)
         splitcol.operator("atomic.inspect_textures", icon='VIEWZOOM', text="")
 
@@ -90,25 +90,25 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "images",
-                      text=ui_layouts.number_suffix("Images", stats.count_unused_images()),
+                      text=ui_layouts.number_suffix("Images", count.unused_images()),
                       toggle=True, icon='IMAGE_DATA')
         splitcol.operator("atomic.inspect_images", icon='VIEWZOOM', text="")
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "materials",
-                      text=ui_layouts.number_suffix("Materials", stats.count_unused_materials()),
+                      text=ui_layouts.number_suffix("Materials", count.unused_materials()),
                       icon='MATERIAL', toggle=True)
         splitcol.operator("atomic.inspect_materials", icon='VIEWZOOM', text="")
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "particles",
-                      text=ui_layouts.number_suffix("Particles", stats.count_unused_particles()),
+                      text=ui_layouts.number_suffix("Particles", count.unused_particles()),
                       icon='PARTICLES', toggle=True)
         splitcol.operator("atomic.inspect_particles", icon='VIEWZOOM', text="")
 
         splitcol = col.split(factor=0.8, align=True)
         splitcol.prop(atom, "worlds",
-                      text=ui_layouts.number_suffix("Worlds", stats.count_unused_worlds()),
+                      text=ui_layouts.number_suffix("Worlds", count.unused_worlds()),
                       icon='WORLD', toggle=True)
         splitcol.operator("atomic.inspect_worlds", icon='VIEWZOOM', text="")
 
