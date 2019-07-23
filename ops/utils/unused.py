@@ -19,7 +19,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 ---
 
 This file contains functions that return the keys of data-blocks that do
-not have any users.
+not have any users, as determined by atomic_data_manager.ops.utils.users.
 """
 
 import bpy
