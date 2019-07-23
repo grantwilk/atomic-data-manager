@@ -20,24 +20,38 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 
 
-# <editor-fold desc="Collection Users">
 def collection_camera(collection_key):
-    # returns a list of camera object keys that are in the collection indicated by collection_key
+    # recursively returns a list of camera object keys that are in the collection and its child collections
     users = []
+    collection = bpy.data.collections[collection_key]
 
-    for obj in bpy.data.collections[collection_key].objects:
+    # list of all child collections in our collection
+    children = collection_children(collection_key)
+
+    # recursively append all cameras from child collections
+    for child_key in children:
+        users.append(collection_camera(child_key))
+
+    # append all camera objects in our collection
+    for obj in collection.objects:
         if obj.type == 'CAMERA':
             users.append(obj.name)
 
     return distinct(users)
 
 
-def collection_child(collection_key):
-    # returns a list of child collection keys that are in the collection indicated by collection_key
+def collection_children(collection_key):
+    # returns a list of child collection keys that are in the collection  and its child collections
     users = []
+    collection = bpy.data.collections[collection_key]
 
-    for child in bpy.data.collections[collection_key].children:
+    # append all children of our collection
+    for child in collection.children:
         users.append(child.name)
+
+    # recurse through our children and append their children
+    for user_key in users:
+        users.append(collection_children(user_key))
 
     return distinct(users)
 
@@ -45,8 +59,17 @@ def collection_child(collection_key):
 def collection_light(collection_key):
     # returns a list of light object keys that are in the collection indicated by collection_key
     users = []
+    collection = bpy.data.collections[collection_key]
 
-    for obj in bpy.data.collections[collection_key].objects:
+    # list of all child collections in our collection
+    children = collection_children(collection_key)
+
+    # recursively append all lights from child collections
+    for child_key in children:
+        users.append(collection_light(child_key))
+
+    # append all light objects in our collection
+    for obj in collection.objects:
         if obj.type == 'LIGHT':
             users.append(obj.name)
 
@@ -56,8 +79,17 @@ def collection_light(collection_key):
 def collection_mesh(collection_key):
     # returns a list of mesh object keys that are in the collection indicated by collection_key
     users = []
+    collection = bpy.data.collections[collection_key]
 
-    for obj in bpy.data.collections[collection_key].objects:
+    # list of all child collections in our collection
+    children = collection_children(collection_key)
+
+    # recursively append all meshes from child collections
+    for child_key in children:
+        users.append(collection_mesh(child_key))
+
+    # append all mesh objects in our collection
+    for obj in collection.objects:
         if obj.type == 'MESH':
             users.append(obj.name)
 
@@ -68,19 +100,26 @@ def collection_others(collection_key):
     # returns a list of other object keys that are in the collection indicated by collection_key
     # excludes cameras, lights, and meshes
     users = []
+    collection = bpy.data.collections[collection_key]
 
-    # Object types to exclude from this search
-    detected_types = ['CAMERA', 'LIGHT', 'MESH']
+    # object types to exclude from this search
+    excluded_types = ['CAMERA', 'LIGHT', 'MESH']
 
-    for obj in bpy.data.collections[collection_key].objects:
-        if obj.type not in detected_types:
+    # list of all child collections in our collection
+    children = collection_children(collection_key)
+
+    # recursively append all other objects from child collections
+    for child_key in children:
+        users.append(collection_others(child_key))
+
+    # append all other objects in our collection
+    for obj in collection.objects:
+        if obj.type not in excluded_types:
             users.append(obj.name)
 
     return distinct(users)
-# </editor-fold>
 
 
-# <editor-fold desc="Image Users">
 def image_materials(image_key):
     # returns a list of material keys that use the image indicated by image_key
     users = []
@@ -92,48 +131,76 @@ def image_materials(image_key):
     node_groups = image_node_groups(image_key)
 
     for mat in bpy.data.materials:
+
+        # if material uses a node tree, check each node
         if mat.use_nodes:
             for node in mat.node_tree.nodes:
 
-                # If image in node in node tree
-                if node.type in image_nodes and node.image is not None:
+                # if image in node in the main node tree
+                if node.type in image_nodes and node.image:
                     if node.image.name == bpy.data.images[image_key].name:
                         users.append(mat.name)
 
-                # If image in node in node group in node tree
+                # if image in node in node group in node tree
                 elif node.type == 'GROUP':
-                    if node.node_tree is not None and node.node_tree.name in node_groups:
+                    if node.node_tree and node.node_tree.name in node_groups:
                         users.append(mat.name)
 
     return distinct(users)
 
 
 def image_node_groups(image_key):
-    # returns a list of node group keys that use the image indicated by image_key
+    # recursively returns a list of node group keys that use the image indicated by image_key
     users = []
-
-    # node types that can have images
-    image_nodes = ['TEX_IMAGE', 'TEX_ENVIRONMENT']
+    image = bpy.data.images[image_key]
 
     for node_group in bpy.data.node_groups:
+
+        # for every node in the node tree
         for node in node_group.nodes:
-            if node.type in image_nodes and node.image is not None:
-                if node.image.name == bpy.data.images[image_key].name:
+
+            # if node is a group type
+            if node.type == "GROUP":
+
+                # recurse through that node group
+                users.append(image_node_groups(image_key))
+
+            # if node is an image type
+            elif hasattr(node, image):
+                if node.image and node.image.name == image.name:
                     users.append(node_group.name)
 
     return distinct(users)
 
 
-def image_objects(image_key):
-    # returns a list of object keys that use the image indicated by image_key
+def image_texture(image_key):
+    # returns a list of texture keys that use the image indicated by image_key
     users = []
+    image = bpy.data.images[image_key]
 
-    # material keys that use the image
-    materials = image_materials(image_key)
+    # list of node groups that use this image
+    node_group_users = image_node_groups(image_key)
 
-    for material_key in materials:
-        for material in material_objects(material_key):
-            users.append(material)
+    for texture in bpy.data.textures:
+
+        # if texture uses a node tree, check each node
+        if texture.use_nodes:
+            for node in texture.node_tree.nodes:
+
+                # check image nodes that use this image
+                if hasattr(node, 'image') and node.image:
+                    if node.image.name == image.name:
+                        users.append(texture.name)
+
+                # check for node groups that use this image
+                elif node.type == "GROUP":
+                    if node.node_tree.name in node_group_users:
+                        users.append(texture.name)
+
+        # otherwise check the texture's image attribute
+        else:
+            if texture.image.name == image.name:
+                users.append(texture.name)
 
     return distinct(users)
 
@@ -141,79 +208,108 @@ def image_objects(image_key):
 def image_worlds(image_key):
     # returns a list of world keys that use the image indicated by image_key
     users = []
+    image = bpy.data.images[image_key]
 
-    # node types that can have images
-    image_nodes = ['TEX_IMAGE', 'TEX_ENVIRONMENT']
+    # list of node groups that use this image
+    node_group_users = image_node_groups(image_key)
 
     for world in bpy.data.worlds:
+
+        # if world uses a node tree, check each node
         if world.use_nodes:
             for node in world.node_tree.nodes:
-                if node.type in image_nodes:
-                    if node.image.name == image_key:
+
+                # check image nodes
+                if hasattr(node, 'image') and node.image:
+                    if node.image.name == image.name:
+                        users.append(world.name)
+
+                # check for node groups that use this image
+                elif node.type == "GROUP":
+                    if node.node_tree.name in node_group_users:
                         users.append(world.name)
 
     return distinct(users)
-# </editor-fold>
 
 
-# <editor-fold desc="Light Users">
-def lights_lights(light_key):
+def objects_lights(light_key):
     # returns a list of light object keys that use the light data specified by light_key
     users = []
+    light = bpy.data.lights[light_key]
 
     for obj in bpy.data.objects:
-        if obj.type == 'LIGHT':
-            if obj.data.name == light_key:
+        if obj.type == 'LIGHT' and obj.data:
+            if obj.data.name == light.name:
                 users.append(obj.name)
 
     return distinct(users)
-# </editor-fold>
 
 
-# <editor-fold desc="Material Users">
 def material_objects(material_key):
     # returns a list of object keys that use the material data specified by material_key
     users = []
-
-    # object types that can have materials
-    material_types = ['MESH', 'META', 'CURVE', 'SURFACE', 'FONT', 'GPENCIL']
+    material = bpy.data.materials[material_key]
 
     for obj in bpy.data.objects:
-        if obj.type in material_types:
+
+        # if the object has the option to add materials
+        if hasattr(obj, 'material_slots'):
+
+            # for each material slot
             for slot in obj.material_slots:
-                if material_key == slot.name:
+                if slot.material.name == material.name:
                     users.append(obj.name)
 
     return distinct(users)
-# </editor-fold>
 
 
-# <editor-fold desc="Node Group Users">
 def node_groups_materials(node_group_key):
     # returns a list of material keys that use the node group specified by node_group_key in their node trees
     users = []
+    node_group = bpy.data.node_groups[node_group_key]
 
     # node groups that use this node group
-    node_groups = node_groups_node_groups(node_group_key)
+    node_group_users = node_groups_node_groups(node_group_key)
 
     for material in bpy.data.materials:
-        if material.use_nodes:
+
+        # if material uses nodes and has a valid node tree, check each node
+        if material.use_nodes and material.node_tree:
             for node in material.node_tree.nodes:
-                if node.type == 'GROUP':
-                    if node.node_tree.name == node_group_key or node.node_tree.name in node_groups:
+
+                # if node is a group node
+                if node.type == "GROUP" and node.node_tree:
+
+                    # if node is the node group
+                    if node.node_tree.name == node_group.name:
+                        users.append(material.name)
+
+                    # if node is using a node group contains our node group
+                    if node.node_tree.name in node_group_users:
                         users.append(material.name)
 
     return distinct(users)
 
 
 def node_groups_node_groups(node_group_key):
-    # returns a list of node group keys that use the node group specified by node_group_key in their node trees
+    # recursively returns a list of node group keys that use the node group specified by node_group_key
     users = []
+    this_node_group = bpy.data.node_groups[node_group_key]
 
     for node_group in bpy.data.node_groups:
-            for node in node_group.nodes:
-                if node.type == 'GROUP' and node.node_tree.name == node_group_key:
-                    users.append(node_group.name)
+        for node in node_group.nodes:
+
+            # if node is a node group and has a valid node tree
+            if node.type == 'GROUP' and node.node_tree:
+
+                # if this node is this node group
+                if node.node_tree.name == this_node_group.name:
+                    users.append(node.node_tree.name)
+
+                # if this node is any other node group
+                else:
+                    # recurse and append return to users
+                    users.append(node_groups_node_groups(node_group.name))
 
     return distinct(users)
 
@@ -221,45 +317,61 @@ def node_groups_node_groups(node_group_key):
 def node_groups_world(node_group_key):
     # returns a list of world keys that use the node group specified by node_group_key in their node trees
     users = []
+    node_group = bpy.data.node_groups[node_group_key]
 
     # node groups that use this node group
-    node_groups = node_groups_node_groups(node_group_key)
+    node_group_users = node_groups_node_groups(node_group_key)
 
     for world in bpy.data.worlds:
-        if world.use_nodes:
+
+        # if world uses nodes and has a valid node tree
+        if world.use_nodes and world.node_tree:
             for node in world.node_tree.nodes:
-                if node.type == 'GROUP' and node.node_tree is not None:
-                    if node.node_tree.name == node_group_key or node.node_tree.name in node_groups:
+
+                # if node is a node group and has a valid node tree
+                if node.type == 'GROUP' and node.node_tree:
+
+                    # if this node is our node group
+                    if node.node_tree.name == node_group.name:
+                        users.append(world.name)
+
+                    # if this node is one of the node groups that use our node group
+                    elif node.node_tree.name in node_group_users:
                         users.append(world.name)
 
     return distinct(users)
-# </editor-fold>
 
 
-# <editor-fold desc="Particle Users">
 def particles_objects(particle_key):
     # returns a list of object keys that use the particle system indicted by particle_key
     users = []
+    particle_system = bpy.data.particles[particle_key]
 
     for obj in bpy.data.objects:
-        if obj.type == 'MESH':
+
+        # if object can have a particle system
+        if hasattr(obj, 'particle_systems'):
             for particle in obj.particle_systems:
-                if particle_key == particle.settings.name:
+
+                # if particle settings is our particle system
+                if particle.settings.name == particle_system.name:
                     users.append(obj.name)
 
     return distinct(users)
-# </editor-fold>
 
 
-# <editor-fold desc="Texture Users">
 def textures_brushes(texture_key):
     # returns a list of brush keys that use the texture indicted by texture_key
     users = []
+    texture = bpy.data.textures[texture_key]
 
     for brush in bpy.data.brushes:
-        if brush.texture is not None:
-            texture_name = brush.texture.name
-            if texture_name is not None and texture_name == texture_key:
+
+        # if brush has a texture
+        if brush.texture:
+
+            # if brush texture is our texture
+            if brush.texture.name == texture.name:
                 users.append(brush.name)
 
     return distinct(users)
@@ -268,35 +380,33 @@ def textures_brushes(texture_key):
 def textures_objects(texture_key):
     # returns a list of object keys that use the texture indicted by texture_key in one of their modifiers
     users = []
+    texture = bpy.data.textures[texture_key]
 
-    # object types that can have modifiers
-    modifier_objects = ['MESH', 'CURVE', 'SURFACE', 'FONT', 'GPENCIL', 'LATTICE']
-    # modifier types with texture attribute
-    texture_modifiers = ['DISPLACE', 'WARP', 'WAVE']
-    # modifier types with mask_texture attribute
-    mask_texture_modifiers = ['VERTEX_WEIGHT_PAINT', 'VERTEX_WEIGHT_PROXIMITY', 'VERTEX_WEIGHT_MIX']
+    # list of particle systems that use our texture
+    particle_users = textures_particles(texture_key)
 
     # append objects that use the texture in a modifier
     for obj in bpy.data.objects:
-        if obj.type in modifier_objects:
+
+        # if object can have modifiers applied to it
+        if hasattr(obj, 'modifiers'):
             for modifier in obj.modifiers:
 
-                if modifier.type in texture_modifiers:
-                    texture_name = modifier.texture.name
-                    if texture_name is not None and texture_name == texture_key:
+                # if the modifier has a texture attribute
+                if hasattr(modifier, 'texture'):
+                    if modifier.texture.name == texture.name:
                         users.append(obj.name)
 
-                elif modifier.type in mask_texture_modifiers:
-                    texture_name = modifier.mask_texture.name
-                    if texture_name is not None and texture_name == texture_key:
+                # if the modifier has a mask_texture attribute
+                elif hasattr(modifier, 'mask_texture'):
+                    if modifier.mask_texture.name == texture.name:
                         users.append(obj.name)
 
-    # append objects that use particle systems that use the texture
-    particles = textures_particles(texture_key)
-    for particle in particles:
-        objects = particles_objects(particle)
-        for obj in objects:
-            users.append(obj)
+    # append objects that use the texture in a particle system
+    for particle in particle_users:
+
+        # append all objects that use the particle system
+        users.append(particles_objects(particle))
 
     return distinct(users)
 
@@ -304,16 +414,21 @@ def textures_objects(texture_key):
 def textures_particles(texture_key):
     # returns a list of particle system keys that use the texture indicted by texture_key in their texture slots
     users = []
+    texture = bpy.data.particles[texture_key]
 
     for particle in bpy.data.particles:
+
+        # for each texture slot in the particle system
         for texture_slot in particle.texture_slots:
-            if texture_slot is not None:
-                texture_name = texture_slot.texture.name
-                if texture_name is not None and texture_name == texture_key:
+
+            # if texture slot is not None
+            if texture_slot:
+
+                # if texture in texture slot is our texture
+                if texture_slot.texture.name == texture.name:
                     users.append(particle.name)
 
     return distinct(users)
-# </editor-fold>
 
 
 def distinct(seq):
