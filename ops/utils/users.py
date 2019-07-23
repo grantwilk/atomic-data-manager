@@ -26,7 +26,7 @@ type of the data being passed in and the second part of the function name
 is the users of that type.
 
 e.g. If you were searching for all of the places where an image is used in
-a material would be searching for the image_material() function.
+a material would be searching for the image_materials() function.
 """
 
 import bpy
@@ -454,7 +454,7 @@ def particle_objects(particle_key):
     return distinct(users)
 
 
-def textures_all(texture_key):
+def texture_all(texture_key):
     # returns a list of keys of every data-block that uses this texture
 
     users = [
