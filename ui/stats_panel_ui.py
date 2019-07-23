@@ -20,6 +20,7 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 import bpy
 from bpy.utils import register_class, unregister_class
 from atomic_data_manager.stats import stats
+from atomic_data_manager.stats import count
 from atomic_data_manager.ui.utils import ui_layouts
 
 
@@ -67,13 +68,13 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
 
             col = split.column()
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_collections()), stats.count_unused_collections()))
+                text=ui_layouts.number_suffix(str(count.collections()), count.unused_collections()))
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_lights()), stats.count_unused_lights()))
+                text=ui_layouts.number_suffix(str(count.lights()), count.unused_lights()))
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_node_groups()), stats.count_unused_node_groups()))
+                text=ui_layouts.number_suffix(str(count.node_groups()), count.unused_node_groups()))
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_textures()), stats.count_unused_textures()))
+                text=ui_layouts.number_suffix(str(count.textures()), count.unused_textures()))
 
             # RIGHT COLUMN
             col = split.column()
@@ -84,13 +85,13 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
 
             col = split.column()
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_images()), stats.count_unused_images()))
+                text=ui_layouts.number_suffix(str(count.images()), count.unused_images()))
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_materials()), stats.count_unused_materials()))
+                text=ui_layouts.number_suffix(str(count.materials()), count.unused_materials()))
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_particles()), stats.count_unused_particles()))
+                text=ui_layouts.number_suffix(str(count.particles()), count.unused_particles()))
             col.label(
-                text=ui_layouts.number_suffix(str(stats.count_worlds()), stats.count_unused_worlds()))
+                text=ui_layouts.number_suffix(str(count.worlds()), count.unused_worlds()))
 
         # COLLECTIONS
         elif atom.stats_mode == 'COLLECTIONS':
@@ -100,12 +101,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_collections()))
+            col.label(text="Total: {0}".format(count.collections()))
             # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_collections()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_collections()))
+            col.label(text="Unused: {0}".format(count.unused_collections()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_collections()))
 
         # IMAGES
         elif atom.stats_mode == 'IMAGES':
@@ -115,12 +116,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_images()))
-            col.label(text="Missing: {0}".format(stats.count_missing_images()))
+            col.label(text="Total: {0}".format(count.images()))
+            col.label(text="Missing: {0}".format(count.missing_images()))
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_images()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_images()))
+            col.label(text="Unused: {0}".format(count.unused_images()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_images()))
 
         # LIGHTS
         elif atom.stats_mode == 'LIGHTS':
@@ -130,12 +131,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_lights()))
+            col.label(text="Total: {0}".format(count.lights()))
             # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_lights()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_lights()))
+            col.label(text="Unused: {0}".format(count.unused_lights()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_lights()))
 
         # MATERIALS
         elif atom.stats_mode == 'MATERIALS':
@@ -145,12 +146,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_materials()))
+            col.label(text="Total: {0}".format(count.materials()))
             # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_materials()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_materials()))
+            col.label(text="Unused: {0}".format(count.unused_materials()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_materials()))
 
         # OBJECTS
         elif atom.stats_mode == 'OBJECTS':
@@ -159,10 +160,10 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
 
             split = box.split()
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_objects()))
+            col.label(text="Total: {0}".format(count.objects()))
 
             col = split.column()
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_objects()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_objects()))
 
         # NODE GROUPS
         elif atom.stats_mode == 'NODE_GROUPS':
@@ -172,12 +173,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_node_groups()))
+            col.label(text="Total: {0}".format(count.node_groups()))
             # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_node_groups()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_node_groups()))
+            col.label(text="Unused: {0}".format(count.unused_node_groups()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_node_groups()))
 
         # PARTICLES
         elif atom.stats_mode == 'PARTICLES':
@@ -187,12 +188,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_particles()))
+            col.label(text="Total: {0}".format(count.particles()))
             # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_particles()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_particles()))
+            col.label(text="Unused: {0}".format(count.unused_particles()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_particles()))
 
         # TEXTURES
         elif atom.stats_mode == 'TEXTURES':
@@ -202,12 +203,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_textures()))
+            col.label(text="Total: {0}".format(count.textures()))
             # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_textures()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_textures()))
+            col.label(text="Unused: {0}".format(count.unused_textures()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_textures()))
 
         # WORLDS
         elif atom.stats_mode == 'WORLDS':
@@ -217,12 +218,12 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             split = box.split()
 
             col = split.column()
-            col.label(text="Total: {0}".format(stats.count_worlds()))
+            col.label(text="Total: {0}".format(count.worlds()))
             # # col.label(text="Placeholder")  # todo
 
             col = split.column()
-            col.label(text="Unused: {0}".format(stats.count_unused_worlds()))
-            col.label(text="Unnamed: {0}".format(stats.count_unnamed_worlds()))
+            col.label(text="Unused: {0}".format(count.unused_worlds()))
+            col.label(text="Unnamed: {0}".format(count.unnamed_worlds()))
 
 
 reg_list = [ATOMIC_PT_stats_panel]
