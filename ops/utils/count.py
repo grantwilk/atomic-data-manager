@@ -23,6 +23,7 @@ Contains functions that count quantities of various data-blocks.
 
 import bpy
 from atomic_data_manager.ops.utils import unused
+from atomic_data_manager.ops.utils import unnamed
 
 
 def collections():
@@ -35,6 +36,11 @@ def unused_collections():
     return len(unused.collections())
 
 
+def unnamed_collections():
+    # returns the number of unnamed collections in the project
+    return len(unnamed.collections())
+
+
 def images():
     # returns the number of images in the project
     return len(bpy.data.images)
@@ -43,6 +49,11 @@ def images():
 def unused_images():
     # returns the number of unused images in the project
     return len(unused.images())
+
+
+def unnamed_images():
+    # returns the number of unnamed images in the project
+    return len(unnamed.images())
 
 
 def lights():
@@ -55,6 +66,11 @@ def unused_lights():
     return len(unused.lights())
 
 
+def unnamed_lights():
+    # returns the number of unnamed lights in the project
+    return len(unnamed.lights())
+
+
 def materials():
     # returns the number of materials in the project
     return len(bpy.data.materials)
@@ -63,6 +79,11 @@ def materials():
 def unused_materials():
     # returns the number of unused materials in the project
     return len(unused.materials())
+
+
+def unnamed_materials():
+    # returns the number of unnamed materials in the project
+    return len(unnamed.materials())
 
 
 def node_groups():
@@ -75,6 +96,11 @@ def unused_node_groups():
     return len(unused.node_groups())
 
 
+def unnamed_node_groups():
+    # returns the number of unnamed node groups in the project
+    return len(unnamed.node_groups())
+
+
 def particles():
     # returns the number of particles in the project
     return len(bpy.data.particles)
@@ -83,6 +109,11 @@ def particles():
 def unused_particles():
     # returns the number of unused particles in the project
     return len(unused.particles())
+
+
+def unnamed_particles():
+    # returns the number of unnamed particle systems in the project
+    return len(unnamed.particles())
 
 
 def textures():
@@ -95,6 +126,11 @@ def unused_textures():
     return len(unused.textures())
 
 
+def unnamed_textures():
+    # returns the number of unnamed textures in the project
+    return len(unnamed.textures())
+
+
 def worlds():
     # returns the number of worlds in the project
     return len(bpy.data.worlds)
@@ -103,3 +139,8 @@ def worlds():
 def unused_worlds():
     # returns the number of unused worlds in the project
     return len(unused.worlds())
+
+
+def unnamed_worlds():
+    # returns the number of unnamed worlds in the project
+    return len(unnamed.worlds())
