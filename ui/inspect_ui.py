@@ -438,14 +438,16 @@ class ATOMIC_OT_inspect_worlds(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-reg_list = [ATOMIC_OT_inspect_collections,
-            ATOMIC_OT_inspect_images,
-            ATOMIC_OT_inspect_lights,
-            ATOMIC_OT_inspect_materials,
-            ATOMIC_OT_inspect_node_groups,
-            ATOMIC_OT_inspect_particles,
-            ATOMIC_OT_inspect_textures,
-            ATOMIC_OT_inspect_worlds,]
+reg_list = [
+    ATOMIC_OT_inspect_collections,
+    ATOMIC_OT_inspect_images,
+    ATOMIC_OT_inspect_lights,
+    ATOMIC_OT_inspect_materials,
+    ATOMIC_OT_inspect_node_groups,
+    ATOMIC_OT_inspect_particles,
+    ATOMIC_OT_inspect_textures,
+    ATOMIC_OT_inspect_worlds
+]
 
 
 def register():
