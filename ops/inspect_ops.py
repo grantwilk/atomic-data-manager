@@ -250,6 +250,11 @@ class ATOMIC_OT_inspection_toggle_fake_user(bpy.types.Operator):
             bpy.data.node_groups[atom.node_groups_field].use_fake_user = \
                 not node_group.use_fake_user
 
+        if inspection == 'PARTICLES':
+            particle = bpy.data.particles[atom.particles_field]
+            bpy.data.particles[atom.particles_field].use_fake_user = \
+                not particle.use_fake_user
+
         if inspection == 'TEXTURES':
             texture = bpy.data.textures[atom.textures_field]
             bpy.data.textures[atom.textures_field].use_fake_user = \
