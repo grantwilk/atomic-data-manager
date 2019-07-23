@@ -18,7 +18,8 @@ with Atomic Data Manager.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import bpy
-from bpy.utils import register_class, unregister_class
+from bpy.utils import register_class
+from bpy.utils import unregister_class
 from atomic_data_manager.stats import missing
 from atomic_data_manager.ui.utils import ui_layouts
 
@@ -161,16 +162,13 @@ class ATOMIC_OT_replace_missing(bpy.types.Operator):
         return wm.invoke_props_dialog(self)
 
 
-
-
-
 reg_list = [
     ATOMIC_OT_reload_missing,
     ATOMIC_OT_reload_report,
     ATOMIC_OT_search_missing,
     ATOMIC_OT_replace_missing,
     ATOMIC_OT_remove_missing
-    ]
+]
 
 
 def register():
