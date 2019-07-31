@@ -77,40 +77,41 @@ def materials():
 
 def objects():
     # returns the keys of all unnamed materials in the project
+    # NOTE: lists of default names must be tuples!
 
     # the default names all curve objects
-    curve_names = [
+    curve_names = (
         "BezierCircle",
         "BezierCurve",
         "NurbsCircle",
         "NurbsCurve",
         "NurbsPath"
-    ]
+    )
 
     # the default names of all grease pencil objects
-    gpencil_names = [
+    gpencil_names = (
         "GPencil",
         "Stroke"
-    ]
+    )
 
     # the default names of all light objects
-    light_names = [
+    light_names = (
         "Area",
         "Light",
         "Point",
         "Spot",
         "Sun"
-    ]
+    )
 
     # the default names of all light probe objects
-    lprobe_names = [
+    lprobe_names = (
         "IrradianceVolume",
         "ReflectionCubemap",
         "ReflectionPlane"
-    ]
+    )
 
     # the default names of all mesh objects
-    mesh_names = [
+    mesh_names = (
         "Circle",
         "Cone",
         "Cube",
@@ -120,10 +121,10 @@ def objects():
         "Plane",
         "Sphere",
         "Torus"
-    ]
+    )
 
     # the default names of all miscellaneous objects
-    misc_names = [
+    misc_names = (
         "Mball",
         "Text",
         "Armature",
@@ -132,27 +133,21 @@ def objects():
         "Camera",
         "Speaker",
         "Field"
-    ]
+    )
 
     # the default names of all nurbs objects
-    nurbs_names = [
+    nurbs_names = (
         "SurfCircle",
         "SurfCurve",
         "SurfPatch",
         "SurfTorus",
         "Surface"
-    ]
+    )
 
-    # the default names of all objects compiled into one list
-    default_obj_names = [
-        curve_names,
-        gpencil_names,
-        light_names,
-        lprobe_names,
-        mesh_names,
-        misc_names,
-        nurbs_names
-    ]
+    # the default names of all objects compiled into one tuple
+    default_obj_names = \
+        curve_names + gpencil_names + light_names + lprobe_names + \
+        mesh_names + misc_names + nurbs_names
 
     unnamed = []
 
