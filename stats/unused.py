@@ -29,19 +29,19 @@ from atomic_data_manager.stats import users
 
 
 def collections():
-    # returns a list of keys of unused collections
+    # returns a full list of keys of unused collections
 
     unused = []
 
     for collection in bpy.data.collections:
-        if not users.collection_all(collection.name):
+        if not (collection.objects or collection.children):
             unused.append(collection.name)
 
     return unused
 
 
 def images():
-    # returns a list of keys of unused images
+    # returns a full list of keys of unused images
 
     unused = []
 
@@ -50,7 +50,7 @@ def images():
 
             # check if image has a fake user or if ignore fake users
             # is enabled
-            if not image.has_fake_user or config.ignore_fake_users:
+            if not image.use_fake_user or config.ignore_fake_users:
                 unused.append(image.name)
 
     return unused
@@ -66,7 +66,7 @@ def lights():
 
             # check if light has a fake user or if ignore fake users
             # is enabled
-            if not light.has_fake_user or config.ignore_fake_users:
+            if not light.use_fake_user or config.ignore_fake_users:
                 unused.append(light.name)
 
     return unused
@@ -82,7 +82,7 @@ def materials():
 
             # check if material has a fake user or if ignore fake users
             # is enabled
-            if not material.has_fake_user or config.ignore_fake_users:
+            if not material.use_fake_user or config.ignore_fake_users:
                 unused.append(material.name)
 
     return unused
@@ -98,7 +98,7 @@ def node_groups():
 
             # check if node group has a fake user or if ignore fake users
             # is enabled
-            if not node_group.has_fake_user or config.ignore_fake_users:
+            if not node_group.use_fake_user or config.ignore_fake_users:
                 unused.append(node_group.name)
 
     return unused
@@ -112,9 +112,9 @@ def particles():
     for particle in bpy.data.particles:
         if not users.particle_all(particle.name):
 
-            # check if particle system has a fake user or if ignore fake users
-            # is enabled
-            if not particle.has_fake_user or config.ignore_fake_users:
+            # check if particle system has a fake user or if ignore fake
+            # users is enabled
+            if not particle.use_fake_user or config.ignore_fake_users:
                 unused.append(particle.name)
 
     return unused
@@ -130,7 +130,7 @@ def textures():
 
             # check if texture has a fake user or if ignore fake users
             # is enabled
-            if not texture.has_fake_user or config.ignore_fake_users:
+            if not texture.use_fake_user or config.ignore_fake_users:
                 unused.append(texture.name)
 
     return unused
@@ -142,11 +142,13 @@ def worlds():
     unused = []
 
     for world in bpy.data.worlds:
-        if world.users == 0:
+
+        # if the world has no users or has one fake user
+        if world.users == 0 or (world.users == 1 and world.use_fake_user):
 
             # check if world has a fake user or if ignore fake users
             # is enabled
-            if not world.has_fake_user or config.ignore_fake_users:
+            if not world.use_fake_user or config.ignore_fake_users:
                 unused.append(world.name)
 
     return unused
