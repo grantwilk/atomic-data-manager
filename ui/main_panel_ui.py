@@ -77,7 +77,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "collections",
             text=ui_layouts.number_suffix(
-                "Collections", count.unused_collections()),
+                "Collections", count.collections_unused()),
             icon='GROUP',
             toggle=True
         )
@@ -95,7 +95,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "lights",
             text=ui_layouts.number_suffix(
-                "Lights", count.unused_lights()),
+                "Lights", count.lights_unused()),
             icon='LIGHT',
             toggle=True
         )
@@ -113,7 +113,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "node_groups",
             text=ui_layouts.number_suffix(
-                "Node Groups", count.unused_node_groups()),
+                "Node Groups", count.node_groups_unused()),
             icon='NODETREE',
             toggle=True
         )
@@ -131,7 +131,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "textures",
             text=ui_layouts.number_suffix(
-                "Textures", count.unused_textures()),
+                "Textures", count.textures_unused()),
             icon='TEXTURE',
             toggle=True
         )
@@ -152,7 +152,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "images",
             text=ui_layouts.number_suffix(
-                "Images", count.unused_images()),
+                "Images", count.images_unused()),
             toggle=True,
             icon='IMAGE_DATA'
         )
@@ -170,7 +170,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "materials",
             text=ui_layouts.number_suffix(
-                "Materials", count.unused_materials()),
+                "Materials", count.materials_unused()),
             icon='MATERIAL',
             toggle=True
         )
@@ -188,7 +188,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "particles",
             text=ui_layouts.number_suffix(
-                "Particles", count.unused_particles()),
+                "Particles", count.particles_unused()),
             icon='PARTICLES',
             toggle=True
         )
@@ -205,7 +205,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
             atom,
             "worlds",
             text=ui_layouts.number_suffix(
-                "Worlds", count.unused_worlds()),
+                "Worlds", count.worlds_unused()),
             icon='WORLD',
             toggle=True
         )
@@ -222,7 +222,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         row.operator(
             "atomic.smart_select",
             text='Smart Select',
-            con='ZOOM_SELECTED'
+            icon='ZOOM_SELECTED'
         )
 
         if all(prop is True for prop in category_props):

@@ -66,7 +66,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             row = box.row()
             row.label(text="Blend File Size:     " + misc.blend_size())
 
-            # DATA SET STATISTICS
+            # cateogry statistics
             split = box.split()
 
             # left column
@@ -84,7 +84,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.collections()),
-                    count.unused_collections()
+                    count.collections_unused()
                 )
             )
 
@@ -92,7 +92,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.lights()),
-                    count.unused_lights()
+                    count.lights_unused()
                 )
             )
 
@@ -100,7 +100,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.node_groups()),
-                    count.unused_node_groups()
+                    count.node_groups_unused()
                 )
             )
 
@@ -108,7 +108,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.textures()),
-                    count.unused_textures()
+                    count.textures_unused()
                 )
             )
 
@@ -127,7 +127,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.images()),
-                    count.unused_images()
+                    count.images_unused()
                 )
             )
 
@@ -135,7 +135,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.materials()),
-                    count.unused_materials()
+                    count.materials_unused()
                 )
             )
 
@@ -143,7 +143,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.particles()),
-                    count.unused_particles()
+                    count.particles_unused()
                 )
             )
 
@@ -151,7 +151,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col.label(
                 text=ui_layouts.number_suffix(
                     str(count.worlds()),
-                    count.unused_worlds()
+                    count.worlds_unused()
                 )
             )
 
@@ -177,11 +177,11 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_collections())
+                text="Unused: {0}".format(count.collections_unused())
             )
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_collections())
+                text="Unnamed: {0}".format(count.collections_unnamed())
             )
 
         # image statistics
@@ -201,17 +201,17 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             )
 
             col.label(
-                text="Missing: {0}".format(count.missing_images())
+                text="Missing: {0}".format(count.images_missing())
             )
 
             # unused and unnamed count
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_images())
+                text="Unused: {0}".format(count.images_unused())
             )
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_images())
+                text="Unnamed: {0}".format(count.images_unnamed())
             )
 
         # light statistics
@@ -234,11 +234,11 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_lights())
+                text="Unused: {0}".format(count.lights_unused())
             )
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_lights())
+                text="Unnamed: {0}".format(count.lights_unnamed())
             )
 
         # material statistics
@@ -263,11 +263,11 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_materials())
+                text="Unused: {0}".format(count.materials_unused())
             )
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_materials())
+                text="Unnamed: {0}".format(count.materials_unnamed())
             )
 
         # object statistics
@@ -289,7 +289,7 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_objects())
+                text="Unnamed: {0}".format(count.objects_unnamed())
             )
 
         # node group statistics
@@ -313,10 +313,10 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             # unused and unnamed count
             col = split.column()
             col.label(
-                text="Unused: {0}".format(count.unused_node_groups())
+                text="Unused: {0}".format(count.node_groups_unused())
             )
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_node_groups())
+                text="Unnamed: {0}".format(count.node_groups_unnamed())
             )
 
         # particle statistics
@@ -341,11 +341,11 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_particles())
+                text="Unused: {0}".format(count.particles_unused())
             )
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_particles())
+                text="Unnamed: {0}".format(count.particles_unnamed())
             )
 
         # texture statistics
@@ -368,11 +368,11 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_textures())
+                text="Unused: {0}".format(count.textures_unused())
             )
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_textures())
+                text="Unnamed: {0}".format(count.textures_unnamed())
             )
 
         # world statistics
@@ -395,11 +395,11 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             col.label(
-                text="Unused: {0}".format(count.unused_worlds())
+                text="Unused: {0}".format(count.worlds_unused())
             )
 
             col.label(
-                text="Unnamed: {0}".format(count.unnamed_worlds())
+                text="Unnamed: {0}".format(count.worlds_unnamed())
             )
 
 
