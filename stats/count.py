@@ -34,13 +34,13 @@ def collections():
     return len(bpy.data.collections)
 
 
-def unused_collections():
+def collections_unused():
     # returns the number of unused collections in the project
 
     return len(unused.collections())
 
 
-def unnamed_collections():
+def collections_unnamed():
     # returns the number of unnamed collections in the project
 
     return len(unnamed.collections())
@@ -52,19 +52,19 @@ def images():
     return len(bpy.data.images)
 
 
-def unused_images():
+def images_unused():
     # returns the number of unused images in the project
 
     return len(unused.images())
 
 
-def unnamed_images():
+def images_unnamed():
     # returns the number of unnamed images in the project
 
     return len(unnamed.images())
 
 
-def missing_images():
+def images_missing():
     # returns the number of missing images in the project
 
     return len(missing.images())
@@ -76,13 +76,13 @@ def lights():
     return len(bpy.data.lights)
 
 
-def unused_lights():
+def lights_unused():
     # returns the number of unused lights in the project
 
     return len(unused.lights())
 
 
-def unnamed_lights():
+def lights_unnamed():
     # returns the number of unnamed lights in the project
 
     return len(unnamed.lights())
@@ -94,13 +94,13 @@ def materials():
     return len(bpy.data.materials)
 
 
-def unused_materials():
+def materials_unused():
     # returns the number of unused materials in the project
 
     return len(unused.materials())
 
 
-def unnamed_materials():
+def materials_unnamed():
     # returns the number of unnamed materials in the project
 
     return len(unnamed.materials())
@@ -112,13 +112,13 @@ def node_groups():
     return len(bpy.data.node_groups)
 
 
-def unused_node_groups():
+def node_groups_unused():
     # returns the number of unused node groups in the project
 
     return len(unused.node_groups())
 
 
-def unnamed_node_groups():
+def node_groups_unnamed():
     # returns the number of unnamed node groups in the project
 
     return len(unnamed.node_groups())
@@ -130,7 +130,7 @@ def objects():
     return len(bpy.data.objects)
 
 
-def unnamed_objects():
+def objects_unnamed():
     # returns the number of unnamed objects in the project
 
     return len(unnamed.objects())
@@ -142,13 +142,13 @@ def particles():
     return len(bpy.data.particles)
 
 
-def unused_particles():
+def particles_unused():
     # returns the number of unused particles in the project
 
     return len(unused.particles())
 
 
-def unnamed_particles():
+def particles_unnamed():
     # returns the number of unnamed particle systems in the project
 
     return len(unnamed.particles())
@@ -160,13 +160,13 @@ def textures():
     return len(bpy.data.textures)
 
 
-def unused_textures():
+def textures_unused():
     # returns the number of unused textures in the project
 
     return len(unused.textures())
 
 
-def unnamed_textures():
+def textures_unnamed():
     # returns the number of unnamed textures in the project
 
     return len(unnamed.textures())
@@ -178,13 +178,13 @@ def worlds():
     return len(bpy.data.worlds)
 
 
-def unused_worlds():
+def worlds_unused():
     # returns the number of unused worlds in the project
 
     return len(unused.worlds())
 
 
-def unnamed_worlds():
+def worlds_unnamed():
     # returns the number of unnamed worlds in the project
 
     return len(unnamed.worlds())
