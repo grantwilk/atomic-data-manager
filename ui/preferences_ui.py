@@ -35,6 +35,8 @@ def set_enable_support_me_popup(value):
 
     bpy.context.preferences.addons["atomic_data_manager"]\
         .preferences.enable_support_me_popup = value
+    copy_prefs_to_config(None, None)
+    bpy.ops.wm.save_userpref()
 
 
 def set_last_popup_day(day):
@@ -42,6 +44,8 @@ def set_last_popup_day(day):
 
     bpy.context.preferences.addons["atomic_data_manager"]\
         .preferences.last_popup_day = day
+    copy_prefs_to_config(None, None)
+    bpy.ops.wm.save_userpref()
 
 
 def copy_prefs_to_config(self, context):
