@@ -1,4 +1,4 @@
-![atomic_combo_side_mono_fontdark1-min](https://remingtoncreative.com/wp-content/uploads/2019/07/atomic_combo_side_mono_fontdark1-min.png)
+[![atomic_combo_side_mono_fontdark1-min](https://remingtoncreative.com/wp-content/uploads/2019/07/atomic_combo_side_mono_fontdark1-min.png)](https://remingtoncreative.com/software/blender/atomic/)
 
 [**Learn More About Atomic Data Manager on its Official Product Page**](https://remingtoncreative.com/software/blender/atomic/)
 
