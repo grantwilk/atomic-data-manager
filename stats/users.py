@@ -498,7 +498,7 @@ def node_group_has_node_group(search_group_key, node_group_key):
             # if node group is any other node group
             else:
                 has_node_group = node_group_has_node_group(
-                    search_group.name, node_group.name)
+                    node.node_tree.name, node_group.name)
 
     return has_node_group
 
