@@ -139,6 +139,15 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
     bl_idname = "atomic.clean_all"
     bl_label = "Clean All"
 
+    unused_collections = []
+    unused_images = []
+    unused_lights = []
+    unused_materials = []
+    unused_node_groups = []
+    unused_particles = []
+    unused_textures = []
+    unused_worlds = []
+
     def draw(self, context):
         layout = self.layout
 
@@ -226,6 +235,16 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+
+        self.unused_collections = unused.collections_deep()
+        self.unused_images = unused.images_deep()
+        self.unused_lights = unused.lights_deep()
+        self.unused_materials = unused.materials_deep()
+        self.unused_node_groups = unused.node_groups_deep()
+        self.unused_particles = unused.particles_deep()
+        self.unused_textures = unused.textures_deep()
+        self.unused_worlds = unused.worlds()
+
         return wm.invoke_props_dialog(self)
 
 
@@ -475,16 +494,17 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
     bl_idname = "atomic.clean_collections"
     bl_label = "Clean Collections"
 
+    unused_collections = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        collections = unused.collections_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=collections,
+            items=self.unused_collections,
             icon="OUTLINER_OB_GROUP_INSTANCE"
         )
 
@@ -496,6 +516,7 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_collections = unused.collections_deep()
         return wm.invoke_props_dialog(self)
 
 
@@ -505,16 +526,17 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
     bl_idname = "atomic.clean_images"
     bl_label = "Clean Images"
 
+    unused_images = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        images = unused.images_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=images,
+            items=self.unused_images,
             icon="IMAGE_DATA"
         )
 
@@ -526,7 +548,9 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_images =unused.images_deep()
         return wm.invoke_props_dialog(self)
+
 
 # Atomic Data Manager Clean Lights Operator
 class ATOMIC_OT_clean_lights(bpy.types.Operator):
@@ -534,16 +558,17 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
     bl_idname = "atomic.clean_lights"
     bl_label = "Clean Lights"
 
+    unused_lights = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        lights = unused.lights_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=lights,
+            items=self.unused_lights,
             icon="OUTLINER_OB_LIGHT"
         )
 
@@ -555,6 +580,7 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_lights = unused.lights_deep()
         return wm.invoke_props_dialog(self)
 
 
@@ -564,16 +590,17 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
     bl_idname = "atomic.clean_materials"
     bl_label = "Clean Materials"
 
+    unused_materials = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        materials = unused.materials_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=materials,
+            items=self.unused_materials,
             icon="MATERIAL"
         )
 
@@ -585,6 +612,7 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_materials = unused.materials_deep()
         return wm.invoke_props_dialog(self)
 
 
@@ -594,16 +622,17 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
     bl_idname = "atomic.clean_node_groups"
     bl_label = "Clean Node Groups"
 
+    unused_node_groups = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        node_groups = unused.node_groups_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=node_groups,
+            items=self.unused_node_groups,
             icon="NODETREE"
         )
 
@@ -615,6 +644,7 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_node_groups = unused.node_groups_deep()
         return wm.invoke_props_dialog(self)
 
 
@@ -624,16 +654,17 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
     bl_idname = "atomic.clean_particles"
     bl_label = "Clean Particles"
 
+    unused_particles = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        particles = unused.particles_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=particles,
+            items=self.unused_particles,
             icon="PARTICLES"
         )
 
@@ -645,6 +676,7 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_particles = unused.particles_deep()
         return wm.invoke_props_dialog(self)
 
 
@@ -654,16 +686,17 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
     bl_idname = "atomic.clean_textures"
     bl_label = "Clean Textures"
 
+    unused_textures = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        textures = unused.textures_deep()
         ui_layouts.box_list(
             layout=layout,
-            items=textures,
+            items=self.unused_textures,
             icon="TEXTURE"
         )
 
@@ -675,6 +708,7 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_textures = unused.textures_deep()
         return wm.invoke_props_dialog(self)
 
 
@@ -684,16 +718,17 @@ class ATOMIC_OT_clean_worlds(bpy.types.Operator):
     bl_idname = "atomic.clean_worlds"
     bl_label = "Clean Worlds"
 
+    unused_worlds = []
+
     def draw(self, context):
         layout = self.layout
 
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        worlds = unused.worlds()
         ui_layouts.box_list(
             layout=layout,
-            items=worlds,
+            items=self.unused_worlds,
             icon="WORLD"
         )
 
@@ -705,6 +740,7 @@ class ATOMIC_OT_clean_worlds(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        self.unused_worlds = unused.worlds()
         return wm.invoke_props_dialog(self)
 
 

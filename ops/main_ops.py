@@ -179,6 +179,15 @@ class ATOMIC_OT_clean(bpy.types.Operator):
     bl_idname = "atomic.clean"
     bl_label = "Clean"
 
+    unused_collections = []
+    unused_images = []
+    unused_lights = []
+    unused_materials = []
+    unused_node_groups = []
+    unused_particles = []
+    unused_textures = []
+    unused_worlds = []
+
     def draw(self, context):
         atom = bpy.context.scene.atomic
         layout = self.layout
@@ -197,61 +206,55 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel collections property is toggled
         if atom.collections:
-            collections = sorted(unused.collections_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Collections",
-                items=collections,
+                items=self.unused_collections,
                 icon="OUTLINER_OB_GROUP_INSTANCE"
             )
 
         # display when the main panel images property is toggled
         if atom.images:
-            images = sorted(unused.images_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Images",
-                items=images,
+                items=self.unused_images,
                 icon="IMAGE_DATA"
             )
 
         # display when the main panel lights property is toggled
         if atom.lights:
-            lights = sorted(unused.lights_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Lights",
-                items=lights,
+                items=self.unused_lights,
                 icon="OUTLINER_OB_LIGHT"
             )
 
         # display when the main panel materials property is toggled
         if atom.materials:
-            materials = sorted(unused.materials_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Materials",
-                items=materials,
+                items=self.unused_materials,
                 icon="MATERIAL"
             )
 
         # display when the main panel node groups property is toggled
         if atom.node_groups:
-            node_groups = sorted(unused.node_groups_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Node Groups",
-                items=node_groups,
+                items=self.unused_node_groups,
                 icon="NODETREE"
             )
 
         # display when the main panel particle systems property is toggled
         if atom.particles:
-            particles = sorted(unused.particles_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Particle Systems",
-                items=particles,
+                items=self.unused_particles,
                 icon="PARTICLES"
             )
 
@@ -267,11 +270,10 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel worlds property is toggled
         if atom.worlds:
-            worlds = sorted(unused.worlds())
             ui_layouts.box_list(
                 layout=layout,
                 title="Worlds",
-                items=worlds,
+                items=self.unused_worlds,
                 icon="WORLD"
             )
 
@@ -282,18 +284,25 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         if atom.collections:
             clean.collections()
+
         if atom.images:
             clean.images()
+
         if atom.lights:
             clean.lights()
+
         if atom.materials:
             clean.materials()
+
         if atom.node_groups:
             clean.node_groups()
+
         if atom.particles:
             clean.particles()
+
         if atom.textures:
             clean.textures()
+
         if atom.worlds:
             clean.worlds()
 
@@ -303,6 +312,32 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
     def invoke(self, context, event):
         wm = context.window_manager
+        atom = bpy.context.scene.atomic
+
+        if atom.collections:
+            self.unused_collections = unused.collections_deep()
+
+        if atom.images:
+            self.unused_images = unused.images_deep()
+
+        if atom.lights:
+            self.unused_lights = unused.lights_deep()
+
+        if atom.materials:
+            self.unused_materials = unused.materials_deep()
+
+        if atom.node_groups:
+            self.unused_node_groups = unused.node_groups_deep()
+
+        if atom.particles:
+            self.unused_particles = unused.particles_deep()
+
+        if atom.textures:
+            self.unused_textures = unused.textures_deep()
+
+        if atom.worlds:
+            self.unused_worlds = unused.worlds()
+
         return wm.invoke_props_dialog(self)
 
 
