@@ -65,7 +65,7 @@ def collections_shallow():
     unused = []
 
     for collection in bpy.data.collections:
-        if not (collection.obejcts or collection.children):
+        if not (collection.objects or collection.children):
             unused.append(collection.name)
 
     return unused
