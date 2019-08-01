@@ -145,7 +145,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
         col = layout.column()
         col.label(text="Remove the following data-blocks?")
 
-        collections = sorted(unused.collections())
+        collections = sorted(unused.collections_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Collections",
@@ -153,7 +153,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
             icon="OUTLINER_OB_GROUP_INSTANCE"
         )
 
-        images = sorted(unused.images())
+        images = sorted(unused.images_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Images",
@@ -161,7 +161,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
             icon="IMAGE_DATA"
         )
 
-        lights = sorted(unused.lights())
+        lights = sorted(unused.lights_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Lights",
@@ -169,7 +169,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
             icon="OUTLINER_OB_LIGHT"
         )
 
-        materials = sorted(unused.materials())
+        materials = sorted(unused.materials_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Materials",
@@ -177,7 +177,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
             icon="MATERIAL"
         )
 
-        node_groups = sorted(unused.node_groups())
+        node_groups = sorted(unused.node_groups_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Node Groups",
@@ -185,7 +185,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
             icon="NODETREE"
         )
 
-        particles = sorted(unused.particles())
+        particles = sorted(unused.particles_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Particle Systems",
@@ -193,7 +193,7 @@ class ATOMIC_OT_clean_all(bpy.types.Operator):
             icon="PARTICLES"
         )
 
-        textures = sorted(unused.textures())
+        textures = sorted(unused.textures_deep())
         ui_layouts.box_list(
             layout=layout,
             title="Textures",
@@ -481,7 +481,7 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        collections = unused.collections()
+        collections = unused.collections_deep()
         ui_layouts.box_list(
             layout=layout,
             items=collections,
@@ -511,7 +511,7 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        images = unused.images()
+        images = unused.images_deep()
         ui_layouts.box_list(
             layout=layout,
             items=images,
@@ -540,7 +540,7 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        lights = unused.lights()
+        lights = unused.lights_deep()
         ui_layouts.box_list(
             layout=layout,
             items=lights,
@@ -570,7 +570,7 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        materials = unused.materials()
+        materials = unused.materials_deep()
         ui_layouts.box_list(
             layout=layout,
             items=materials,
@@ -600,7 +600,7 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        node_groups = unused.node_groups()
+        node_groups = unused.node_groups_deep()
         ui_layouts.box_list(
             layout=layout,
             items=node_groups,
@@ -630,7 +630,7 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        particles = unused.particles()
+        particles = unused.particles_deep()
         ui_layouts.box_list(
             layout=layout,
             items=particles,
@@ -660,7 +660,7 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
         row = layout.row()
         row.label(text="Remove the following data-blocks?")
 
-        textures = unused.textures()
+        textures = unused.textures_deep()
         ui_layouts.box_list(
             layout=layout,
             items=textures,

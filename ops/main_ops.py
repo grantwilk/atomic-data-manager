@@ -197,7 +197,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel collections property is toggled
         if atom.collections:
-            collections = sorted(unused.collections())
+            collections = sorted(unused.collections_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Collections",
@@ -207,7 +207,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel images property is toggled
         if atom.images:
-            images = sorted(unused.images())
+            images = sorted(unused.images_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Images",
@@ -217,7 +217,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel lights property is toggled
         if atom.lights:
-            lights = sorted(unused.lights())
+            lights = sorted(unused.lights_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Lights",
@@ -227,7 +227,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel materials property is toggled
         if atom.materials:
-            materials = sorted(unused.materials())
+            materials = sorted(unused.materials_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Materials",
@@ -237,7 +237,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel node groups property is toggled
         if atom.node_groups:
-            node_groups = sorted(unused.node_groups())
+            node_groups = sorted(unused.node_groups_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Node Groups",
@@ -247,7 +247,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel particle systems property is toggled
         if atom.particles:
-            particles = sorted(unused.particles())
+            particles = sorted(unused.particles_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Particle Systems",
@@ -257,7 +257,7 @@ class ATOMIC_OT_clean(bpy.types.Operator):
 
         # display when the main panel textures property is toggled
         if atom.textures:
-            textures = sorted(unused.textures())
+            textures = sorted(unused.textures_deep())
             ui_layouts.box_list(
                 layout=layout,
                 title="Textures",
@@ -325,13 +325,13 @@ class ATOMIC_OT_smart_select(bpy.types.Operator):
 
     def execute(self, context):
 
-        bpy.context.scene.atomic.collections = any(unused.collections())
-        bpy.context.scene.atomic.images = any(unused.images())
-        bpy.context.scene.atomic.lights = any(unused.lights())
-        bpy.context.scene.atomic.materials = any(unused.materials())
-        bpy.context.scene.atomic.node_groups = any(unused.node_groups())
-        bpy.context.scene.atomic.particles = any(unused.particles())
-        bpy.context.scene.atomic.textures = any(unused.textures())
+        bpy.context.scene.atomic.collections = any(unused.collections_deep())
+        bpy.context.scene.atomic.images = any(unused.images_deep())
+        bpy.context.scene.atomic.lights = any(unused.lights_deep())
+        bpy.context.scene.atomic.materials = any(unused.materials_deep())
+        bpy.context.scene.atomic.node_groups = any(unused.node_groups_deep())
+        bpy.context.scene.atomic.particles = any(unused.particles_deep())
+        bpy.context.scene.atomic.textures = any(unused.textures_deep())
         bpy.context.scene.atomic.worlds = any(unused.worlds())
 
         return {'FINISHED'}

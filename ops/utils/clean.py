@@ -28,43 +28,43 @@ from atomic_data_manager.stats import unused
 
 def collections():
     # removes all unused collections from the project
-    for collection_key in unused.collections():
+    for collection_key in unused.collections_deep():
         bpy.data.collections.remove(bpy.data.collections[collection_key])
 
 
 def images():
     # removes all unused images from the project
-    for image_key in unused.images():
+    for image_key in unused.images_deep():
         bpy.data.images.remove(bpy.data.images[image_key])
 
 
 def lights():
     # removes all unused lights from the project
-    for light_key in unused.lights():
+    for light_key in unused.lights_deep():
         bpy.data.lights.remove(bpy.data.lights[light_key])
 
 
 def materials():
     # removes all unused materials from the project
-    for light_key in unused.materials():
+    for light_key in unused.materials_deep():
         bpy.data.materials.remove(bpy.data.materials[light_key])
 
 
 def node_groups():
     # removes all unused node groups from the project
-    for node_group_key in unused.node_groups():
+    for node_group_key in unused.node_groups_deep():
         bpy.data.node_groups.remove(bpy.data.node_groups[node_group_key])
 
 
 def particles():
     # removes all unused particle systems from the project
-    for particle_key in unused.particles():
+    for particle_key in unused.particles_deep():
         bpy.data.particles.remove(bpy.data.particles[particle_key])
 
 
 def textures():
     # removes all unused textures from the project
-    for texture_key in unused.textures():
+    for texture_key in unused.textures_deep():
         bpy.data.textures.remove(bpy.data.textures[texture_key])
 
 

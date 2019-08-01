@@ -37,7 +37,7 @@ def collections():
 def collections_unused():
     # returns the number of unused collections in the project
 
-    return len(unused.collections())
+    return len(unused.collections_shallow())
 
 
 def collections_unnamed():
@@ -55,7 +55,7 @@ def images():
 def images_unused():
     # returns the number of unused images in the project
 
-    return len(unused.images())
+    return len(unused.images_shallow())
 
 
 def images_unnamed():
@@ -79,7 +79,7 @@ def lights():
 def lights_unused():
     # returns the number of unused lights in the project
 
-    return len(unused.lights())
+    return len(unused.lights_shallow())
 
 
 def lights_unnamed():
@@ -97,7 +97,7 @@ def materials():
 def materials_unused():
     # returns the number of unused materials in the project
 
-    return len(unused.materials())
+    return len(unused.materials_shallow())
 
 
 def materials_unnamed():
@@ -115,7 +115,7 @@ def node_groups():
 def node_groups_unused():
     # returns the number of unused node groups in the project
 
-    return len(unused.node_groups())
+    return len(unused.node_groups_shallow())
 
 
 def node_groups_unnamed():
@@ -145,7 +145,7 @@ def particles():
 def particles_unused():
     # returns the number of unused particles in the project
 
-    return len(unused.particles())
+    return len(unused.particles_shallow())
 
 
 def particles_unnamed():
@@ -163,7 +163,7 @@ def textures():
 def textures_unused():
     # returns the number of unused textures in the project
 
-    return len(unused.textures())
+    return len(unused.textures_shallow())
 
 
 def textures_unnamed():
