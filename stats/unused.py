@@ -28,19 +28,50 @@ from atomic_data_manager import config
 from atomic_data_manager.stats import users
 
 
-def collections():
+def shallow(data):
+    # returns a list of keys of unused data-blocks in the data that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    unused = []
+
+    for datablock in data:
+
+        # if data-block has no users or if it has a fake user and
+        # ignore fake users is enabled
+        if datablock.users == 0 or (datablock.users == 1 and
+                                    datablock.use_fake_user and
+                                    config.ignore_fake_users):
+            unused.append(datablock.name)
+
+    return unused
+
+
+def collections_deep():
     # returns a full list of keys of unused collections
 
     unused = []
 
     for collection in bpy.data.collections:
-        if not (collection.objects or collection.children):
+        if not users.collection_all(collection.name):
             unused.append(collection.name)
 
     return unused
 
 
-def images():
+def collections_shallow():
+    # returns a list of keys of unused collections that may be
+    # incomplete, but is significantly faster.
+
+    unused = []
+
+    for collection in bpy.data.collections:
+        if not (collection.obejcts or collection.children):
+            unused.append(collection.name)
+
+    return unused
+
+
+def images_deep():
     # returns a full list of keys of unused images
 
     unused = []
@@ -56,7 +87,14 @@ def images():
     return unused
 
 
-def lights():
+def images_shallow():
+    # returns a list of keys of unused images that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    return shallow(bpy.data.images)
+
+
+def lights_deep():
     # returns a list of keys of unused lights
 
     unused = []
@@ -72,7 +110,14 @@ def lights():
     return unused
 
 
-def materials():
+def lights_shallow():
+    # returns a list of keys of unused lights that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    return shallow(bpy.data.lights)
+
+
+def materials_deep():
     # returns a list of keys of unused materials
 
     unused = []
@@ -88,7 +133,14 @@ def materials():
     return unused
 
 
-def node_groups():
+def materials_shallow():
+    # returns a list of keys of unused material that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    return shallow(bpy.data.materials)
+
+
+def node_groups_deep():
     # returns a list of keys of unused node_groups
 
     unused = []
@@ -104,8 +156,15 @@ def node_groups():
     return unused
 
 
-def particles():
-    # returns a list of keys of unused particles
+def node_groups_shallow():
+    # returns a list of keys of unused node groups that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    return shallow(bpy.data.node_groups)
+
+
+def particles_deep():
+    # returns a list of keys of unused particle systems
 
     unused = []
 
@@ -120,7 +179,14 @@ def particles():
     return unused
 
 
-def textures():
+def particles_shallow():
+    # returns a list of keys of unused particle systems that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    return shallow(bpy.data.particles)
+
+
+def textures_deep():
     # returns a list of keys of unused textures
 
     unused = []
@@ -136,19 +202,25 @@ def textures():
     return unused
 
 
+def textures_shallow():
+    # returns a list of keys of unused textures that may be
+    # incomplete, but is significantly faster than doing a deep search
+
+    return shallow(bpy.data.textures)
+
+
 def worlds():
-    # returns a list of keys of unused worlds
+    # returns a full list of keys of unused worlds
 
     unused = []
 
     for world in bpy.data.worlds:
 
-        # if the world has no users or has one fake user
-        if world.users == 0 or (world.users == 1 and world.use_fake_user):
-
-            # check if world has a fake user or if ignore fake users
-            # is enabled
-            if not world.use_fake_user or config.ignore_fake_users:
-                unused.append(world.name)
+        # if data-block has no users or if it has a fake user and
+        # ignore fake users is enabled
+        if world.users == 0 or (world.users == 1 and
+                                world.use_fake_user and
+                                config.ignore_fake_users):
+            unused.append(world.name)
 
     return unused
