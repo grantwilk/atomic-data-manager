@@ -55,8 +55,8 @@ def collection_cameras(collection_key):
         if obj.type == 'CAMERA':
             users.append(obj.name)
 
-        # list of all child collections in our collection
-        children = collection_children(collection_key)
+    # list of all child collections in our collection
+    children = collection_children(collection_key)
 
     # append all camera objects from the child collections
     for child in children:
