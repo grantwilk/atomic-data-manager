@@ -360,14 +360,29 @@ class ATOMIC_OT_smart_select(bpy.types.Operator):
 
     def execute(self, context):
 
-        bpy.context.scene.atomic.collections = any(unused.collections_deep())
-        bpy.context.scene.atomic.images = any(unused.images_deep())
-        bpy.context.scene.atomic.lights = any(unused.lights_deep())
-        bpy.context.scene.atomic.materials = any(unused.materials_deep())
-        bpy.context.scene.atomic.node_groups = any(unused.node_groups_deep())
-        bpy.context.scene.atomic.particles = any(unused.particles_deep())
-        bpy.context.scene.atomic.textures = any(unused.textures_deep())
-        bpy.context.scene.atomic.worlds = any(unused.worlds())
+        bpy.context.scene.atomic.collections = \
+            any(unused.collections_deep())
+
+        bpy.context.scene.atomic.images = \
+            any(unused.images_deep())
+
+        bpy.context.scene.atomic.lights = \
+            any(unused.lights_deep())
+
+        bpy.context.scene.atomic.materials = \
+            any(unused.materials_deep())
+
+        bpy.context.scene.atomic.node_groups = \
+            any(unused.node_groups_deep())
+
+        bpy.context.scene.atomic.particles = \
+            any(unused.particles_deep())
+
+        bpy.context.scene.atomic.textures = \
+            any(unused.textures_deep())
+
+        bpy.context.scene.atomic.worlds = \
+            any(unused.worlds())
 
         return {'FINISHED'}
 
