@@ -11,10 +11,17 @@ Atomic Data Manager offers Blender artists an intelligent data management soluti
 
 ## UNMATCHED FEATURE SET
 
-|**Rapid Cleaning:** With Atomic, you can clean your project files in a snap. Simply select a category and click the clean button.|**Missing File Detection:** Stop those pink textures! Atomic helps you restore missing project files before you even realize they're gone.|
+| Rapid Cleaning | File Detection |
 |--|--|
-|**Inspection Tools:** Find out where and how data-blocks are being used, so you can make manual adjustments on the fly.|**Data Security:** Know what you're removing before its gone. Atomic offers reliable data security features to keep your projects safe.|
-|**Rich Statistics:** Get a detailed breakdown of the data being used in your Blender projects. Surprisingly interesting and useful!|**Compact Design:** Atomic's sleek user interface packs numerous powerful features into a convenient and easily accessible space.|
+| With Atomic, you can clean your project files in a snap. Simply select a category and click the clean button. | Stop those pink textures! Atomic helps you restore missing project files before you even realize they're gone. |
+
+| Inspection Tools | Data Security |
+|--|--|
+| Find out where and how data-blocks are being used, so you can make manual adjustments on the fly. | Know what you're removing before its gone. Atomic offers reliable data security features to keep your projects safe. |
+
+| Rich Statistics | Compact Design |
+|--|--|
+| Get a detailed breakdown of the data being used in your Blender projects. Surprisingly interesting and useful! | Atomic's sleek user interface packs numerous powerful features into a convenient and easily accessible space.|
 
 #### Additional Features:
 Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Accidental Deletions, Save Data-Blocks, Delete Data-Blocks, Replace Data-Blocks, Rename Data-Blocks, Reload Missing Files, Remove Missing Files, Replace Missing Files*, and Search for Missing Files*.
