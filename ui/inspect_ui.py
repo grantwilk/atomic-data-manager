@@ -45,6 +45,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
     bl_idname = "atomic.inspect_collections"
     bl_label = "Inspect Collections"
 
+    # user lists
     users_meshes = []
     users_lights = []
     users_cameras = []
@@ -66,6 +67,8 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+
+            # if key is valid, update the user lists
             if atom.collections_field in bpy.data.collections.keys():
                 self.users_meshes = \
                     users.collection_meshes(atom.collections_field)
@@ -78,6 +81,7 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
                 self.users_children = \
                     users.collection_children(atom.collections_field)
 
+            # if key is invalid, empty the user lists
             else:
                 self.users_meshes = []
                 self.users_lights = []
@@ -132,11 +136,16 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "COLLECTIONS"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
@@ -146,6 +155,8 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
     bl_idname = "atomic.inspect_images"
     bl_label = "Inspect Images"
 
+    # user lists
+    users_compositors = []
     users_materials = []
     users_node_groups = []
     users_textures = []
@@ -166,7 +177,11 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+
+            # if key is valid, update the user lists
             if atom.images_field in bpy.data.images.keys():
+                self.users_compositors = \
+                    users.image_compositors(atom.images_field)
                 self.users_materials = \
                     users.image_materials(atom.images_field)
                 self.users_node_groups = \
@@ -176,13 +191,23 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
                 self.users_worlds = \
                     users.image_worlds(atom.images_field)
 
+            # if key is invalid, empty the user lists
             else:
+                self.users_compositors = []
                 self.users_materials = []
                 self.users_node_groups = []
                 self.users_textures = []
                 self.users_worlds = []
 
             inspection_update_trigger = False
+
+        # compositors box list
+        ui_layouts.box_list(
+            layout=layout,
+            title="Compositors",
+            items=self.users_compositors,
+            icon="NODE_COMPOSITING"
+        )
 
         # materials box list
         ui_layouts.box_list(
@@ -222,13 +247,17 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "IMAGES"
 
-        return wm.invoke_props_dialog(self)
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
 
+        # invoke inspect dialog
+        wm = context.window_manager
+        return wm.invoke_props_dialog(self)
 
 # Atomic Data Manager Inspect Lights UI Operator
 class ATOMIC_OT_inspect_lights(bpy.types.Operator):
@@ -236,6 +265,7 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
     bl_idname = "atomic.inspect_lights"
     bl_label = "Inspect Lights"
 
+    # user lists
     users_objects = []
 
     def draw(self, context):
@@ -253,9 +283,11 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+            # if key is valid, update the user lists
             if atom.lights_field in bpy.data.lights.keys():
                 self.users_objects = users.light_objects(atom.lights_field)
 
+            # if key is invalid, empty the user lists
             else:
                 self.users_objects = []
 
@@ -275,11 +307,16 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "LIGHTS"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
@@ -289,6 +326,7 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
     bl_idname = "atomic.inspect_materials"
     bl_label = "Inspect Materials"
 
+    # user lists
     users_objects = []
 
     def draw(self, context):
@@ -306,10 +344,13 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+
+            # if key is valid, update the user lists
             if atom.materials_field in bpy.data.materials.keys():
                 self.users_objects = \
                     users.material_objects(atom.materials_field)
 
+            # if key is invalid, empty the user lists
             else:
                 self.users_objects = []
 
@@ -328,11 +369,16 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "MATERIALS"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
@@ -342,6 +388,8 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
     bl_idname = "atomic.inspect_node_groups"
     bl_label = "Inspect Node Groups"
 
+    # user lists
+    users_compositors = []
     users_materials = []
     users_node_groups = []
     users_textures = []
@@ -362,8 +410,12 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+
+            # if key is valid, update the user lists
             if atom.node_groups_field in bpy.data.node_groups.keys():
 
+                self.users_compositors = \
+                    users.node_group_compositors(atom.node_groups_field)
                 self.users_materials = \
                     users.node_group_materials(atom.node_groups_field)
                 self.users_node_groups = \
@@ -373,13 +425,23 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
                 self.users_worlds = \
                     users.node_group_worlds(atom.node_groups_field)
 
+            # if key is invalid, empty the user lists
             else:
+                self.users_compositors = []
                 self.users_materials = []
                 self.users_node_groups = []
                 self.users_textures = []
                 self.users_worlds = []
 
             inspection_update_trigger = False
+
+        # compositors box list
+        ui_layouts.box_list(
+            layout=layout,
+            title="Compositors",
+            items=self.users_compositors,
+            icon="NODE_COMPOSITING"
+        )
 
         # materials box list
         ui_layouts.box_list(
@@ -419,11 +481,16 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "NODE_GROUPS"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
@@ -433,6 +500,7 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
     bl_idname = "atomic.inspect_particles"
     bl_label = "Inspect Particles"
 
+    # user lists
     users_objects = []
 
     def draw(self, context):
@@ -450,11 +518,14 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+
+            # if key is valid, update the user lists
             if atom.particles_field in bpy.data.particles.keys():
 
                 self.users_objects = \
                     users.particle_objects(atom.particles_field)
 
+            # if key is invalid, empty the user lists
             else:
                 self.users_objects = []
 
@@ -474,11 +545,16 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "PARTICLES"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
@@ -488,11 +564,11 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
     bl_idname = "atomic.inspect_textures"
     bl_label = "Inspect Textures"
 
+    # user lists
+    users_compositors = []
     users_brushes = []
     users_particles = []
     users_objects = []
-
-    textures_field: bpy.props.StringProperty()
 
     def draw(self, context):
         global inspection_update_trigger
@@ -509,7 +585,12 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
 
         # inspection update code
         if inspection_update_trigger:
+
+            # if the key is valid, update the user lists
             if atom.textures_field in bpy.data.textures.keys():
+
+                self.users_compositors = \
+                    users.texture_compositor(atom.textures_field)
                 self.users_brushes = \
                     users.texture_brushes(atom.textures_field)
                 self.users_objects = \
@@ -517,7 +598,9 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
                 self.users_particles = \
                     users.texture_particles(atom.textures_field)
 
+            # if the key is invalid, set empty the user lists
             else:
+                self.users_compositors = []
                 self.users_brushes = []
                 self.users_particles = []
                 self.users_objects = []
@@ -530,6 +613,14 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
             title="Brushes",
             items=self.users_brushes,
             icon="BRUSH_DATA"
+        )
+
+        # compositors box list
+        ui_layouts.box_list(
+            layout=layout,
+            title="Compositors",
+            items=self.users_compositors,
+            icon="NODE_COMPOSITING"
         )
 
         # particles box list
@@ -553,11 +644,16 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "TEXTURES"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 
@@ -591,11 +687,16 @@ class ATOMIC_OT_inspect_worlds(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
-        wm = context.window_manager
-
+        # update inspection context
         atom = bpy.context.scene.atomic
         atom.active_inspection = "WORLDS"
 
+        # trigger update on invoke
+        global inspection_update_trigger
+        inspection_update_trigger = True
+
+        # invoke inspect dialog
+        wm = context.window_manager
         return wm.invoke_props_dialog(self)
 
 

@@ -158,10 +158,45 @@ def collection_others(collection_key):
 def image_all(image_key):
     # returns a list of keys of every data-block that uses this image
 
-    return image_materials(image_key) + \
+    return image_compositors(image_key) + \
+           image_materials(image_key) + \
            image_node_groups(image_key) + \
            image_textures(image_key) + \
            image_worlds(image_key)
+
+
+def image_compositors(image_key):
+    # returns a list containing "Compositor" if the image is used in
+    # the scene's compositor
+
+    users = []
+    image = bpy.data.images[image_key]
+
+    # a list of node groups that use our image
+    node_group_users = image_node_groups(image_key)
+
+    # if our compositor uses nodes and has a valid node tree
+    if bpy.context.scene.use_nodes and bpy.context.scene.node_tree:
+
+        # check each node in the compositor
+        for node in bpy.context.scene.node_tree.nodes:
+
+            # if the node is an image node with a valid image
+            if hasattr(node, 'image') and node.image:
+
+                # if the node's image is our image
+                if node.image.name == image.name:
+                    users.append("Compositor")
+
+            # if the node is a group node with a valid node tree
+            elif hasattr(node, 'node_tree') and node.node_tree:
+
+                # if the node tree's name is in our list of node group
+                # users
+                if node.node_tree.name in node_group_users:
+                    users.append("Compositor")
+
+    return distinct(users)
 
 
 def image_materials(image_key):
@@ -235,7 +270,7 @@ def image_textures(image_key):
                         users.append(texture.name)
 
                 # check for node groups that use this image
-                elif node.type == "GROUP" and node.node_tree:
+                elif hasattr(node, 'node_tree') and node.node_tree:
 
                     # if node group is in our list of node groups that
                     # use this image
@@ -276,7 +311,7 @@ def image_worlds(image_key):
                         users.append(world.name)
 
                 # check for node groups that use this image
-                elif node.type == "GROUP" and node.node_tree:
+                elif hasattr(node, 'node_tree') and node.node_tree:
                     if node.node_tree.name in node_group_users:
                         users.append(world.name)
 
@@ -334,10 +369,41 @@ def material_objects(material_key):
 def node_group_all(node_group_key):
     # returns a list of keys of every data-block that uses this node group
 
-    return node_group_materials(node_group_key) + \
+    return node_group_compositors(node_group_key) + \
+           node_group_materials(node_group_key) + \
            node_group_node_groups(node_group_key) + \
            node_group_textures(node_group_key) + \
            node_group_worlds(node_group_key)
+
+
+def node_group_compositors(node_group_key):
+    # returns a list containing "Compositor" if the node group is used in
+    # the scene's compositor
+
+    users = []
+    node_group = bpy.data.node_groups[node_group_key]
+
+    # a list of node groups that use our node group
+    node_group_users = node_group_node_groups(node_group_key)
+
+    # if our compositor uses nodes and has a valid node tree
+    if bpy.context.scene.use_nodes and bpy.context.scene.node_tree:
+
+        # check each node in the compositor
+        for node in bpy.context.scene.node_tree.nodes:
+
+            # if the node is a group and has a valid node tree
+            if hasattr(node, 'node_tree') and node.node_tree:
+
+                # if the node group is our node group
+                if node.node_tree.name == node_group.name:
+                    users.append("Compositor")
+
+                # if the node group is in our list of node group users
+                if node.node_tree.name in node_group_users:
+                    users.append("Compositor")
+
+    return distinct(users)
 
 
 def node_group_materials(node_group_key):
@@ -357,7 +423,7 @@ def node_group_materials(node_group_key):
             for node in material.node_tree.nodes:
 
                 # if node is a group node
-                if node.type == "GROUP" and node.node_tree:
+                if hasattr(node, 'node_tree') and node.node_tree:
 
                     # if node is the node group
                     if node.node_tree.name == node_group.name:
@@ -405,7 +471,7 @@ def node_group_textures(node_group_key):
             for node in texture.node_tree.nodes:
 
                 # check if node is a node group and has a valid node tree
-                if node.type == "GROUP" and node.node_tree:
+                if hasattr(node, 'node_tree') and node.node_tree:
 
                     # if node is our node group
                     if node.node_tree.name == node_group.name:
@@ -435,7 +501,7 @@ def node_group_worlds(node_group_key):
             for node in world.node_tree.nodes:
 
                 # if node is a node group and has a valid node tree
-                if node.type == 'GROUP' and node.node_tree:
+                if hasattr(node, 'node_tree') and node.node_tree:
 
                     # if this node is our node group
                     if node.node_tree.name == node_group.name:
@@ -450,7 +516,9 @@ def node_group_worlds(node_group_key):
 
 
 def node_group_has_image(node_group_key, image_key):
-    # returns true if a node group contains this image
+    # recursively returns true if the node group contains this image
+    # directly or if it contains a node group a node group that contains
+    # the image indirectly
 
     has_image = False
     node_group = bpy.data.node_groups[node_group_key]
@@ -469,7 +537,7 @@ def node_group_has_image(node_group_key, image_key):
 
         # recurse case
         # if node is a node group and has a valid node tree
-        elif node.type == "GROUP" and node.node_tree:
+        elif hasattr(node, 'node_tree') and node.node_tree:
             has_image = node_group_has_image(
                 node.node_tree.name, image.name)
 
@@ -487,7 +555,7 @@ def node_group_has_node_group(search_group_key, node_group_key):
     for node in search_group.nodes:
 
         # if node is a node group and has a valid node tree
-        if node.type == "GROUP" and node.node_tree:
+        if hasattr(node, 'node_tree') and node.node_tree:
 
             # base case
             # if node group is our node group
@@ -523,7 +591,7 @@ def node_group_has_texture(node_group_key, texture_key):
 
         # recurse case
         # if node is a node group and has a valid node tree
-        elif node.type == "GROUP" and node.node_tree:
+        elif hasattr(node, 'node_tree') and node.node_tree:
             has_texture = node_group_has_texture(
                 node.node_tree.name, texture.name)
 
@@ -560,6 +628,7 @@ def texture_all(texture_key):
     # returns a list of keys of every data-block that uses this texture
 
     return texture_brushes(texture_key) + \
+           texture_compositor(texture_key) + \
            texture_objects(texture_key) + \
            texture_node_groups(texture_key) + \
            texture_particles(texture_key)
@@ -579,6 +648,40 @@ def texture_brushes(texture_key):
             # if brush texture is our texture
             if brush.texture.name == texture.name:
                 users.append(brush.name)
+
+    return distinct(users)
+
+
+def texture_compositor(texture_key):
+    # returns a list containing "Compositor" if the texture is used in
+    # the scene's compositor
+
+    users = []
+    texture = bpy.data.textures[texture_key]
+
+    # a list of node groups that use our image
+    node_group_users = texture_node_groups(texture_key)
+
+    # if our compositor uses nodes and has a valid node tree
+    if bpy.context.scene.use_nodes and bpy.context.scene.node_tree:
+
+        # check each node in the compositor
+        for node in bpy.context.scene.node_tree.nodes:
+
+            # if the node is an texture node with a valid texture
+            if hasattr(node, 'texture') and node.texture:
+
+                # if the node's texture is our texture
+                if node.texture.name == texture.name:
+                    users.append("Compositor")
+
+            # if the node is a group node with a valid node tree
+            elif hasattr(node, 'node_tree') and node.node_tree:
+
+                # if the node tree's name is in our list of node group
+                # users
+                if node.node_tree.name in node_group_users:
+                    users.append("Compositor")
 
     return distinct(users)
 
