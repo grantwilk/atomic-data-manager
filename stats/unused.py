@@ -76,13 +76,20 @@ def images_deep():
 
     unused = []
 
+    # a list of image keys that should not be flagged as unused
+    # this list also exists in images_shallow()
+    do_not_flag = ["Render Result", "Viewer Node", "D-NOISE Export"]
+
     for image in bpy.data.images:
         if not users.image_all(image.name):
 
             # check if image has a fake user or if ignore fake users
             # is enabled
             if not image.use_fake_user or config.ignore_fake_users:
-                unused.append(image.name)
+
+                # if image is not in our do not flag list
+                if image.name not in do_not_flag:
+                    unused.append(image.name)
 
     return unused
 
@@ -91,7 +98,18 @@ def images_shallow():
     # returns a list of keys of unused images that may be
     # incomplete, but is significantly faster than doing a deep search
 
-    return shallow(bpy.data.images)
+    unused_images = shallow(bpy.data.images)
+
+    # a list of image keys that should not be flagged as unused
+    # this list also exists in images_deep()
+    do_not_flag = ["Render Result", "Viewer Node", "D-NOISE Export"]
+
+    # remove do not flag keys from unused images
+    for key in do_not_flag:
+        if key in unused_images:
+            unused_images.remove(key)
+
+    return unused_images
 
 
 def lights_deep():
