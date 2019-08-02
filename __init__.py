@@ -29,6 +29,7 @@ from bpy.utils import register_class
 from bpy.utils import unregister_class
 from atomic_data_manager import ops
 from atomic_data_manager import ui
+from atomic_data_manager.ui import inspect_ui
 from atomic_data_manager.updater import addon_updater_ops
 
 bl_info = {
@@ -59,14 +60,29 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
     worlds: bpy.props.BoolProperty(default=False)
 
     # inspect data-block search fields
-    collections_field: bpy.props.StringProperty()
-    images_field: bpy.props.StringProperty()
-    lights_field: bpy.props.StringProperty()
-    materials_field: bpy.props.StringProperty()
-    node_groups_field: bpy.props.StringProperty()
-    particles_field: bpy.props.StringProperty()
-    textures_field: bpy.props.StringProperty()
-    worlds_field: bpy.props.StringProperty()
+    collections_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    images_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    lights_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    materials_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    node_groups_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    particles_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    textures_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
+
+    worlds_field: bpy.props.StringProperty(
+        update=inspect_ui.update_inspection)
 
     # enum for the inspection mode that is currently active
     active_inspection: bpy.props.EnumProperty(
@@ -200,23 +216,23 @@ class ATOMIC_PG_main(bpy.types.PropertyGroup):
 
 
 def register():
-    # Add-on updater registration
+    # add-on updater registration
     addon_updater_ops.register(bl_info)
 
     register_class(ATOMIC_PG_main)
     bpy.types.Scene.atomic = bpy.props.PointerProperty(type=ATOMIC_PG_main)
 
-    # Atomic package registration
+    # atomic package registration
     ui.register()
     ops.register()
 
 
 def unregister():
 
-    # Add-on updated unregistration
+    # add-on updated unregistration
     addon_updater_ops.unregister()
 
-    # Atomic package unregistration
+    # atomic package unregistration
     ui.unregister()
     ops.unregister()
 

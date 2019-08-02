@@ -146,8 +146,8 @@ def inspect_header(layout, atom_prop, data):
 
     # convert the data set string into an actual data set reference
     data = getattr(bpy.data, data)
-    # convert the atom_prop input into the value of its respective
-    # string property
+
+    # get the string value of the string property
     text_field = getattr(atom, atom_prop)
 
     # determine whether or not the text entered in the string property

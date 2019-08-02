@@ -29,18 +29,33 @@ from atomic_data_manager.stats import users
 from atomic_data_manager.ui.utils import ui_layouts
 
 
+# bool that triggers an inspection update if it is True when the
+# inspection's draw() method is called
+inspection_update_trigger = False
+
+
+def update_inspection(self, context):
+    global inspection_update_trigger
+    inspection_update_trigger = True
+
+
 # Atomic Data Manager Inspect Collections UI Operator
 class ATOMIC_OT_inspect_collections(bpy.types.Operator):
     """Inspect Collections"""
     bl_idname = "atomic.inspect_collections"
     bl_label = "Inspect Collections"
 
+    users_meshes = []
+    users_lights = []
+    users_cameras = []
+    users_others = []
+    users_children = []
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        collections = bpy.data.collections
-        collections_field = atom.collections_field \
-            if atom.collections_field in collections.keys() else ""
+
+        layout = self.layout
 
         # inspect collections box list
         ui_layouts.inspect_header(
@@ -49,62 +64,65 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
             data="collections"
         )
 
-        # mesh box list
-        meshes = sorted(
-            users.collection_meshes(collections_field)) \
-            if collections_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.collections_field in bpy.data.collections.keys():
+                self.users_meshes = \
+                    users.collection_meshes(atom.collections_field)
+                self.users_lights = \
+                    users.collection_lights(atom.collections_field)
+                self.users_cameras = \
+                    users.collection_cameras(atom.collections_field)
+                self.users_others = \
+                    users.collection_others(atom.collections_field)
+                self.users_children = \
+                    users.collection_children(atom.collections_field)
 
+            else:
+                self.users_meshes = []
+                self.users_lights = []
+                self.users_cameras = []
+                self.users_others = []
+                self.users_children = []
+
+            inspection_update_trigger = False
+
+        # mesh box list
         ui_layouts.box_list(
             layout=layout,
             title="Meshes",
-            items=meshes,
+            items=self.users_meshes,
             icon="OUTLINER_OB_MESH"
         )
 
         # light box list
-        lights = sorted(
-            users.collection_lights(collections_field)) \
-            if collections_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Lights",
-            items=lights,
+            items=self.users_lights,
             icon="OUTLINER_OB_LIGHT"
         )
 
         # camera box list
-        cameras = sorted(
-            users.collection_cameras(collections_field)) \
-            if collections_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Cameras",
-            items=cameras,
+            items=self.users_cameras,
             icon="OUTLINER_OB_CAMERA"
         )
 
         # other objects box list
-        others = sorted(
-            users.collection_others(collections_field)) \
-            if collections_field != "" else []
-
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Other",
-            items=others
+            items=self.users_others
         )
 
         # child collections box list
-        children = sorted(
-            users.collection_children(collections_field)) \
-            if collections_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Child Collections",
-            items=children,
+            items=self.users_children,
             icon="OUTLINER_OB_GROUP_INSTANCE"
         )
 
@@ -114,9 +132,11 @@ class ATOMIC_OT_inspect_collections(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "COLLECTIONS"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -126,12 +146,16 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
     bl_idname = "atomic.inspect_images"
     bl_label = "Inspect Images"
 
+    users_materials = []
+    users_node_groups = []
+    users_textures = []
+    users_worlds = []
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        images = bpy.data.images
-        images_field = atom.images_field \
-            if atom.images_field in images.keys() else ""
+
+        layout = self.layout
 
         # inspect images header
         ui_layouts.inspect_header(
@@ -140,51 +164,55 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
             data="images"
         )
 
-        # materials box list
-        materials = sorted(
-            users.image_materials(images_field)) \
-            if images_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.images_field in bpy.data.images.keys():
+                self.users_materials = \
+                    users.image_materials(atom.images_field)
+                self.users_node_groups = \
+                    users.image_node_groups(atom.images_field)
+                self.users_textures = \
+                    users.image_textures(atom.images_field)
+                self.users_worlds = \
+                    users.image_worlds(atom.images_field)
 
+            else:
+                self.users_materials = []
+                self.users_node_groups = []
+                self.users_textures = []
+                self.users_worlds = []
+
+            inspection_update_trigger = False
+
+        # materials box list
         ui_layouts.box_list(
             layout=layout,
             title="Materials",
-            items=materials,
+            items=self.users_materials,
             icon="MATERIAL"
         )
 
         # node groups box list
-        materials = sorted(
-            users.image_node_groups(images_field)) \
-            if images_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Node Groups",
-            items=materials,
+            items=self.users_node_groups,
             icon="NODETREE"
         )
 
         # textures box list
-        textures = sorted(
-            users.image_textures(images_field)) \
-            if images_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Textures",
-            items=textures,
+            items=self.users_textures,
             icon="TEXTURE"
         )
 
         # worlds box list
-        worlds = sorted(
-            users.image_worlds(images_field)) \
-            if images_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Worlds",
-            items=worlds,
+            items=self.users_worlds,
             icon="WORLD"
         )
 
@@ -194,9 +222,11 @@ class ATOMIC_OT_inspect_images(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "IMAGES"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -206,12 +236,13 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
     bl_idname = "atomic.inspect_lights"
     bl_label = "Inspect Lights"
 
+    users_objects = []
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        lights = bpy.data.lights
-        lights_field = atom.lights_field \
-            if atom.lights_field in lights.keys() else ""
+
+        layout = self.layout
 
         # inspect lights header
         ui_layouts.inspect_header(
@@ -220,15 +251,21 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
             data="lights"
         )
 
-        # light objects box list
-        lights = sorted(
-            users.light_objects(lights_field)) \
-            if lights_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.lights_field in bpy.data.lights.keys():
+                self.users_objects = users.light_objects(atom.lights_field)
 
+            else:
+                self.users_objects = []
+
+            inspection_update_trigger = False
+
+        # light objects box list
         ui_layouts.box_list(
             layout=layout,
             title="Light Objects",
-            items=lights,
+            items=self.users_objects,
             icon="OUTLINER_OB_LIGHT"
         )
 
@@ -238,9 +275,11 @@ class ATOMIC_OT_inspect_lights(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "LIGHTS"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -250,12 +289,13 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
     bl_idname = "atomic.inspect_materials"
     bl_label = "Inspect Materials"
 
+    users_objects = []
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        materials = bpy.data.materials
-        materials_field = atom.materials_field \
-            if atom.materials_field in materials.keys() else ""
+
+        layout = self.layout
 
         # inspect materials header
         ui_layouts.inspect_header(
@@ -264,15 +304,22 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
             data="materials"
         )
 
-        # objects box list
-        objects = sorted(
-            users.material_objects(materials_field)) \
-            if materials_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.materials_field in bpy.data.materials.keys():
+                self.users_objects = \
+                    users.material_objects(atom.materials_field)
 
+            else:
+                self.users_objects = []
+
+            inspection_update_trigger = False
+
+        # objects box list
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
-            items=objects
+            items=self.users_objects
         )
 
         row = layout.row()  # extra row for spacing
@@ -281,9 +328,11 @@ class ATOMIC_OT_inspect_materials(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "MATERIALS"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -293,12 +342,16 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
     bl_idname = "atomic.inspect_node_groups"
     bl_label = "Inspect Node Groups"
 
+    users_materials = []
+    users_node_groups = []
+    users_textures = []
+    users_worlds = []
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        node_groups = bpy.data.node_groups
-        node_groups_field = atom.node_groups_field \
-            if atom.node_groups_field in node_groups.keys() else ""
+
+        layout = self.layout
 
         # inspect node groups header
         ui_layouts.inspect_header(
@@ -307,39 +360,56 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
             data="node_groups"
         )
 
-        # materials box list
-        materials = sorted(
-            users.node_group_materials(node_groups_field)) \
-            if node_groups_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.node_groups_field in bpy.data.node_groups.keys():
 
+                self.users_materials = \
+                    users.node_group_materials(atom.node_groups_field)
+                self.users_node_groups = \
+                    users.node_group_node_groups(atom.node_groups_field)
+                self.users_textures = \
+                    users.node_group_textures(atom.node_groups_field)
+                self.users_worlds = \
+                    users.node_group_worlds(atom.node_groups_field)
+
+            else:
+                self.users_materials = []
+                self.users_node_groups = []
+                self.users_textures = []
+                self.users_worlds = []
+
+            inspection_update_trigger = False
+
+        # materials box list
         ui_layouts.box_list(
             layout=layout,
             title="Materials",
-            items=materials,
+            items=self.users_materials,
             icon="MATERIAL"
         )
 
         # node groups box list
-        node_groups = sorted(
-            users.node_group_node_groups(node_groups_field)) \
-            if node_groups_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Node Groups",
-            items=node_groups,
+            items=self.users_node_groups,
             icon="NODETREE"
         )
 
-        # world box list
-        worlds = sorted(
-            users.node_group_worlds(node_groups_field)) \
-            if node_groups_field != "" else []
+        # textures box list
+        ui_layouts.box_list(
+            layout=layout,
+            title="Textures",
+            items=self.users_textures,
+            icon="TEXTURE"
+        )
 
+        # world box list
         ui_layouts.box_list(
             layout=layout,
             title="Worlds",
-            items=worlds,
+            items=self.users_worlds,
             icon="WORLD"
         )
 
@@ -349,9 +419,11 @@ class ATOMIC_OT_inspect_node_groups(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "NODE_GROUPS"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -361,12 +433,13 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
     bl_idname = "atomic.inspect_particles"
     bl_label = "Inspect Particles"
 
+    users_objects = []
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        particles = bpy.data.particles
-        particles_field = atom.particles_field \
-            if atom.particles_field in particles.keys() else ""
+
+        layout = self.layout
 
         # inspect particles header
         ui_layouts.inspect_header(
@@ -375,15 +448,23 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
             data="particles"
         )
 
-        # objects box list
-        objects = sorted(
-            users.particle_objects(particles_field)) \
-            if particles_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.particles_field in bpy.data.particles.keys():
 
+                self.users_objects = \
+                    users.particle_objects(atom.particles_field)
+
+            else:
+                self.users_objects = []
+
+            inspection_update_trigger = False
+
+        # objects box list
         ui_layouts.box_list(
             layout=layout,
             title="Objects",
-            items=objects,
+            items=self.users_objects,
             icon="OUTLINER_OB_MESH"
         )
 
@@ -393,9 +474,11 @@ class ATOMIC_OT_inspect_particles(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "PARTICLES"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -405,12 +488,17 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
     bl_idname = "atomic.inspect_textures"
     bl_label = "Inspect Textures"
 
+    users_brushes = []
+    users_particles = []
+    users_objects = []
+
+    textures_field: bpy.props.StringProperty()
+
     def draw(self, context):
-        layout = self.layout
+        global inspection_update_trigger
         atom = bpy.context.scene.atomic
-        textures = bpy.data.textures
-        textures_field = atom.textures_field \
-            if atom.textures_field in textures.keys() else ""
+
+        layout = self.layout
 
         # inspect textures header
         ui_layouts.inspect_header(
@@ -419,39 +507,44 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
             data="textures"
         )
 
-        # brushes box list
-        brushes = sorted(
-            users.texture_brushes(textures_field)) \
-            if textures_field != "" else []
+        # inspection update code
+        if inspection_update_trigger:
+            if atom.textures_field in bpy.data.textures.keys():
+                self.users_brushes = \
+                    users.texture_brushes(atom.textures_field)
+                self.users_objects = \
+                    users.texture_objects(atom.textures_field)
+                self.users_particles = \
+                    users.texture_particles(atom.textures_field)
 
+            else:
+                self.users_brushes = []
+                self.users_particles = []
+                self.users_objects = []
+
+            inspection_update_trigger = False
+
+        # brushes box list
         ui_layouts.box_list(
             layout=layout,
             title="Brushes",
-            items=brushes,
+            items=self.users_brushes,
             icon="BRUSH_DATA"
         )
 
         # particles box list
-        particles = sorted(
-            users.texture_particles(textures_field)) \
-            if textures_field != "" else []
-
         ui_layouts.box_list(
             layout=layout,
             title="Particles",
-            items=particles,
+            items=self.users_particles,
             icon="PARTICLES"
         )
 
         # objects box list
-        objects = sorted(
-            users.texture_objects(textures_field)) \
-            if textures_field != "" else []
-
         ui_layouts.box_list_diverse(
             layout=layout,
             title="Objects",
-            items=objects,
+            items=self.users_objects,
         )
 
         row = layout.row()  # extra row for spacing
@@ -460,9 +553,11 @@ class ATOMIC_OT_inspect_textures(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "TEXTURES"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
@@ -496,9 +591,11 @@ class ATOMIC_OT_inspect_worlds(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        wm = context.window_manager
+
         atom = bpy.context.scene.atomic
         atom.active_inspection = "WORLDS"
-        wm = context.window_manager
+
         return wm.invoke_props_dialog(self)
 
 
