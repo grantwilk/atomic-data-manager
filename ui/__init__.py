@@ -33,12 +33,15 @@ from atomic_data_manager.ui import support_me_ui
 
 
 def register():
+    # register preferences first so we can access variables in config.py
+    preferences_ui.register()
+
+    # register everything else
     main_panel_ui.register()
     stats_panel_ui.register()
     inspect_ui.register()
     missing_file_ui.register()
     pie_menu_ui.register()
-    preferences_ui.register()
     support_me_ui.register()
 
 
