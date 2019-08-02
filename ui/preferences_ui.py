@@ -45,7 +45,6 @@ def set_last_popup_day(day):
     bpy.context.preferences.addons["atomic_data_manager"]\
         .preferences.last_popup_day = day
     copy_prefs_to_config(None, None)
-    bpy.ops.wm.save_userpref()
 
 
 def copy_prefs_to_config(self, context):
