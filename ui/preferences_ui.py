@@ -56,6 +56,7 @@ def copy_prefs_to_config(self, context):
     atomic_preferences = preferences.addons['atomic_data_manager']\
         .preferences
 
+    # visible atomic preferences
     config.enable_missing_file_warning = \
         atomic_preferences.enable_missing_file_warning
 
@@ -68,44 +69,143 @@ def copy_prefs_to_config(self, context):
     config.ignore_fake_users = \
         atomic_preferences.ignore_fake_users
 
+    # hidden atomic preferences
+    config.pie_menu_type = \
+        atomic_preferences.pie_menu_type
+
+    config.pie_menu_alt = \
+        atomic_preferences.pie_menu_alt
+
+    config.pie_menu_any = \
+        atomic_preferences.pie_menu_any
+
+    config.pie_menu_ctrl = \
+        atomic_preferences.pie_menu_ctrl
+
+    config.pie_menu_oskey = \
+        atomic_preferences.pie_menu_oskey
+
+    config.pie_menu_shift = \
+        atomic_preferences.pie_menu_shift
+
     config.last_popup_day = \
         atomic_preferences.last_popup_day
+
+
+def update_pie_menu_hotkeys(self, context):
+    preferences = bpy.context.preferences
+    atomic_preferences = preferences.addons['atomic_data_manager'] \
+        .preferences
+
+    # add the hotkeys if the preference is enabled
+    if atomic_preferences.enable_pie_menu_ui:
+        add_pie_menu_hotkeys()
+
+    # remove the hotkeys otherwise
+    else:
+        remove_pie_menu_hotkeys()
+
+
+def add_pie_menu_hotkeys():
+    # adds the pie menu hotkeys to blender's addon keymaps
+
+    keyconfigs = bpy.context.window_manager.keyconfigs.addon
+
+    # add a new keymap
+    km = keyconfigs.keymaps.new(
+        name="Window",
+        space_type='EMPTY',
+        region_type='WINDOW'
+    )
+
+    # add a new keymap item to that keymap
+    kmi = km.keymap_items.new(
+        idname="atom.invoke_pie_menu_ui",
+        type=config.pie_menu_type,
+        value="PRESS",
+        alt=config.pie_menu_alt,
+        any=config.pie_menu_any,
+        ctrl=config.pie_menu_ctrl,
+        oskey=config.pie_menu_oskey,
+        shift=config.pie_menu_shift,
+    )
+
+    # # point the keymap item to our pie menu
+    # kmi.properties.name = "ATOMIC_MT_main_pie"
+    keymaps.append((km, kmi))
+
+
+def remove_pie_menu_hotkeys():
+    # removes the pie menu hotkeys from blender's addon keymaps if they
+    # exist there
+
+    # remove each hotkey in our keymaps list if it exists in blenders
+    # addon keymaps
+    for km, kmi in keymaps:
+        if kmi in km.keymap_items:
+            km.keymap_items.remove(kmi)
+
+    # clear our keymaps list
+    keymaps.clear()
 
 
 # Atomic Data Manager Preference Panel UI
 class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     bl_idname = "atomic_data_manager"
 
-    # atomic preferences
+    # visible atomic preferences
     enable_missing_file_warning: bpy.props.BoolProperty(
         description="Display a warning on startup if Atomic detects "
                     "missing files in your project",
-        default=True,
-        update=copy_prefs_to_config
-    )
-
-    enable_pie_menu_ui: bpy.props.BoolProperty(
-        description="Enable the Atomic pie menu UI, so you can clean "
-                    "your project from anywhere. Just press \"D\"!",
+        default=True
     )
 
     enable_support_me_popup: bpy.props.BoolProperty(
         description="Occasionally display a popup asking if you would "
                     "like to support Remington Creative",
-        default=True,
-        update=copy_prefs_to_config
+        default=True
     )
 
     ignore_fake_users: bpy.props.BoolProperty(
         description="Let the clean tool remove unused data-blocks "
                     "even if they have fake users",
-        default=False,
-        update=copy_prefs_to_config
+        default=False
+    )
+
+    enable_pie_menu_ui: bpy.props.BoolProperty(
+        description="Enable the Atomic pie menu UI, so you can clean "
+                    "your project from anywhere.",
+        default=True,
+        update=update_pie_menu_hotkeys
+    )
+
+    # hidden atomic preferences
+    pie_menu_type: bpy.props.StringProperty(
+        default="D"
+    )
+
+    pie_menu_alt: bpy.props.BoolProperty(
+        default=False
+    )
+
+    pie_menu_any: bpy.props.BoolProperty(
+        default=False
+    )
+
+    pie_menu_ctrl: bpy.props.BoolProperty(
+        default=False
+    )
+
+    pie_menu_oskey: bpy.props.BoolProperty(
+        default=False
+    )
+
+    pie_menu_shift: bpy.props.BoolProperty(
+        default=False
     )
 
     last_popup_day: bpy.props.FloatProperty(
-        default=0,
-        update=copy_prefs_to_config
+        default=0
     )
 
     # add-on updater properties
@@ -146,20 +246,16 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
     def draw(self, context):
         layout = self.layout
 
-        col = layout.column()
+        split = layout.split()
+
+        # left column
+        col = split.column()
 
         # enable missing file warning toggle
         col.prop(
             self,
             "enable_missing_file_warning",
             text="Show Missing File Warning"
-        )
-
-        # enable pie menu ui toggle
-        col.prop(
-            self,
-            "enable_pie_menu_ui",
-            text="Enable Pie Menu UI"
         )
 
         # enable support me popup toggle
@@ -169,6 +265,9 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
             text="Show \"Support Me\" Popup"
         )
 
+        # right column
+        col = split.column()
+
         # ignore fake users toggle
         col.prop(
             self,
@@ -176,13 +275,53 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
             text="Ignore Fake Users"
         )
 
+        # pie menu settings
+        pie_split = col.split(factor=0.55)  # nice
+
+        # enable pie menu ui toggle
+        pie_split.prop(
+            self,
+            "enable_pie_menu_ui",
+            text="Enable Pie Menu"
+        )
+
+        # keymap item that contains our pie menu hotkey
+        # note: keymap item index hardcoded with an index -- may be
+        # dangerous if more keymap items are added
+        kmi = bpy.context.window_manager.keyconfigs.addon.keymaps[
+            'Window'].keymap_items[0]
+
+        # put the property in a row so it can be disabled
+        pie_row = pie_split.row()
+        pie_row.enabled = self.enable_pie_menu_ui
+
+        # hotkey property
+        pie_row.prop(
+            kmi,
+            "type",
+            text="",
+            full_event=True
+        )
+
+        # update hotkey preferences
+        self.pie_menu_type = kmi.type
+        self.pie_menu_any = kmi.any
+        self.pie_menu_alt = kmi.alt
+        self.pie_menu_ctrl = kmi.ctrl
+        self.pie_menu_oskey = kmi.oskey
+        self.pie_menu_shift = kmi.shift
+
         separator = layout.separator()  # extra space
 
         # add-on updater box
         addon_updater_ops.update_settings_ui(self, context)
 
+        # update config with any new preferences
+        copy_prefs_to_config(None, None)
+
 
 reg_list = [ATOMIC_PT_preferences_panel]
+keymaps = []
 
 
 def register():
@@ -192,7 +331,12 @@ def register():
     # make sure global preferences are updated on registration
     copy_prefs_to_config(None, None)
 
+    # update keymaps
+    add_pie_menu_hotkeys()
+
 
 def unregister():
     for cls in reg_list:
         unregister_class(cls)
+
+    remove_pie_menu_hotkeys()

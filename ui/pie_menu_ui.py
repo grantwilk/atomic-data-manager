@@ -190,38 +190,11 @@ reg_list = [
 ]
 
 
-keymaps = []
-
-
 def register():
     for cls in reg_list:
         register_class(cls)
-
-    # add keymap entry
-    keyconfigs = bpy.context.window_manager.keyconfigs.addon
-
-    keymap = keyconfigs.keymaps.new(
-        name="Window",
-        space_type='EMPTY',
-        region_type='WINDOW'
-    )
-
-    keymap_items_menu = keymap.keymap_items.new(
-        "wm.call_menu_pie",
-        "D",
-        "PRESS"
-    )
-
-    keymap_items_menu.properties.name = ATOMIC_MT_main_pie.bl_idname
-    keymaps.append((keymap, keymap_items_menu))
 
 
 def unregister():
     for cls in reg_list:
         unregister_class(cls)
-
-    # remove keymap entry
-    for km, kmi in keymaps:
-        km.keymap_items.remove(kmi)
-
-    keymaps.clear()

@@ -28,9 +28,17 @@ NOTE:
 
 """
 
+# visible atomic preferences
 enable_missing_file_warning = True
-enable_pie_menu_ui = True
 enable_support_me_popup = True
 ignore_fake_users = False
+enable_pie_menu_ui = True
 
+# hidden atomic preferences
+pie_menu_type = "D"
+pie_menu_alt = False
+pie_menu_any = False
+pie_menu_ctrl = False
+pie_menu_oskey = False
+pie_menu_shift = False
 last_popup_day = 0

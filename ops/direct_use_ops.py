@@ -31,10 +31,23 @@ intefaces in Blender.
 import bpy
 from bpy.utils import register_class
 from bpy.utils import unregister_class
-from atomic_data_manager.ui.utils import ui_layouts
+from atomic_data_manager import config
+from atomic_data_manager.stats import unused
 from atomic_data_manager.ops.utils import nuke
 from atomic_data_manager.ops.utils import clean
-from atomic_data_manager.stats import unused
+from atomic_data_manager.ui.utils import ui_layouts
+
+
+class ATOMIC_OT_invoke_pie_menu_ui(bpy.types.Operator):
+    """Invokes Atomic's pie menu UI if the \"Enable Pie Menu UI\"
+    preference is enabled in Atomic's preferences panel"""
+    bl_idname = "atom.invoke_pie_menu_ui"
+    bl_label = "Invoke Pie Menu UI"
+
+    def execute(self, context):
+        if config.enable_pie_menu_ui:
+            bpy.ops.wm.call_menu_pie(name="ATOMIC_MT_main_pie")
+        return {'FINISHED'}
 
 
 # Atomic Data Manager Nuke All Operator
@@ -745,6 +758,8 @@ class ATOMIC_OT_clean_worlds(bpy.types.Operator):
 
 
 reg_list = [
+    ATOMIC_OT_invoke_pie_menu_ui,
+
     ATOMIC_OT_nuke_all,
     ATOMIC_OT_clean_all,
 
