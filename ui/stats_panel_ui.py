@@ -81,36 +81,16 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             # collection count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.collections()),
-                    count.collections_unused()
-                )
-            )
+            col.label(text=count.collections())
 
             # light count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.lights()),
-                    count.lights_unused()
-                )
-            )
+            col.label(text=count.lights())
 
             # node group count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.node_groups()),
-                    count.node_groups_unused()
-                )
-            )
+            col.label(text=count.node_groups())
 
             # texture count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.textures()),
-                    count.textures_unused()
-                )
-            )
+            col.label(text=count.textures())
 
             # right column
             col = split.column()
@@ -124,36 +104,16 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             # image count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.images()),
-                    count.images_unused()
-                )
-            )
+            col.label(text=count.images())
 
             # material count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.materials()),
-                    count.materials_unused()
-                )
-            )
+            col.label(text=count.materials())
 
             # particle system count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.particles()),
-                    count.particles_unused()
-                )
-            )
+            col.label(text=count.particles())
 
             # world count
-            col.label(
-                text=ui_layouts.number_suffix(
-                    str(count.worlds()),
-                    count.worlds_unused()
-                )
-            )
+            col.label(text=count.worlds())
 
         # collection statistics
         elif atom.stats_mode == 'COLLECTIONS':

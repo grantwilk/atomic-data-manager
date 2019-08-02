@@ -76,8 +76,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "collections",
-            text=ui_layouts.number_suffix(
-                "Collections", count.collections_unused()),
+            text="Collections",
             icon='GROUP',
             toggle=True
         )
@@ -94,8 +93,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "lights",
-            text=ui_layouts.number_suffix(
-                "Lights", count.lights_unused()),
+            text="Lights",
             icon='LIGHT',
             toggle=True
         )
@@ -112,8 +110,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "node_groups",
-            text=ui_layouts.number_suffix(
-                "Node Groups", count.node_groups_unused()),
+            text="Node Groups",
             icon='NODETREE',
             toggle=True
         )
@@ -130,8 +127,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "textures",
-            text=ui_layouts.number_suffix(
-                "Textures", count.textures_unused()),
+            text="Textures",
             icon='TEXTURE',
             toggle=True
         )
@@ -151,8 +147,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "images",
-            text=ui_layouts.number_suffix(
-                "Images", count.images_unused()),
+            text="Images",
             toggle=True,
             icon='IMAGE_DATA'
         )
@@ -169,8 +164,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "materials",
-            text=ui_layouts.number_suffix(
-                "Materials", count.materials_unused()),
+            text="Materials",
             icon='MATERIAL',
             toggle=True
         )
@@ -187,8 +181,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "particles",
-            text=ui_layouts.number_suffix(
-                "Particles", count.particles_unused()),
+            text="Particles",
             icon='PARTICLES',
             toggle=True
         )
@@ -204,8 +197,7 @@ class ATOMIC_PT_main_panel(bpy.types.Panel):
         splitcol.prop(
             atom,
             "worlds",
-            text=ui_layouts.number_suffix(
-                "Worlds", count.worlds_unused()),
+            text="Worlds",
             icon='WORLD',
             toggle=True
         )
