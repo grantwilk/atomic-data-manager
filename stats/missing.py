@@ -47,8 +47,6 @@ def get_missing(data):
             # if data-block is not in our do not flag list
             # append it to the missing data list
             if datablock.name not in do_not_flag:
-                print(datablock.name + " is not packed and has an "
-                                       "invalid filepath")
                 missing.append(datablock.name)
 
         # if data-block is packed but it does not have a filepath
@@ -57,7 +55,6 @@ def get_missing(data):
             # if data-block is not in our do not flag list
             # append it to the missing data list
             if datablock.name not in do_not_flag:
-                print(datablock.name + " is packed and has no filepath")
                 missing.append(datablock.name)
 
     return missing
