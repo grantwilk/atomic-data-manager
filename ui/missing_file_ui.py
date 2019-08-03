@@ -58,12 +58,12 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
             ),
             (
                 'SEARCH',
-                'Search for Missing Files (coming soon)',
+                'Search for Missing Files (under development)',
                 'Search for the missing files in a directory'
             ),
             (
                 'REPLACE',
-                'Specify Replacement Files (coming soon)',
+                'Specify Replacement Files (under development)',
                 'Replace missing files with new files'
             ),
             ],
