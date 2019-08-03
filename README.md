@@ -11,7 +11,7 @@ Atomic Data Manager offers Blender artists an intelligent data management soluti
 
 ## UNMATCHED FEATURE SET
 
-| Rapid Cleaning | File Detection |
+| Rapid Cleaning | Missing File Detection |
 |--|--|
 | With Atomic, you can clean your project files in a snap. Simply select a category and click the clean button. | Stop those pink textures! Atomic helps you restore missing project files before you even realize they're gone. |
 
