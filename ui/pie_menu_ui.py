@@ -53,9 +53,9 @@ class ATOMIC_MT_main_pie(bpy.types.Menu):
 
         # undo operator
         pie.operator(
-            "atomic.undo",
-            text="Undo",
-            icon="LOOP_BACK"
+            "atomic.detect_missing",
+            text="Detect Missing Files",
+            icon="SHADERFX"
         )
 
         # inspect category operator
