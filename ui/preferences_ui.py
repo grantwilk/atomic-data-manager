@@ -120,7 +120,7 @@ def add_pie_menu_hotkeys():
 
     # add a new keymap item to that keymap
     kmi = km.keymap_items.new(
-        idname="atom.invoke_pie_menu_ui",
+        idname="atomic.invoke_pie_menu_ui",
         type=config.pie_menu_type,
         value="PRESS",
         alt=config.pie_menu_alt,

@@ -41,7 +41,7 @@ from atomic_data_manager.ui.utils import ui_layouts
 class ATOMIC_OT_invoke_pie_menu_ui(bpy.types.Operator):
     """Invokes Atomic's pie menu UI if the \"Enable Pie Menu UI\"
     preference is enabled in Atomic's preferences panel"""
-    bl_idname = "atom.invoke_pie_menu_ui"
+    bl_idname = "atomic.invoke_pie_menu_ui"
     bl_label = "Invoke Pie Menu UI"
 
     def execute(self, context):
