@@ -22,9 +22,9 @@ This file contains global copies of Atomic's preferences so that they
 can be easily access throughout the add-on.
 
 NOTE:
-    Changing the values of the variables will NOT change the values in the
-    Atomic's preferences. If you want to change a setting, change it in
-    Blender, not in here.
+Changing the values of these variables will NOT change the values in the
+Atomic's preferences. If you want to change a setting, change it in
+Blender, not in here.
 
 """
 
