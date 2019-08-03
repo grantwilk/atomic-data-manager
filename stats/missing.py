@@ -28,13 +28,37 @@ import os
 
 
 def get_missing(data):
-    # returns a list of keys of non-packed datablocks with non-existent
+    # returns a list of keys of unpacked data-blocks with non-existent
     # filepaths
+
     missing = []
+
+    # list of keys that should not be flagged
+    do_not_flag = ["Render Result", "Viewer Node", "D-NOISE Export"]
+
     for datablock in data:
-        if datablock.filepath and not os.path.isfile(datablock.filepath) \
-                and not datablock.packed_files.keys():
-            missing.append(datablock.name)
+
+        # the absolute path to our data-block
+        abspath = bpy.path.abspath(datablock.filepath)
+
+        # if data-block is not packed and has an invalid filepath
+        if not datablock.packed_files and not os.path.isfile(abspath):
+
+            # if data-block is not in our do not flag list
+            # append it to the missing data list
+            if datablock.name not in do_not_flag:
+                print(datablock.name + " is not packed and has an "
+                                       "invalid filepath")
+                missing.append(datablock.name)
+
+        # if data-block is packed but it does not have a filepath
+        elif datablock.packed_files and not abspath:
+
+            # if data-block is not in our do not flag list
+            # append it to the missing data list
+            if datablock.name not in do_not_flag:
+                print(datablock.name + " is packed and has no filepath")
+                missing.append(datablock.name)
 
     return missing
 
