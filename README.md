@@ -30,7 +30,7 @@ Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Acci
 
 
 ## TAKE A VIDEO TOUR
-![video-thumb](https://remingtoncreative.com/wp-content/uploads/2019/07/spring_inspect_images-min.jpg)
+[![video-thumb](https://remingtoncreative.com/wp-content/uploads/2019/08/atomic_addon_tour_play_button.jpg)](https://remingtoncreative.com/software/blender/atomic/#tour)
 
 | Keep Your Projects Clean | Reduce File Sizes | Optimize for Render Farms |
 |--|--|--|
