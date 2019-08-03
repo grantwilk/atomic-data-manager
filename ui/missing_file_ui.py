@@ -38,6 +38,7 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
     bl_idname = "atomic.detect_missing"
     bl_label = "Missing File Detection"
 
+    # missing file lists
     missing_images = []
     missing_libraries = []
 
@@ -150,11 +151,20 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+
+        # update missing file lists
         self.missing_images = missing.images()
         self.missing_libraries = missing.libraries()
 
         wm = context.window_manager
-        return wm.invoke_props_dialog(self, width=500)
+
+        # invoke large dialog if there are missing files
+        if self.missing_images or self.missing_libraries:
+            return wm.invoke_props_dialog(self, width=500)
+
+        # invoke small dialog if there are no missing files
+        else:
+            return wm.invoke_popup(self, width=300)
 
 
 @persistent
