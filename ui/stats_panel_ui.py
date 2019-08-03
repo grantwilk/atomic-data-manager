@@ -81,16 +81,16 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             # collection count
-            col.label(text=count.collections())
+            col.label(text=str(count.collections()))
 
             # light count
-            col.label(text=count.lights())
+            col.label(text=str(count.lights()))
 
             # node group count
-            col.label(text=count.node_groups())
+            col.label(text=str(count.node_groups()))
 
             # texture count
-            col.label(text=count.textures())
+            col.label(text=str(count.textures()))
 
             # right column
             col = split.column()
@@ -104,16 +104,16 @@ class ATOMIC_PT_stats_panel(bpy.types.Panel):
             col = split.column()
 
             # image count
-            col.label(text=count.images())
+            col.label(text=str(count.images()))
 
             # material count
-            col.label(text=count.materials())
+            col.label(text=str(count.materials()))
 
             # particle system count
-            col.label(text=count.particles())
+            col.label(text=str(count.particles()))
 
             # world count
-            col.label(text=count.worlds())
+            col.label(text=str(count.worlds()))
 
         # collection statistics
         elif atom.stats_mode == 'COLLECTIONS':
