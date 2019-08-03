@@ -44,12 +44,12 @@ class ATOMIC_OT_reload_missing(bpy.types.Operator):
 
     def execute(self, context):
         # reload images
-        for image_key in missing.images():
-            bpy.data.images[image_key].reload()
+        for image in bpy.data.images:
+            image.reload()
 
         # reload libraries
-        for lib_key in missing.libraries():
-            bpy.data.libraries[lib_key].reload()
+        for library in bpy.data.libraries:
+            library.reload()
 
         # call reload report
         bpy.ops.atomic.reload_report('INVOKE_DEFAULT')

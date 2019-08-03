@@ -38,6 +38,9 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
     bl_idname = "atomic.detect_missing"
     bl_label = "Missing File Detection"
 
+    missing_images = []
+    missing_libraries = []
+
     # missing file recovery option enum property
     recovery_option: bpy.props.EnumProperty(
         items=[
@@ -72,11 +75,9 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
 
     def draw(self, context):
         layout = self.layout
-        missing_images = missing.images()
-        missing_libraries = missing.libraries()
 
         # missing files interface if missing files are found
-        if missing_images or missing_libraries:
+        if self.missing_images or self.missing_libraries:
 
             # header warning
             row = layout.row()
@@ -86,21 +87,21 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
             )
 
             # missing images box list
-            if missing_images:
+            if self.missing_images:
                 ui_layouts.box_list(
                     layout=layout,
                     title="Images",
-                    items=missing_images,
+                    items=self.missing_images,
                     icon="IMAGE_DATA",
                     columns=3
                 )
 
             # missing libraries box list
-            if missing_libraries:
+            if self.missing_libraries:
                 ui_layouts.box_list(
                     layout=layout,
                     title="Libraries",
-                    items=missing_libraries,
+                    items=self.missing_libraries,
                     icon="LIBRARY_DATA_DIRECT",
                     columns=3
                 )
@@ -149,6 +150,9 @@ class ATOMIC_OT_detect_missing(bpy.types.Operator):
         return {'FINISHED'}
 
     def invoke(self, context, event):
+        self.missing_images = missing.images()
+        self.missing_libraries = missing.libraries()
+
         wm = context.window_manager
         return wm.invoke_props_dialog(self, width=500)
 
