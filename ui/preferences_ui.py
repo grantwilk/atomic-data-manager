@@ -109,14 +109,20 @@ def update_pie_menu_hotkeys(self, context):
 def add_pie_menu_hotkeys():
     # adds the pie menu hotkeys to blender's addon keymaps
 
+    global keymaps
     keyconfigs = bpy.context.window_manager.keyconfigs.addon
 
-    # add a new keymap
-    km = keyconfigs.keymaps.new(
-        name="Window",
-        space_type='EMPTY',
-        region_type='WINDOW'
-    )
+    # check to see if a window keymap already exists
+    if "Window" in keyconfigs.keymaps.keys():
+        km = keyconfigs.keymaps['Window']
+
+    # if not, crate a new one
+    else:
+        km = keyconfigs.keymaps.new(
+            name="Window",
+            space_type='EMPTY',
+            region_type='WINDOW'
+        )
 
     # add a new keymap item to that keymap
     kmi = km.keymap_items.new(
@@ -139,11 +145,12 @@ def remove_pie_menu_hotkeys():
     # removes the pie menu hotkeys from blender's addon keymaps if they
     # exist there
 
+    global keymaps
+
     # remove each hotkey in our keymaps list if it exists in blenders
     # addon keymaps
     for km, kmi in keymaps:
-        if kmi in km.keymap_items:
-            km.keymap_items.remove(kmi)
+        km.keymap_items.remove(kmi)
 
     # clear our keymaps list
     keymaps.clear()
@@ -285,33 +292,34 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
             text="Enable Pie Menu"
         )
 
-        # keymap item that contains our pie menu hotkey
-        # note: keymap item index hardcoded with an index -- may be
-        # dangerous if more keymap items are added
-        kmi = bpy.context.window_manager.keyconfigs.addon.keymaps[
-            'Window'].keymap_items[0]
-
         # put the property in a row so it can be disabled
         pie_row = pie_split.row()
         pie_row.enabled = self.enable_pie_menu_ui
 
-        # hotkey property
-        pie_row.prop(
-            kmi,
-            "type",
-            text="",
-            full_event=True
-        )
+        if pie_row.enabled:
+            # keymap item that contains our pie menu hotkey
+            # note: keymap item index hardcoded with an index -- may be
+            # dangerous if more keymap items are added
+            kmi = bpy.context.window_manager.keyconfigs.addon.keymaps[
+                'Window'].keymap_items[0]
 
-        # update hotkey preferences
-        self.pie_menu_type = kmi.type
-        self.pie_menu_any = kmi.any
-        self.pie_menu_alt = kmi.alt
-        self.pie_menu_ctrl = kmi.ctrl
-        self.pie_menu_oskey = kmi.oskey
-        self.pie_menu_shift = kmi.shift
+            # hotkey property
+            pie_row.prop(
+                kmi,
+                "type",
+                text="",
+                full_event=True
+            )
 
-        separator = layout.separator()  # extra space
+            # update hotkey preferences
+            self.pie_menu_type = kmi.type
+            self.pie_menu_any = kmi.any
+            self.pie_menu_alt = kmi.alt
+            self.pie_menu_ctrl = kmi.ctrl
+            self.pie_menu_oskey = kmi.oskey
+            self.pie_menu_shift = kmi.shift
+
+        separator = layout.row()  # extra space
 
         # add-on updater box
         addon_updater_ops.update_settings_ui(self, context)
