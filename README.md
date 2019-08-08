@@ -6,12 +6,12 @@
 ## ENJOY A CLEANER PROJECT
 Atomic Data Manager offers Blender artists an intelligent data management solution. This feature-packed add-on provides artists with every tool they need to keep unwanted and unused data out of their Blender files. Even better, Atomic's real-time data analysis and automated data removal tools allow its users to clean their projects in a flash.
 
-![spring_window_shaded-min](https://remingtoncreative.com/wp-content/uploads/2019/07/spring_window_shaded-min-uai-1440x810.jpg)
+![spring_window_shaded-min](https://remingtoncreative.com/wp-content/uploads/2019/07/spring_window_shaded-min.jpg)
 
 
 ## UNMATCHED FEATURE SET
 
-| Rapid Cleaning | File Detection |
+| Rapid Cleaning | Missing File Detection |
 |--|--|
 | With Atomic, you can clean your project files in a snap. Simply select a category and click the clean button. | Stop those pink textures! Atomic helps you restore missing project files before you even realize they're gone. |
 
