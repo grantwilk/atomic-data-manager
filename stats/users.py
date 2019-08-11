@@ -541,6 +541,10 @@ def node_group_has_image(node_group_key, image_key):
             has_image = node_group_has_image(
                 node.node_tree.name, image.name)
 
+        # break the loop if the image is found
+        if has_image:
+            break
+
     return has_image
 
 
@@ -557,6 +561,10 @@ def node_group_has_node_group(search_group_key, node_group_key):
         # if node is a node group and has a valid node tree
         if hasattr(node, 'node_tree') and node.node_tree:
 
+            if node.node_tree.name == "RG_MetallicMap":
+                print(node.node_tree.name)
+                print(node_group.name)
+
             # base case
             # if node group is our node group
             if node.node_tree.name == node_group.name:
@@ -567,6 +575,10 @@ def node_group_has_node_group(search_group_key, node_group_key):
             else:
                 has_node_group = node_group_has_node_group(
                     node.node_tree.name, node_group.name)
+
+        # break the loop if the node group is found
+        if has_node_group:
+            break
 
     return has_node_group
 
@@ -594,6 +606,10 @@ def node_group_has_texture(node_group_key, texture_key):
         elif hasattr(node, 'node_tree') and node.node_tree:
             has_texture = node_group_has_texture(
                 node.node_tree.name, texture.name)
+
+        # break the loop if the texture is found
+        if has_texture:
+            break
 
     return has_texture
 
