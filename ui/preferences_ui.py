@@ -66,8 +66,8 @@ def copy_prefs_to_config(self, context):
     config.enable_support_me_popup = \
         atomic_preferences.enable_support_me_popup
 
-    config.ignore_fake_users = \
-        atomic_preferences.ignore_fake_users
+    config.include_fake_users = \
+        atomic_preferences.include_fake_users
 
     # hidden atomic preferences
     config.pie_menu_type = \
@@ -173,9 +173,9 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         default=True
     )
 
-    ignore_fake_users: bpy.props.BoolProperty(
-        description="Let the clean tool remove unused data-blocks "
-                    "even if they have fake users",
+    include_fake_users: bpy.props.BoolProperty(
+        description="Include data-blocks with only fake users in unused "
+                    "data detection",
         default=False
     )
 
@@ -278,8 +278,8 @@ class ATOMIC_PT_preferences_panel(bpy.types.AddonPreferences):
         # ignore fake users toggle
         col.prop(
             self,
-            "ignore_fake_users",
-            text="Ignore Fake Users"
+            "include_fake_users",
+            text="Include Fake Users"
         )
 
         # pie menu settings

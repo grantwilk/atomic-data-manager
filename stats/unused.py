@@ -40,7 +40,7 @@ def shallow(data):
         # ignore fake users is enabled
         if datablock.users == 0 or (datablock.users == 1 and
                                     datablock.use_fake_user and
-                                    config.ignore_fake_users):
+                                    config.include_fake_users):
             unused.append(datablock.name)
 
     return unused
@@ -85,7 +85,7 @@ def images_deep():
 
             # check if image has a fake user or if ignore fake users
             # is enabled
-            if not image.use_fake_user or config.ignore_fake_users:
+            if not image.use_fake_user or config.include_fake_users:
 
                 # if image is not in our do not flag list
                 if image.name not in do_not_flag:
@@ -122,7 +122,7 @@ def lights_deep():
 
             # check if light has a fake user or if ignore fake users
             # is enabled
-            if not light.use_fake_user or config.ignore_fake_users:
+            if not light.use_fake_user or config.include_fake_users:
                 unused.append(light.name)
 
     return unused
@@ -145,7 +145,7 @@ def materials_deep():
 
             # check if material has a fake user or if ignore fake users
             # is enabled
-            if not material.use_fake_user or config.ignore_fake_users:
+            if not material.use_fake_user or config.include_fake_users:
                 unused.append(material.name)
 
     return unused
@@ -168,7 +168,7 @@ def node_groups_deep():
 
             # check if node group has a fake user or if ignore fake users
             # is enabled
-            if not node_group.use_fake_user or config.ignore_fake_users:
+            if not node_group.use_fake_user or config.include_fake_users:
                 unused.append(node_group.name)
 
     return unused
@@ -191,7 +191,7 @@ def particles_deep():
 
             # check if particle system has a fake user or if ignore fake
             # users is enabled
-            if not particle.use_fake_user or config.ignore_fake_users:
+            if not particle.use_fake_user or config.include_fake_users:
                 unused.append(particle.name)
 
     return unused
@@ -214,7 +214,7 @@ def textures_deep():
 
             # check if texture has a fake user or if ignore fake users
             # is enabled
-            if not texture.use_fake_user or config.ignore_fake_users:
+            if not texture.use_fake_user or config.include_fake_users:
                 unused.append(texture.name)
 
     return unused
@@ -238,7 +238,7 @@ def worlds():
         # ignore fake users is enabled
         if world.users == 0 or (world.users == 1 and
                                 world.use_fake_user and
-                                config.ignore_fake_users):
+                                config.include_fake_users):
             unused.append(world.name)
 
     return unused

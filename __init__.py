@@ -36,7 +36,7 @@ bl_info = {
     "name": "Atomic Data Manager",
     "author": "Remington Creative",
     "blender": (2, 80, 0),
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "location": "Properties > Scene",
     "category": "Remington Creative",
     "description": "An Intelligent Data Manager for Blender.",

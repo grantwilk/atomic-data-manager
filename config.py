@@ -31,7 +31,7 @@ Blender, not in here.
 # visible atomic preferences
 enable_missing_file_warning = True
 enable_support_me_popup = True
-ignore_fake_users = False
+include_fake_users = False
 enable_pie_menu_ui = True
 
 # hidden atomic preferences
