@@ -175,7 +175,7 @@ class ATOMIC_OT_nuke(bpy.types.Operator):
 
 # Atomic Data Manager Clean Operator
 class ATOMIC_OT_clean(bpy.types.Operator):
-    """Remove all unused.py data-blocks from the selected categories"""
+    """Remove all unused data-blocks from the selected categories"""
     bl_idname = "atomic.clean"
     bl_label = "Clean"
 
@@ -354,7 +354,7 @@ class ATOMIC_OT_undo(bpy.types.Operator):
 
 # Atomic Data Manager Smart Select Operator
 class ATOMIC_OT_smart_select(bpy.types.Operator):
-    """Auto-select categories with unused.py data"""
+    """Auto-select categories with unused data"""
     bl_idname = "atomic.smart_select"
     bl_label = "Smart Select"
 

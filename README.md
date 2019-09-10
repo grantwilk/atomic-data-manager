@@ -1,12 +1,12 @@
-[![atomic_combo_side_mono_fontdark1-min](https://remingtoncreative.com/wp-content/uploads/2019/07/atomic_combo_side_mono_fontdark1-min.png)](https://remingtoncreative.com/software/blender/atomic/)
+[![atomic_combo_side_mono_dark1-min](https://remington.pro/wp-content/uploads/2019/08/atomic_combo_side_dark1_512px.png)](https://remington.pro/software/blender/atomic)
 
-[**Learn More About Atomic Data Manager on its Official Product Page**](https://remingtoncreative.com/software/blender/atomic/)
+[**Learn More About Atomic Data Manager on its Official Product Page**](https://remington.pro/software/blender/atomic)
 
 
 ## ENJOY A CLEANER PROJECT
 Atomic Data Manager offers Blender artists an intelligent data management solution. This feature-packed add-on provides artists with every tool they need to keep unwanted and unused data out of their Blender files. Even better, Atomic's real-time data analysis and automated data removal tools allow its users to clean their projects in a flash.
 
-![spring_window_shaded-min](https://remingtoncreative.com/wp-content/uploads/2019/07/spring_window_shaded-min.jpg)
+![spring_window_shaded-min](https://remington.pro/wp-content/uploads/2019/07/spring_window_shaded-min.jpg)
 
 
 ## UNMATCHED FEATURE SET
@@ -24,13 +24,11 @@ Atomic Data Manager offers Blender artists an intelligent data management soluti
 | Get a detailed breakdown of the data being used in your Blender projects. Surprisingly interesting and useful! | Atomic's sleek user interface packs numerous powerful features into a convenient and easily accessible space.|
 
 #### Additional Features:
-Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Accidental Deletions, Save Data-Blocks, Delete Data-Blocks, Replace Data-Blocks, Rename Data-Blocks, Reload Missing Files, Remove Missing Files, Replace Missing Files*, and Search for Missing Files*.
-
-###### \* feature coming soon
+Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Accidental Deletions, Save Data-Blocks, Delete Data-Blocks, Replace Data-Blocks, Rename Data-Blocks, Reload Missing Files, Remove Missing Files, Replace Missing Files, and Search for Missing Files.
 
 
 ## TAKE A VIDEO TOUR
-[![video-thumb](https://remingtoncreative.com/wp-content/uploads/2019/08/atomic_addon_tour_play_button-min.jpg)](https://remingtoncreative.com/software/blender/atomic/#tour)
+[![video-thumb](https://remington.pro/wp-content/uploads/2019/08/atomic_addon_tour_play_button-min.jpg)](https://remington.pro/software/blender/atomic/#tour)
 
 | Keep Your Projects Clean | Reduce File Sizes | Optimize for Render Farms |
 |--|--|--|
@@ -39,10 +37,10 @@ Pie Menu Controls, Advanced Fake User Options, Mass Delete Categories, Undo Acci
 
 ## GET ATOMIC
 
-**Download:** [https://remingtoncreative.com/software/blender/atomic/](https://remingtoncreative.com/software/blender/atomic/)
+**Download:** [https://remington.pro/software/blender/atomic/](https://remington.pro/software/blender/atomic)
 
 **Older Versions:** [https://github.com/grantwilk/atomic-data-manager/releases](https://github.com/grantwilk/atomic-data-manager/releases)
 
 
 
-**Like the Add-on?** [Consider Supporting Me!](https://remingtoncreative.com/support/)
+**Like the Add-on?** [Consider Supporting Remington Creative](https://remington.pro/support/)!

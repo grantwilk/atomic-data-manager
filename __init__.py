@@ -36,12 +36,12 @@ bl_info = {
     "name": "Atomic Data Manager",
     "author": "Remington Creative",
     "blender": (2, 80, 0),
-    "version": (1, 0, 2),
+    "version": (1, 0, 3),
     "location": "Properties > Scene",
     "category": "Remington Creative",
     "description": "An Intelligent Data Manager for Blender.",
     "wiki_url":
-        "https://remingtoncreative.com/software/blender/atomic",
+        "https://remington.pro/software/blender/atomic",
     "tracker_url":
         "https://github.com/grantwilk/atomic-data-manager/issues"
 }

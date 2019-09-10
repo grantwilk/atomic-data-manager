@@ -679,7 +679,7 @@ def post_update_callback(module_name, res=None):
 	i.e. don't auto-restart the addon
 
 	Arguments:
-		module_name: returns the module name from updater, but unused.py here
+		module_name: returns the module name from updater, but unused here
 		res: If an error occurred, this is the detail string
 	"""
 

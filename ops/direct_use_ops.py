@@ -148,7 +148,7 @@ class ATOMIC_OT_nuke_all(bpy.types.Operator):
 
 # Atomic Data Manager Clean All Operator
 class ATOMIC_OT_clean_all(bpy.types.Operator):
-    """Remove all unused.py data-blocks from the selected categories"""
+    """Remove all unused data-blocks from the selected categories"""
     bl_idname = "atomic.clean_all"
     bl_label = "Clean All"
 
@@ -503,7 +503,7 @@ class ATOMIC_OT_nuke_worlds(bpy.types.Operator):
 
 # Atomic Data Manager Clean Collections Operator
 class ATOMIC_OT_clean_collections(bpy.types.Operator):
-    """Remove all unused.py collections from this project"""
+    """Remove all unused collections from this project"""
     bl_idname = "atomic.clean_collections"
     bl_label = "Clean Collections"
 
@@ -535,7 +535,7 @@ class ATOMIC_OT_clean_collections(bpy.types.Operator):
 
 # Atomic Data Manager Clean Images Operator
 class ATOMIC_OT_clean_images(bpy.types.Operator):
-    """Remove all unused.py images from this project"""
+    """Remove all unused images from this project"""
     bl_idname = "atomic.clean_images"
     bl_label = "Clean Images"
 
@@ -567,7 +567,7 @@ class ATOMIC_OT_clean_images(bpy.types.Operator):
 
 # Atomic Data Manager Clean Lights Operator
 class ATOMIC_OT_clean_lights(bpy.types.Operator):
-    """Remove all unused.py lights from this project"""
+    """Remove all unused lights from this project"""
     bl_idname = "atomic.clean_lights"
     bl_label = "Clean Lights"
 
@@ -599,7 +599,7 @@ class ATOMIC_OT_clean_lights(bpy.types.Operator):
 
 # Atomic Data Manager Clean Materials Operator
 class ATOMIC_OT_clean_materials(bpy.types.Operator):
-    """Remove all unused.py materials from this project"""
+    """Remove all unused materials from this project"""
     bl_idname = "atomic.clean_materials"
     bl_label = "Clean Materials"
 
@@ -631,7 +631,7 @@ class ATOMIC_OT_clean_materials(bpy.types.Operator):
 
 # Atomic Data Manager Clean Node Groups Operator
 class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
-    """Remove all unused.py node groups from this project"""
+    """Remove all unused node groups from this project"""
     bl_idname = "atomic.clean_node_groups"
     bl_label = "Clean Node Groups"
 
@@ -663,7 +663,7 @@ class ATOMIC_OT_clean_node_groups(bpy.types.Operator):
 
 # Atomic Data Manager Clean Particles Operator
 class ATOMIC_OT_clean_particles(bpy.types.Operator):
-    """Remove all unused.py particle systems from this project"""
+    """Remove all unused particle systems from this project"""
     bl_idname = "atomic.clean_particles"
     bl_label = "Clean Particles"
 
@@ -695,7 +695,7 @@ class ATOMIC_OT_clean_particles(bpy.types.Operator):
 
 # Atomic Data Manager Clean Textures Operator
 class ATOMIC_OT_clean_textures(bpy.types.Operator):
-    """Remove all unused.py textures from this project"""
+    """Remove all unused textures from this project"""
     bl_idname = "atomic.clean_textures"
     bl_label = "Clean Textures"
 
@@ -727,7 +727,7 @@ class ATOMIC_OT_clean_textures(bpy.types.Operator):
 
 # Atomic Data Manager Clean Worlds Operator
 class ATOMIC_OT_clean_worlds(bpy.types.Operator):
-    """Remove all unused.py worlds from this project"""
+    """Remove all unused worlds from this project"""
     bl_idname = "atomic.clean_worlds"
     bl_label = "Clean Worlds"
 
